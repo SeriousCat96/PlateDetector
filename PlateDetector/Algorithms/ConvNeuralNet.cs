@@ -2,21 +2,17 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TensorFlow;
-using System.Drawing.Imaging;
-using OpenCvSharp.Extensions;
+
 using OpenCvSharp;
+using OpenCvSharp.Extensions;
+
+using TensorFlow;
 
 namespace PlateDetector.Algorithms
 {
 	public class ConvNeuralNet : IDetectionAlgorithm, IDisposable
 	{
 		private TFGraph _model;
-
-		public object ColorConversion { get; private set; }
 
 		public ConvNeuralNet()
 		{
@@ -43,7 +39,7 @@ namespace PlateDetector.Algorithms
 
 				var output = runner.Run();
 				TFTensor result = output[0];
-				var res = (float[][])result.GetValue(jagged: true);
+				var res = (float[][]) result.GetValue(jagged: true);
 
 				var rects = new List<Rectangle>();
 				var rect = ImageProcessor.GetRectangle(res[0], image.Width, image.Height);
@@ -53,7 +49,7 @@ namespace PlateDetector.Algorithms
 			}
 		}
 
-		public float[,,,] Preprocess(Bitmap bitmap)
+		private static float[,,,] Preprocess(Bitmap bitmap)
 		{
 			var mat = BitmapConverter.ToMat(bitmap);
 
@@ -62,7 +58,7 @@ namespace PlateDetector.Algorithms
 
 			bitmap = BitmapConverter.ToBitmap(gray);
 
-			return ImageProcessor.BitmapToGray(bitmap);
+			return ImageProcessor.BitmapToFloatGrayScale(bitmap);
 		}
 
 		public void Dispose()

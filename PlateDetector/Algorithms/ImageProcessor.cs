@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using OpenCvSharp;
 using OpenCvSharp.Extensions;
 
@@ -12,51 +8,7 @@ namespace PlateDetector.Algorithms
 {
 	public static class ImageProcessor
 	{
-		public static Bitmap Resize(Bitmap srcImg, System.Drawing.Size newSize)
-		{
-			var mat = BitmapConverter.ToMat(srcImg);
-
-			var resizedMat = mat.Resize(
-				new OpenCvSharp.Size(newSize.Width, newSize.Height),
-				fx: 1.0,
-				fy: 1.0,
-				interpolation: InterpolationFlags.Cubic);
-
-			var result = BitmapConverter.ToBitmap(resizedMat);
-
-			return result;
-		}
-
-		public static Mat Resize(Mat mat, OpenCvSharp.Size newSize)
-		{
-			var resizedMat = mat.Resize(
-				newSize,
-				fx: 1.0,
-				fy: 1.0,
-				interpolation: InterpolationFlags.Cubic);
-
-			return resizedMat;
-		}
-
-
-		public static Rectangle GetRectangle(float[] coord, int width, int height)
-		{
-			for(int i = 0; i < coord.Length; i++)
-			{
-				coord[i] = DeconvertFunc(coord[i], i % 2 == 0 ? width : height, "0..1");
-			}
-
-			return new Rectangle((int)coord[0], (int)coord[1], (int)coord[2] - (int)coord[0], (int)coord[3] - (int)coord[1]);
-		}
-
-		private static float DeconvertFunc(float x, int a, string type = "None")
-		{
-			if(type == "0..1")
-				return a * x;
-			else return x;
-		}
-
-		public unsafe static float[,,,] BitmapToByteRgb(Bitmap bmp, int channels)
+		public unsafe static float[,,,] BitmapToFloatRgb(Bitmap bmp)
 		{
 			int width = bmp.Width,
 				height = bmp.Height;
@@ -88,7 +40,7 @@ namespace PlateDetector.Algorithms
 			return res;
 		}
 
-		public unsafe static float[,,,] BitmapToGray(Bitmap bmp)
+		public unsafe static float[,,,] BitmapToFloatGrayScale(Bitmap bmp)
 		{
 			int width = bmp.Width,
 				height = bmp.Height;
@@ -116,6 +68,50 @@ namespace PlateDetector.Algorithms
 				bmp.UnlockBits(bd);
 			}
 			return res;
+		}
+
+		public static Bitmap Resize(Bitmap srcImg, System.Drawing.Size newSize)
+		{
+			var mat = BitmapConverter.ToMat(srcImg);
+
+			var resizedMat = mat.Resize(
+				new OpenCvSharp.Size(newSize.Width, newSize.Height),
+				fx: 1.0,
+				fy: 1.0,
+				interpolation: InterpolationFlags.Cubic);
+
+			var result = BitmapConverter.ToBitmap(resizedMat);
+
+			return result;
+		}
+
+		public static Mat Resize(Mat mat, OpenCvSharp.Size newSize)
+		{
+			var resizedMat = mat.Resize(
+				newSize,
+				fx: 1.0,
+				fy: 1.0,
+				interpolation: InterpolationFlags.Cubic);
+
+			return resizedMat;
+		}
+
+
+		public static Rectangle GetRectangle(float[] coord, int width, int height)
+		{
+			for(int i = 0; i < coord.Length; i++)
+			{
+				coord[i] = TransormCood(coord[i], i % 2 == 0 ? width : height, "0..1");
+			}
+
+			return new Rectangle((int)coord[0], (int)coord[1], (int)coord[2] - (int)coord[0], (int)coord[3] - (int)coord[1]);
+		}
+
+		private static float TransormCood(float x, int a, string type = "None")
+		{
+			if(type == "0..1")
+				return a * x;
+			else return x;
 		}
 	}
 }
