@@ -27,6 +27,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>2</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,29 +37,30 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\lib\net40\OpenCvSharp.dll</HintPath>
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\lib\net46\OpenCvSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OpenCvSharp.Blob, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\lib\net40\OpenCvSharp.Blob.dll</HintPath>
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\lib\net46\OpenCvSharp.Blob.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OpenCvSharp.Extensions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\lib\net40\OpenCvSharp.Extensions.dll</HintPath>
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\lib\net46\OpenCvSharp.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="OpenCvSharp.UserInterface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
-      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\lib\net40\OpenCvSharp.UserInterface.dll</HintPath>
+      <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\lib\net46\OpenCvSharp.UserInterface.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.ValueTuple, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.3.1\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
@@ -92,6 +94,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Native.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -123,8 +126,8 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\build\OpenCvSharp3-AnyCPU.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\build\OpenCvSharp3-AnyCPU.props'))" />
     <Error Condition="!Exists('..\packages\TensorFlowSharp.1.4.0\build\TensorFlowSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TensorFlowSharp.1.4.0\build\TensorFlowSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\build\OpenCvSharp3-AnyCPU.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp3-AnyCPU.3.3.1.20171117\build\OpenCvSharp3-AnyCPU.props'))" />
   </Target>
   <Import Project="..\packages\TensorFlowSharp.1.4.0\build\TensorFlowSharp.targets" Condition="Exists('..\packages\TensorFlowSharp.1.4.0\build\TensorFlowSharp.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

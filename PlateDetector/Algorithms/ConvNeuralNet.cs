@@ -7,12 +7,16 @@ using System.Text;
 using System.Threading.Tasks;
 using TensorFlow;
 using System.Drawing.Imaging;
+using OpenCvSharp.Extensions;
+using OpenCvSharp;
 
 namespace PlateDetector.Algorithms
 {
-	public class ConvNeuralNet : IDetectionAlgorithm
+	public class ConvNeuralNet : IDetectionAlgorithm, IDisposable
 	{
 		private TFGraph _model;
+
+		public object ColorConversion { get; private set; }
 
 		public ConvNeuralNet()
 		{
@@ -21,50 +25,52 @@ namespace PlateDetector.Algorithms
 
 		public void Load(string filename)
 		{
-			_model.Import(File.ReadAllBytes(filename));
+			var buffer = new TFBuffer(File.ReadAllBytes(filename));
+			_model.Import(buffer, "");
 		}
 
 		public List<Rectangle> Predict(Bitmap image)
 		{
-			var session = new TFSession(_model);
-			var runner = session.GetRunner();
+			using(var session = new TFSession(_model))
+			{
+				var runner = session.GetRunner();
+				
+				var imgArr = Preprocess(image);
+				var tensor = new TFTensor(imgArr);
+				runner.AddInput(_model["inputs"][0], tensor);
+				runner.AddInput(_model["fc2_c_dropout"][0], new TFTensor(1.0f));
+				runner.Fetch(_model["outputs"][0]);
 
-			//var tensor = ImageUtil.CreateTensorFromImageFile(tuple.input, TFDataType.UInt8);
-			//runner.AddInput(_model[""], tensor);
+				var output = runner.Run();
+				TFTensor result = output[0];
+				var res = (float[][])result.GetValue(jagged: true);
 
-			return null;
+				var rects = new List<Rectangle>();
+				var rect = ImageProcessor.GetRectangle(res[0], image.Width, image.Height);
+
+				rects.Add(rect);
+				return rects;
+			}
 		}
 
-		public unsafe static double[,,] BitmapToByteRgb(Bitmap bmp)
+		public float[,,,] Preprocess(Bitmap bitmap)
 		{
-			int width = bmp.Width,
-				height = bmp.Height;
-			double[,,] res = new double[3, height, width];
-			BitmapData bd = bmp.LockBits(
-				new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly,PixelFormat.Format24bppRgb);
-			try
+			var mat = BitmapConverter.ToMat(bitmap);
+
+			mat = ImageProcessor.Resize(mat, new OpenCvSharp.Size(128, 96));
+			var gray = mat.CvtColor(ColorConversionCodes.RGBA2GRAY);
+
+			bitmap = BitmapConverter.ToBitmap(gray);
+
+			return ImageProcessor.BitmapToGray(bitmap);
+		}
+
+		public void Dispose()
+		{
+			if(_model != null)
 			{
-				byte* curpos;
-				fixed (double* _res = res)
-				{
-					double* _r = _res, _g = _res + width * height, _b = _res + 2 * width * height;
-					for(int h = 0; h < height; h++)
-					{
-						curpos = ((byte*)bd.Scan0) + h * bd.Stride;
-						for(int w = 0; w < width; w++)
-						{
-							*_b = *(curpos++) / 255d; ++_b;
-							*_g = *(curpos++) / 255d; ++_g;
-							*_r = *(curpos++) / 255d; ++_r;
-						}
-					}
-				}
+				_model.Dispose();
 			}
-			finally
-			{
-				bmp.UnlockBits(bd);
-			}
-			return res;
 		}
 	}
 }

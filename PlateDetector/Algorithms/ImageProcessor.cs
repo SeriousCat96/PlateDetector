@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,97 @@ namespace PlateDetector.Algorithms
 			var result = BitmapConverter.ToBitmap(resizedMat);
 
 			return result;
+		}
+
+		public static Mat Resize(Mat mat, OpenCvSharp.Size newSize)
+		{
+			var resizedMat = mat.Resize(
+				newSize,
+				fx: 1.0,
+				fy: 1.0,
+				interpolation: InterpolationFlags.Cubic);
+
+			return resizedMat;
+		}
+
+
+		public static Rectangle GetRectangle(float[] coord, int width, int height)
+		{
+			for(int i = 0; i < coord.Length; i++)
+			{
+				coord[i] = DeconvertFunc(coord[i], i % 2 == 0 ? width : height, "0..1");
+			}
+
+			return new Rectangle((int)coord[0], (int)coord[1], (int)coord[2] - (int)coord[0], (int)coord[3] - (int)coord[1]);
+		}
+
+		private static float DeconvertFunc(float x, int a, string type = "None")
+		{
+			if(type == "0..1")
+				return a * x;
+			else return x;
+		}
+
+		public unsafe static float[,,,] BitmapToByteRgb(Bitmap bmp, int channels)
+		{
+			int width = bmp.Width,
+				height = bmp.Height;
+			float[,,,] res = new float[1, height, width, 3];
+			BitmapData bd = bmp.LockBits(
+				new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, bmp.PixelFormat);
+			try
+			{
+				byte* curpos;
+				fixed (float* _res = res)
+				{
+					float* _r = _res, _g = _res + 1, _b = _res + 2;
+					for(int h = 0; h < height; h++)
+					{
+						curpos = ((byte*)bd.Scan0) + h * bd.Stride;
+						for(int w = 0; w < width; w++)
+						{
+							*_b = *(curpos++) / 255f; _b += 3;
+							*_g = *(curpos++) / 255f; _g += 3;
+							*_r = *(curpos++) / 255f; _r += 3;
+						}
+					}
+				}
+			}
+			finally
+			{
+				bmp.UnlockBits(bd);
+			}
+			return res;
+		}
+
+		public unsafe static float[,,,] BitmapToGray(Bitmap bmp)
+		{
+			int width = bmp.Width,
+				height = bmp.Height;
+			float[,,,] res = new float[1, height, width, 1];
+			BitmapData bd = bmp.LockBits(
+				new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, bmp.PixelFormat);
+			try
+			{
+				byte* curpos;
+				fixed (float* _res = res)
+				{
+					float* _r = _res;
+					for(int h = 0; h < height; h++)
+					{
+						curpos = ((byte*)bd.Scan0) + h * bd.Stride;
+						for(int w = 0; w < width; w++)
+						{
+							*_r = *(curpos++) / 255f; ++_r;
+						}
+					}
+				}
+			}
+			finally
+			{
+				bmp.UnlockBits(bd);
+			}
+			return res;
 		}
 	}
 }
