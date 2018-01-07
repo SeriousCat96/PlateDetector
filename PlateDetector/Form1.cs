@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PlateDetector.Algorithms;
 
 namespace PlateDetector
 {
@@ -15,6 +16,9 @@ namespace PlateDetector
 		public Form1()
 		{
 			InitializeComponent();
+
+			//var m = ConvNeuralNet.BitmapToByteRgb(new Bitmap(@"C:\Users\Павел\Desktop\epifancev-s-vilkoy_107165493_orig_.jpg"));
+			//;
 		}
 	}
 }
