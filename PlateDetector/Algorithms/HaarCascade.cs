@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 
@@ -8,7 +9,7 @@ using OpenCvSharp.Extensions;
 namespace PlateDetector.Algorithms
 {
 	/// <summary> Реализует каскадный классификатор Хаара. </summary>
-	public class HaarCascade : IDetectionAlgorithm
+	public class HaarCascade : IDetectionAlgorithm, IDisposable
 	{
 		#region Data
 		/// <summary> Классификатор каскадов <seealso cref="OpenCvSharp.CascadeClassifier"/> для обнаружения объектов. </summary>
@@ -45,6 +46,15 @@ namespace PlateDetector.Algorithms
 		#endregion
 
 		#region Methods
+
+		/// <summary> Освобождает ресурсы объекта. </summary>
+		public void Dispose()
+		{
+			if(_classifier != null)
+			{
+				_classifier.Dispose();
+			}
+		}
 
 		/// <summary> Загрузка параметров алгоритма из файла. </summary>
 		/// <param name="filename"> Путь к файлу. </param>
