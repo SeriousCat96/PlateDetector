@@ -87,7 +87,7 @@
     <Compile Include="Algorithms\Detector.cs" />
     <Compile Include="Algorithms\HaarCascade.cs" />
     <Compile Include="Algorithms\IDetectionAlgorithm.cs" />
-    <Compile Include="Algorithms\ImageProcessor.cs" />
+    <Compile Include="Algorithms\BitmapUtils.cs" />
     <Compile Include="Algorithms\IDetectionAlgorithmFactory.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

@@ -6,7 +6,7 @@ using OpenCvSharp.Extensions;
 
 namespace PlateDetector.Algorithms
 {
-	public static class ImageProcessor
+	public static class BitmapUtils
 	{
 		public unsafe static float[,,,] BitmapToFloatRgb(Bitmap bmp)
 		{
