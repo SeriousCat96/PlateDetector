@@ -6,8 +6,13 @@ using OpenCvSharp.Extensions;
 
 namespace PlateDetector.Algorithms
 {
+	//TODO: Переделать класс в BitmapExtensions и MatExtensions, используя механизм расширений классов.
+	/// <summary> Обеспечивает функции обработки изображений <see cref="Bitmap"/>.</summary>
 	public static class BitmapUtils
 	{
+		/// <summary> Преобразует Bitmap в ч/б цвет в массив float</summary>
+		/// <param name="bmp"> Исходное изображение </param>
+		/// <returns> Возвращает 4-мерный массив пикселей float со значениями в диапазоне [0, 1]. </returns>
 		public unsafe static float[,,,] BitmapToFloatRgb(Bitmap bmp)
 		{
 			int width = bmp.Width,
@@ -40,6 +45,9 @@ namespace PlateDetector.Algorithms
 			return res;
 		}
 
+		/// <summary> Преобразует Bitmap в RGB цвет в массив float</summary>
+		/// <param name="bmp"> Исходное изображение </param>
+		/// <returns> Возвращает 4-мерный массив пикселей float со значениями в диапазоне [0, 1]. </returns>
 		public unsafe static float[,,,] BitmapToFloatGrayScale(Bitmap bmp)
 		{
 			int width = bmp.Width,
@@ -70,6 +78,10 @@ namespace PlateDetector.Algorithms
 			return res;
 		}
 
+		/// <summary> Преобразование изображения <see cref="Bitmap"/> в новый размер. </summary>
+		/// <param name="srcImg"> Исходное изображение. </param>
+		/// <param name="newSize"> Новый размер. </param>
+		/// <returns> Возвращает <see cref="Bitmap"/> с измененным размером. </returns>
 		public static Bitmap Resize(Bitmap srcImg, System.Drawing.Size newSize)
 		{
 			var mat = BitmapConverter.ToMat(srcImg);
@@ -85,6 +97,10 @@ namespace PlateDetector.Algorithms
 			return result;
 		}
 
+		/// <summary> Преобразование массива изображения <see cref="OpenCvSharp.Mat"/> в новый размер</summary>
+		/// <param name="srcImg"> Исходное изображение. </param>
+		/// <param name="newSize"> Новый размер. </param>
+		/// <returns> Возвращает <see cref="OpenCvSharp.Mat"/> с измененным размером. </returns>
 		public static Mat Resize(Mat mat, OpenCvSharp.Size newSize)
 		{
 			var resizedMat = mat.Resize(
@@ -96,7 +112,11 @@ namespace PlateDetector.Algorithms
 			return resizedMat;
 		}
 
-
+		/// <summary> Получает <see cref="Rectangle"/> из массива <see cref="float"/>.</summary>
+		/// <param name="coord"> Массив координат.</param>
+		/// <param name="width"> Исходная ширина изображения.</param>
+		/// <param name="height"> Исходная высота изображения.</param>
+		/// <returns> Возвращает получившийся <see cref="Rectangle"/>.</returns>
 		public static Rectangle GetRectangle(float[] coord, int width, int height)
 		{
 			for(int i = 0; i < coord.Length; i++)
@@ -107,6 +127,11 @@ namespace PlateDetector.Algorithms
 			return new Rectangle((int)coord[0], (int)coord[1], (int)coord[2] - (int)coord[0], (int)coord[3] - (int)coord[1]);
 		}
 
+		/// <summary> Преобразует относительную координату в абсолютную. </summary>
+		/// <param name="x"> Исходная относительная координата. </param>
+		/// <param name="a"> Множитель для преобразования. </param>
+		/// <param name="type"> Тип преобразованиея. </param>
+		/// <returns> Возвращает абсолютное значение координаты.</returns>
 		private static float TransormCood(float x, int a, string type = "None")
 		{
 			if(type == "0..1")
