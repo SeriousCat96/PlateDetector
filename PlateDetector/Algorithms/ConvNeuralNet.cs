@@ -16,14 +16,20 @@ namespace PlateDetector.Algorithms
 		#region Data
 		/// <summary> Граф вычислений модели сверточной нейронной сети. </summary>
 		private TFGraph _model;
+
+		/// <summary> Размер входного изображения. </summary>
+		private OpenCvSharp.Size _imageSize;
 		#endregion
 
 		#region .ctor
 
 		/// <summary> Создает <see cref="ConvNeuralNet"/>. </summary>
-		public ConvNeuralNet()
+		/// <param name="model"> Граф вычислений модели сверточной нейронной сети. </param>
+		/// <param name="imageSize"> Размер входного изображения. </param>
+		public ConvNeuralNet(TFGraph model, OpenCvSharp.Size imageSize)
 		{
-			_model = new TFGraph();
+			_imageSize = imageSize;
+			_model = model;
 		}
 		#endregion
 
@@ -80,7 +86,7 @@ namespace PlateDetector.Algorithms
 		{
 			var mat = BitmapConverter.ToMat(bitmap);
 
-			mat = BitmapUtils.Resize(mat, new OpenCvSharp.Size(128, 96));
+			mat = BitmapUtils.Resize(mat, _imageSize);
 			var gray = mat.CvtColor(ColorConversionCodes.RGBA2GRAY);
 
 			bitmap = BitmapConverter.ToBitmap(gray);
