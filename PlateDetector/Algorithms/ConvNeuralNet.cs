@@ -55,7 +55,7 @@ namespace PlateDetector.Algorithms
 		/// <summary> Предсказывает местоположения объектов на изображении. </summary>
 		/// <param name="image"> Анализируемое изображение. </param>
 		/// <returns> Список ограничивающих прямоугольников <see cref="Rectangle"/>. </returns>
-		public List<Rectangle> Predict(Bitmap image)
+		public List<Rect> Predict(Mat image)
 		{
 			using(var session = new TFSession(_model))
 			{
@@ -71,7 +71,7 @@ namespace PlateDetector.Algorithms
 				TFTensor result = output[0];
 				var res = (float[][])result.GetValue(jagged: true);
 
-				var rects = new List<Rectangle>();
+				var rects = new List<Rect>();
 				var rect = BitmapUtils.GetRectangle(res[0], image.Width, image.Height);
 
 				rects.Add(rect);
@@ -82,16 +82,13 @@ namespace PlateDetector.Algorithms
 		/// <summary> Предварительная обработка изображения и конвертация пикселей в массив <see cref="float"/>. </summary>
 		/// <param name="bitmap"> Исходное изображение. </param>
 		/// <returns> Массив float пикселей изображения. </returns>
-		private float[,,,] Preprocess(Bitmap bitmap)
+		private float[,,,] Preprocess(Mat image)
 		{
-			var mat = BitmapConverter.ToMat(bitmap);
 
-			mat = BitmapUtils.Resize(mat, _imageSize);
-			var gray = mat.CvtColor(ColorConversionCodes.RGBA2GRAY);
+			image = image.Resize(_imageSize);
+			var gray = image.CvtColor(ColorConversionCodes.RGBA2GRAY);
 
-			bitmap = BitmapConverter.ToBitmap(gray);
-
-			return BitmapUtils.BitmapToFloatGrayScale(bitmap);
+			return BitmapUtils.BitmapToFloatGrayScale(image);
 		}
 		 
 		#endregion

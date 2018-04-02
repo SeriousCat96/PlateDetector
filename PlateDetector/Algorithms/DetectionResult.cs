@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using OpenCvSharp;
+
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace PlateDetector.Algorithms
@@ -9,14 +11,14 @@ namespace PlateDetector.Algorithms
 		#region Data
 
 		/// <summary> Список координат ограничивающих прямоугольников <see cref="Rectangle"/>. </summary>
-		private List<Rectangle> _boundBoxes;
+		private List<Rect> _boundBoxes;
 		#endregion
 
 		#region .ctor
 
 		/// <summary> Создает <see cref="DetectionResult"/>. </summary>
 		/// <param name="boundBoxes"> Список координат ограничивающих прямоугольников <see cref="Rectangle"/>.</param>
-		public DetectionResult(List<Rectangle> boundBoxes)
+		public DetectionResult(List<Rect> boundBoxes)
 		{
 			_boundBoxes = boundBoxes;
 		}
@@ -25,7 +27,7 @@ namespace PlateDetector.Algorithms
 		#region Methods
 
 		/// <summary> Получает список координат результата локализации. </summary>
-		public List<Rectangle> GetBoundBoxes()
+		public List<Rect> GetBoundBoxes()
 		{
 			return _boundBoxes;
 		} 

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using OpenCvSharp;
 
 namespace PlateDetector.Algorithms
 {
@@ -10,6 +12,14 @@ namespace PlateDetector.Algorithms
 
 		/// <summary> Менеджер алгоритмов локализации. </summary>
 		private AlgorithmManager _manager;
+
+		private Stopwatch _timer;
+		#endregion
+
+
+		#region Events
+		public event EventHandler<DetectionEventArgs> Detected;
+
 		#endregion
 
 		#region .ctor
@@ -19,15 +29,32 @@ namespace PlateDetector.Algorithms
 		public Detector(AlgorithmManager manager)
 		{
 			_manager = manager;
+			_timer	 = new Stopwatch();
+
 		}
 		#endregion
 
 		#region Properties
 
 		/// <summary> Обрабатываемое изображение. </summary>
-		public Bitmap CurrentBitmap { get; set; }
+		public Mat Image { get; set; }
+
+		public IDetectionAlgorithm SelectedAlgorithm
+		{
+			get
+			{
+				return _manager.SelectedAlgorithm;
+			}
+		}
 		#endregion
 
+		#region Handlers
+
+		private void OnDetected(DetectionEventArgs e)
+		{
+			Detected?.Invoke(this, e);
+		}
+		#endregion
 		#region Methods
 
 		/// <summary> Изменяет алгоритм локализации в детекторе. </summary>
@@ -43,10 +70,18 @@ namespace PlateDetector.Algorithms
 		{
 			var algorithm = _manager.SelectedAlgorithm;
 
-			if(algorithm != null && CurrentBitmap != null)
+			if(algorithm != null && Image != null)
 			{
-				var boundBoxes = algorithm.Predict(CurrentBitmap);
+				_timer.Restart();
+				var boundBoxes = algorithm.Predict(Image);
+				_timer.Stop();
+
 				var result = new DetectionResult(boundBoxes);
+
+				if(boundBoxes.Count > 0)
+				{
+					OnDetected(new DetectionEventArgs(result, _timer.Elapsed));
+				}
 
 				return result;
 			}
@@ -55,5 +90,17 @@ namespace PlateDetector.Algorithms
 		}
 
 		#endregion
+	}
+
+	public sealed class DetectionEventArgs : EventArgs
+	{
+		public DetectionEventArgs(DetectionResult result, TimeSpan time)
+		{
+			Result = result;
+			Time   = time;
+		}
+
+		public DetectionResult Result { get; }
+		public TimeSpan Time { get; }
 	}
 }

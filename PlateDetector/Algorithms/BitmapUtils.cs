@@ -13,68 +13,58 @@ namespace PlateDetector.Algorithms
 		/// <summary> Преобразует Bitmap в ч/б цвет в массив float</summary>
 		/// <param name="bmp"> Исходное изображение </param>
 		/// <returns> Возвращает 4-мерный массив пикселей float со значениями в диапазоне [0, 1]. </returns>
-		public unsafe static float[,,,] BitmapToFloatRgb(Bitmap bmp)
+		public unsafe static float[,,,] BitmapToFloatRgb(Mat img)
 		{
-			int width = bmp.Width,
-				height = bmp.Height;
+			int width = img.Width,
+				height = img.Height;
 			float[,,,] res = new float[1, height, width, 3];
-			BitmapData bd = bmp.LockBits(
-				new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, bmp.PixelFormat);
-			try
+
+			int stride = img.Channels();
+
+			byte* curpos;
+			fixed (float* _res = res)
 			{
-				byte* curpos;
-				fixed (float* _res = res)
+				float* _r = _res, _g = _res + 1, _b = _res + 2;
+				for(int h = 0; h < height; h++)
 				{
-					float* _r = _res, _g = _res + 1, _b = _res + 2;
-					for(int h = 0; h < height; h++)
+					curpos = (byte*)img.Ptr(h);
+					for(int w = 0; w < width; w++)
 					{
-						curpos = ((byte*)bd.Scan0) + h * bd.Stride;
-						for(int w = 0; w < width; w++)
-						{
-							*_b = *(curpos++) / 255f; _b += 3;
-							*_g = *(curpos++) / 255f; _g += 3;
-							*_r = *(curpos++) / 255f; _r += 3;
-						}
+						*_b = *(curpos++) / 255f; _b += 3;
+						*_g = *(curpos++) / 255f; _g += 3;
+						*_r = *(curpos++) / 255f; _r += 3;
 					}
 				}
 			}
-			finally
-			{
-				bmp.UnlockBits(bd);
-			}
+			
 			return res;
 		}
 
 		/// <summary> Преобразует Bitmap в RGB цвет в массив float</summary>
-		/// <param name="bmp"> Исходное изображение </param>
+		/// <param name="img"> Исходное изображение </param>
 		/// <returns> Возвращает 4-мерный массив пикселей float со значениями в диапазоне [0, 1]. </returns>
-		public unsafe static float[,,,] BitmapToFloatGrayScale(Bitmap bmp)
+		public unsafe static float[,,,] BitmapToFloatGrayScale(Mat img)
 		{
-			int width = bmp.Width,
-				height = bmp.Height;
+			int width = img.Width,
+				height = img.Height;
 			float[,,,] res = new float[1, height, width, 1];
-			BitmapData bd = bmp.LockBits(
-				new Rectangle(0, 0, width, height), ImageLockMode.ReadOnly, bmp.PixelFormat);
-			try
+			int stride = img.Channels();
+			
+			byte* curpos;
+			fixed (float* _res = res)
 			{
-				byte* curpos;
-				fixed (float* _res = res)
+				float* _r = _res;
+				for(int h = 0; h < height; h++)
 				{
-					float* _r = _res;
-					for(int h = 0; h < height; h++)
+					curpos = (byte*)img.Ptr(h);
+					for(int w = 0; w < width; w++)
 					{
-						curpos = ((byte*)bd.Scan0) + h * bd.Stride;
-						for(int w = 0; w < width; w++)
-						{
-							*_r = *(curpos++) / 255f; ++_r;
-						}
+
+						*_r = *(curpos++) / 255f; ++_r;
 					}
 				}
 			}
-			finally
-			{
-				bmp.UnlockBits(bd);
-			}
+			
 			return res;
 		}
 
@@ -116,15 +106,15 @@ namespace PlateDetector.Algorithms
 		/// <param name="coord"> Массив координат.</param>
 		/// <param name="width"> Исходная ширина изображения.</param>
 		/// <param name="height"> Исходная высота изображения.</param>
-		/// <returns> Возвращает получившийся <see cref="Rectangle"/>.</returns>
-		public static Rectangle GetRectangle(float[] coord, int width, int height)
+		/// <returns> Возвращает получившийся <see cref="OpenCvSharp.Rect"/>.</returns>
+		public static Rect GetRectangle(float[] coord, int width, int height)
 		{
 			for(int i = 0; i < coord.Length; i++)
 			{
 				coord[i] = TransormCood(coord[i], i % 2 == 0 ? width : height, "0..1");
 			}
 
-			return new Rectangle((int)coord[0], (int)coord[1], (int)coord[2] - (int)coord[0], (int)coord[3] - (int)coord[1]);
+			return new Rect((int)coord[0], (int)coord[1], (int)coord[2] - (int)coord[0], (int)coord[3] - (int)coord[1]);
 		}
 
 		/// <summary> Преобразует относительную координату в абсолютную. </summary>

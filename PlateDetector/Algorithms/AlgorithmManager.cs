@@ -22,6 +22,8 @@ namespace PlateDetector.Algorithms
 					var algorithm = factory.CreateDetectionAlgorithm();
 					Algorithms.Add(algorithm);
 				}
+
+				SelectedAlgorithm = Algorithms[0];
 			}
 		}
 		#endregion

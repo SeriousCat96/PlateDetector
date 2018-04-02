@@ -11,6 +11,11 @@ namespace PlateDetector.Algorithms
 	/// <summary> Реализует каскадный классификатор Хаара. </summary>
 	public class HaarCascade : IDetectionAlgorithm, IDisposable
 	{
+		#region Const
+		private const string ModelFile = "haarcascade_russian_plate_number.xml";
+
+		#endregion
+
 		#region Data
 		/// <summary> Классификатор каскадов <seealso cref="OpenCvSharp.CascadeClassifier"/> для обнаружения объектов. </summary>
 		private CascadeClassifier _classifier;
@@ -41,6 +46,8 @@ namespace PlateDetector.Algorithms
 			_minNeighbours = minNeighbours;
 			_minSize = minSize;
 			_maxSize = maxSize;
+
+			_classifier = new CascadeClassifier(ModelFile);
 		}
 
 		#endregion
@@ -60,30 +67,23 @@ namespace PlateDetector.Algorithms
 		/// <param name="filename"> Путь к файлу. </param>
 		public void Load(string filename)
 		{
-			_classifier = new CascadeClassifier(filename);
+			var result = _classifier.Load(filename);
 		}
 
 		/// <summary> Предсказывает местоположения объектов на изображении. </summary>
 		/// <param name="image"> Анализируемое изображение. </param>
-		/// <returns> Список ограничивающих прямоугольников <see cref="Rectangle"/>. </returns>
-		public List<Rectangle> Predict(Bitmap image)
+		/// <returns> Список ограничивающих прямоугольников <see cref="OpenCvSharp.Rect"/>. </returns>
+		public List<Rect> Predict(Mat image)
 		{
-			var mat = BitmapConverter.ToMat(image);
-
 			var rects = _classifier.DetectMultiScale(
-				image: mat,
+				image: image,
 				scaleFactor: _scaleFactor,
 				minNeighbors: _minNeighbours,
 				flags: HaarDetectionType.ScaleImage,
 				minSize: _minSize,
 				maxSize: _maxSize);
 
-
-			var rectList = rects
-				.Select(e => new Rectangle(e.X, e.Y, e.Width, e.Height))
-				.ToList();
-
-			return rectList;
+			return rects.ToList();
 		}
 
 		#endregion
