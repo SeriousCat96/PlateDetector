@@ -195,13 +195,25 @@ namespace PlateDetector
 
 						Log.Info($"Загружено изображение: {openFileDlg.FileName}");
 
-						Detect();
 					}
 					catch (Exception exc)
 					{
 						Log.Error(exc.Message);
 					}
 				}			
+			}
+		}
+
+		private void OnButtonDetectClick(object sender, EventArgs e)
+		{
+			try
+			{
+				Detect();
+
+			}
+			catch(Exception exc)
+			{
+				Log.Error(exc.Message);
 			}
 		}
 	}

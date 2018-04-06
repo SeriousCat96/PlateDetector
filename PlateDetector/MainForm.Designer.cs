@@ -38,6 +38,7 @@ namespace PlateDetector
 			this.evalAlgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.pictureBox = new OpenCvSharp.UserInterface.PictureBoxIpl();
 			this.lboxLog = new System.Windows.Forms.ListBox();
+			this.btnDetect = new System.Windows.Forms.Button();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
 			this.SuspendLayout();
@@ -96,7 +97,7 @@ namespace PlateDetector
 			this.pictureBox.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.pictureBox.Location = new System.Drawing.Point(12, 27);
 			this.pictureBox.Name = "pictureBox";
-			this.pictureBox.Size = new System.Drawing.Size(635, 407);
+			this.pictureBox.Size = new System.Drawing.Size(761, 425);
 			this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 			this.pictureBox.TabIndex = 1;
 			this.pictureBox.TabStop = false;
@@ -106,16 +107,28 @@ namespace PlateDetector
 			this.lboxLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.lboxLog.FormattingEnabled = true;
-			this.lboxLog.Location = new System.Drawing.Point(13, 440);
+			this.lboxLog.Location = new System.Drawing.Point(13, 458);
 			this.lboxLog.Name = "lboxLog";
-			this.lboxLog.Size = new System.Drawing.Size(760, 95);
+			this.lboxLog.Size = new System.Drawing.Size(634, 95);
 			this.lboxLog.TabIndex = 2;
+			// 
+			// btnDetect
+			// 
+			this.btnDetect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.btnDetect.Location = new System.Drawing.Point(653, 458);
+			this.btnDetect.Name = "btnDetect";
+			this.btnDetect.Size = new System.Drawing.Size(120, 95);
+			this.btnDetect.TabIndex = 3;
+			this.btnDetect.Text = "Локализовать";
+			this.btnDetect.UseVisualStyleBackColor = true;
+			this.btnDetect.Click += new System.EventHandler(this.OnButtonDetectClick);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(785, 545);
+			this.ClientSize = new System.Drawing.Size(785, 563);
+			this.Controls.Add(this.btnDetect);
 			this.Controls.Add(this.lboxLog);
 			this.Controls.Add(this.pictureBox);
 			this.Controls.Add(this.menuStrip);
@@ -140,6 +153,7 @@ namespace PlateDetector
 		private System.Windows.Forms.ToolStripMenuItem chooseAlgToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem evalAlgToolStripMenuItem;
 		private System.Windows.Forms.ListBox lboxLog;
+		private System.Windows.Forms.Button btnDetect;
 	}
 }
 
