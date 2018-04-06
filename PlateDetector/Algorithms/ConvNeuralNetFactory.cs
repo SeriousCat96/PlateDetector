@@ -11,7 +11,7 @@ namespace PlateDetector.Algorithms
 		/// <returns> Возвращает созданный объект <see cref="IDetectionAlgorithm"/> . </returns>
 		public IDetectionAlgorithm CreateDetectionAlgorithm()
 		{
-			return new ConvNeuralNet(new TFGraph(), new Size(128, 96));
+			return new ConvNeuralNet(new TFGraph(), new Size(224, 224));
 		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using OpenCvSharp.UserInterface;
 
-namespace PlateDetector
+namespace PlateDetector.UI
 {
 	partial class MainForm
 	{
@@ -46,8 +46,8 @@ namespace PlateDetector
 			// menuStrip
 			// 
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.algToolStripMenuItem});
+			this.fileToolStripMenuItem,
+			this.algToolStripMenuItem});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Size = new System.Drawing.Size(785, 24);
@@ -56,7 +56,7 @@ namespace PlateDetector
 			// fileToolStripMenuItem
 			// 
 			this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadImgToolStripMenuItem});
+			this.loadImgToolStripMenuItem});
 			this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
 			this.fileToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
 			this.fileToolStripMenuItem.Text = "Файл";
@@ -71,8 +71,8 @@ namespace PlateDetector
 			// algToolStripMenuItem
 			// 
 			this.algToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.chooseAlgToolStripMenuItem,
-            this.evalAlgToolStripMenuItem});
+			this.chooseAlgToolStripMenuItem,
+			this.evalAlgToolStripMenuItem});
 			this.algToolStripMenuItem.Name = "algToolStripMenuItem";
 			this.algToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
 			this.algToolStripMenuItem.Text = "Алгоритм";
@@ -92,8 +92,8 @@ namespace PlateDetector
 			// pictureBox
 			// 
 			this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Left) 
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBox.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.pictureBox.Location = new System.Drawing.Point(12, 27);
 			this.pictureBox.Name = "pictureBox";
@@ -105,7 +105,7 @@ namespace PlateDetector
 			// lboxLog
 			// 
 			this.lboxLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			| System.Windows.Forms.AnchorStyles.Right)));
 			this.lboxLog.FormattingEnabled = true;
 			this.lboxLog.Location = new System.Drawing.Point(13, 458);
 			this.lboxLog.Name = "lboxLog";

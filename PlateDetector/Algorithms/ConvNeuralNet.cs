@@ -63,18 +63,20 @@ namespace PlateDetector.Algorithms
 
 				var imgArr = Preprocess(image);
 				var tensor = new TFTensor(imgArr);
-				runner.AddInput(_model["inputs"][0], tensor);
-				runner.AddInput(_model["fc2_c_dropout"][0], new TFTensor(1.0f));
-				runner.Fetch(_model["outputs"][0]);
+				var is_train = new TFTensor(false);
+
+				runner.AddInput(_model["Placeholder"][0], tensor);
+				runner.AddInput(_model["is_train"][0], is_train);
+				runner.Fetch(_model["BoundingBoxTransform/clip_bboxes_1/concat"][0], _model["nms/gather_nms_proposals_scores"][0]);
 
 				var output = runner.Run();
 				TFTensor result = output[0];
 				var res = (float[][])result.GetValue(jagged: true);
 
 				var rects = new List<Rect>();
-				var rect = BitmapUtils.GetRectangle(res[0], image.Width, image.Height);
+				//var rect = MatExtensions.GetRectangle(res[0], image.Width, image.Height);
 
-				rects.Add(rect);
+				//rects.Add(rect);
 				return rects;
 			}
 		}
@@ -84,11 +86,9 @@ namespace PlateDetector.Algorithms
 		/// <returns> Массив float пикселей изображения. </returns>
 		private float[,,,] Preprocess(Mat image)
 		{
-
 			image = image.Resize(_imageSize);
-			var gray = image.CvtColor(ColorConversionCodes.RGBA2GRAY);
 
-			return BitmapUtils.BitmapToFloatGrayScale(image);
+			return image.ToFloatArray();
 		}
 		 
 		#endregion

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace PlateDetector.Logging
+namespace PlateDetector.UI
 {
 	/// <summary> Предоставляет методы, обрабатывающие элемент управления <see cref="ListBox"/> для лога. </summary>
 	public class LogController

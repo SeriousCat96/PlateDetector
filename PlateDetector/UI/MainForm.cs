@@ -1,23 +1,15 @@
 ﻿using OpenCvSharp;
-using OpenCvSharp.Extensions;
-using OpenCvSharp.UserInterface;
 
 using PlateDetector.Algorithms;
 using PlateDetector.Logging;
+using PlateDetector.UI;
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
 
-namespace PlateDetector
+
+namespace PlateDetector.UI
 {
 	public partial class MainForm : Form
 	{
@@ -37,31 +29,11 @@ namespace PlateDetector
 			InitializeComponent();
 			InitializeData();
 
+			//var net = OpenCvSharp.Dnn.Net.ReadNetFromTensorflow(@"E:\Study\Mallenom\vgg16_rpn\fasterrcnn_frozen.pb");
 			//var file = @"E:\YandexDisk\testsamples\frames\Россия(RU)\#15722-Фест(19-21.07.2017)\20170719_05115020_1_T459BB178_RU_N02_a000aa100.jpg";
-			////var convNet = new ConvNeuralNetFactory().CreateDetectionAlgorithm();
-			////convNet.Load(Path.Combine(Directory.GetCurrentDirectory(), "test_model7", "neuralnet.pb"));
-			////var r = convNet.Predict(new Bitmap(@"E:\YandexDisk\testsamples\frames\Беларусь(BY)\full_images_BY\1260958590_hiop.ru_gai_03[1].jpg"));
-			//var haar = new HaarCascadeFactory().CreateDetectionAlgorithm();
-
-			//haar.Load(@"E:\Study\Управление программными проектами\haarcascade_russian_plate_number.xml");
-
-			//var bitmap = new Bitmap(file);
-
-			//var coords = haar
-			//	.Predict(bitmap)
-			//	.Select(r => new Rect(r.X, r.Y, r.Width, r.Height));
-
-			//var mat = BitmapConverter.ToMat(bitmap);
-			//foreach(var rect in coords)
-			//{
-			//	mat.Rectangle(rect, Scalar.Red);
-			//}
-
-			//mat = mat.Resize(new OpenCvSharp.Size(1366, 768));
-			//using(var w = new Window(mat))
-			//{
-			//	Cv2.WaitKey();
-			//}
+			//var convNet = new ConvNeuralNetFactory().CreateDetectionAlgorithm();
+			//convNet.Load(@"E:\Study\Mallenom\vgg16_rpn\2\fasterrcnn.pb");
+			//var r = convNet.Predict(new Mat(@"E:\YandexDisk\testsamples\frames\Беларусь(BY)\full_images_BY\1260958590_hiop.ru_gai_03[1].jpg"));
 		}
 
 		#endregion
