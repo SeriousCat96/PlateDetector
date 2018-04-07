@@ -9,7 +9,7 @@ using OpenCvSharp.Extensions;
 namespace PlateDetector.Algorithms
 {
 	/// <summary> Реализует каскадный классификатор Хаара. </summary>
-	public class HaarCascade : IDetectionAlgorithm, IDisposable
+	public class HaarCascade : IDetectionAlg, IDisposable
 	{
 		#region Const
 		private const string ModelFile = "haarcascade_russian_plate_number.xml";

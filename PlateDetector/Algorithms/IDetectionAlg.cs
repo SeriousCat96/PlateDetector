@@ -6,7 +6,7 @@ using System.Drawing;
 namespace PlateDetector.Algorithms
 {
 	/// <summary> Интерфейс алгоритма локализации. </summary>
-	public interface IDetectionAlgorithm
+	public interface IDetectionAlg
 	{
 		/// <summary> Загрузка параметров алгоритма из файла. </summary>
 		/// <param name="filename"> Путь к файлу. </param>

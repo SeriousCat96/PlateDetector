@@ -11,7 +11,7 @@ namespace PlateDetector.Algorithms
 		#region Data
 
 		/// <summary> Менеджер алгоритмов локализации. </summary>
-		private AlgorithmManager _manager;
+		private AlgManager _manager;
 
 		private Stopwatch _timer;
 		#endregion
@@ -26,7 +26,7 @@ namespace PlateDetector.Algorithms
 
 		/// <summary> Создаёт <see cref="Detector"/>. </summary>
 		/// <param name="manager">Менеджер алгоритмов локализации. </param>
-		public Detector(AlgorithmManager manager)
+		public Detector(AlgManager manager)
 		{
 			_manager = manager;
 			_timer	 = new Stopwatch();
@@ -39,7 +39,7 @@ namespace PlateDetector.Algorithms
 		/// <summary> Обрабатываемое изображение. </summary>
 		public Mat Image { get; set; }
 
-		public IDetectionAlgorithm SelectedAlgorithm
+		public IDetectionAlg SelectedAlgorithm
 		{
 			get
 			{

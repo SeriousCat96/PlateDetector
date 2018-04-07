@@ -5,15 +5,15 @@ using System.Linq;
 namespace PlateDetector.Algorithms
 {
 	/// <summary> Реализует менеджер алгоритмов, способный переключаться между алгоритмами локализации. </summary>
-	public class AlgorithmManager
+	public class AlgManager
 	{
 		#region .ctor
 
-		/// <summary> Создает <see cref="AlgorithmManager"/>. </summary>
+		/// <summary> Создает <see cref="AlgManager"/>. </summary>
 		/// <param name="factories"> Абстрактные фабрики алгоритмов локализации. </param>
-		public AlgorithmManager(params IDetectionAlgorithmFactory[] factories)
+		public AlgManager(params IDetectionAlgFactory[] factories)
 		{
-			Algorithms = new List<IDetectionAlgorithm>();
+			Algorithms = new List<IDetectionAlg>();
 
 			if(factories != null)
 			{
@@ -31,10 +31,10 @@ namespace PlateDetector.Algorithms
 		#region Properties
 
 		/// <summary> Список алгоритмов локализации. </summary>
-		public List<IDetectionAlgorithm> Algorithms { get; }
+		public List<IDetectionAlg> Algorithms { get; }
 
 		/// <summary> Выбранный алгоритм локализации. </summary>
-		public IDetectionAlgorithm SelectedAlgorithm { get; protected set; }
+		public IDetectionAlg SelectedAlgorithm { get; protected set; }
 		#endregion
 
 		#region Methods

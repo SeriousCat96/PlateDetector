@@ -11,11 +11,11 @@ using TensorFlow;
 namespace PlateDetector.Algorithms
 {
 	/// <summary> Реализует сверточную нейронную сеть. </summary>
-	public class ConvNeuralNet : IDetectionAlgorithm, IDisposable
+	public class ConvNeuralNet : IDetectionAlg, IDisposable
 	{
 		#region Data
 		/// <summary> Граф вычислений модели сверточной нейронной сети. </summary>
-		private TFGraph _model;
+		private TFGraph _graph;
 
 		/// <summary> Размер входного изображения. </summary>
 		private OpenCvSharp.Size _imageSize;
@@ -29,7 +29,7 @@ namespace PlateDetector.Algorithms
 		public ConvNeuralNet(TFGraph model, OpenCvSharp.Size imageSize)
 		{
 			_imageSize = imageSize;
-			_model = model;
+			_graph = model;
 		}
 		#endregion
 
@@ -38,9 +38,9 @@ namespace PlateDetector.Algorithms
 		/// <summary> Освобождает ресурсы объекта. </summary>
 		public void Dispose()
 		{
-			if(_model != null)
+			if(_graph != null)
 			{
-				_model.Dispose();
+				_graph.Dispose();
 			}
 		}
 
@@ -49,7 +49,7 @@ namespace PlateDetector.Algorithms
 		public void Load(string filename)
 		{
 			var buffer = new TFBuffer(File.ReadAllBytes(filename));
-			_model.Import(buffer, "");
+			_graph.Import(buffer, "");
 		}
 
 		/// <summary> Предсказывает местоположения объектов на изображении. </summary>
@@ -57,17 +57,22 @@ namespace PlateDetector.Algorithms
 		/// <returns> Список ограничивающих прямоугольников <see cref="Rectangle"/>. </returns>
 		public List<Rect> Predict(Mat image)
 		{
-			using(var session = new TFSession(_model))
+			using(var session = new TFSession(_graph))
 			{
 				var runner = session.GetRunner();
+				var global = _graph["init"];
+				var local = _graph["init_1"];
+
+				runner.AddTarget(global, local);
+				runner.Run();
 
 				var imgArr = Preprocess(image);
 				var tensor = new TFTensor(imgArr);
 				var is_train = new TFTensor(false);
 
-				runner.AddInput(_model["Placeholder"][0], tensor);
-				runner.AddInput(_model["is_train"][0], is_train);
-				runner.Fetch(_model["BoundingBoxTransform/clip_bboxes_1/concat"][0], _model["nms/gather_nms_proposals_scores"][0]);
+				runner.AddInput(_graph["inputs"][0], tensor);
+				runner.AddInput(_graph["is_train"][0], is_train);
+				runner.Fetch(_graph["BoundingBoxTransform/clip_bboxes_1/concat"][0], _graph["nms/gather_nms_proposals_scores"][0]);
 
 				var output = runner.Run();
 				TFTensor result = output[0];

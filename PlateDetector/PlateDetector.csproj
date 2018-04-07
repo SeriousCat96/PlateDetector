@@ -94,16 +94,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms\AlgorithmManager.cs" />
+    <Compile Include="Algorithms\AlgManager.cs" />
     <Compile Include="Algorithms\ConvNeuralNetFactory.cs" />
     <Compile Include="Algorithms\HaarCascadeFactory.cs" />
     <Compile Include="Algorithms\ConvNeuralNet.cs" />
     <Compile Include="Algorithms\DetectionResult.cs" />
     <Compile Include="Algorithms\Detector.cs" />
     <Compile Include="Algorithms\HaarCascade.cs" />
-    <Compile Include="Algorithms\IDetectionAlgorithm.cs" />
+    <Compile Include="Algorithms\IDetectionAlg.cs" />
     <Compile Include="Algorithms\MatExtensions.cs" />
-    <Compile Include="Algorithms\IDetectionAlgorithmFactory.cs" />
+    <Compile Include="Algorithms\IDetectionAlgFactory.cs" />
     <Compile Include="Logging\Log.cs" />
     <Compile Include="UI\LogController.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />
