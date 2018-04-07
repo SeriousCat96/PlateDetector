@@ -31,9 +31,9 @@ namespace PlateDetector.UI
 
 			//var net = OpenCvSharp.Dnn.Net.ReadNetFromTensorflow(@"E:\Study\Mallenom\vgg16_rpn\fasterrcnn_frozen.pb");
 			//var file = @"E:\YandexDisk\testsamples\frames\Россия(RU)\#15722-Фест(19-21.07.2017)\20170719_05115020_1_T459BB178_RU_N02_a000aa100.jpg";
-			var convNet = new ConvNeuralNetFactory().CreateDetectionAlgorithm();
-			convNet.Load(@"E:\Study\Mallenom\fasterrcnn.pb");
-			var r = convNet.Predict(new Mat(@"E:\YandexDisk\testsamples\frames\Беларусь(BY)\full_images_BY\1260958590_hiop.ru_gai_03[1].jpg"));
+			//var convNet = new ConvNeuralNetFactory().CreateDetectionAlgorithm();
+			//convNet.Load(@"E:\Study\Mallenom\fasterrcnn.pb");
+			//var r = convNet.Predict(new Mat(@"E:\YandexDisk\testsamples\frames\Абхазия(AB)\ABH (avto-nomer.ru)\car10459868.jpg"));
 		}
 
 		#endregion
@@ -47,6 +47,7 @@ namespace PlateDetector.UI
 			_logController	= new LogController(lboxLog);
 			_detector		= new Detector(
 				new AlgManager(
+					new ConvNeuralNetFactory(),
 					new HaarCascadeFactory()
 					)
 				);
