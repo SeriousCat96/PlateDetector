@@ -94,7 +94,8 @@ namespace PlateDetector.UI
 
 			MinimumSize	= Size;
 			BackColor	= SystemColors.Window;
-			Location	= new System.Drawing.Point(200, 25);
+			Location	= new System.Drawing.Point(200, 0);
+			Font		= SystemFonts.MessageBoxFont;
 		}
 
 		private void OnLogFileUpdated(object sender, LogEventArgs e)

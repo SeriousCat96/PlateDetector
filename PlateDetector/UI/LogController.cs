@@ -10,7 +10,7 @@ namespace PlateDetector.UI
 		private SolidBrush _reportsForegroundBrushSelected;
 		private SolidBrush _reportsBackgroundBrushSelected;
 		private SolidBrush _reportsBackgroundBrush1;
-		private SolidBrush _reportsBackgroundBrush2;																																																																																																																																	 
+		private SolidBrush _reportsBackgroundBrush2;
 
 		#region .ctor
 		/// <summary> Создаёт <see cref="LogDispatcher"/>. </summary>
