@@ -16,7 +16,6 @@ namespace PlateDetector.Algorithms
 		private Stopwatch _timer;
 		#endregion
 
-
 		#region Events
 		public event EventHandler<DetectionEventArgs> Detected;
 
@@ -46,6 +45,14 @@ namespace PlateDetector.Algorithms
 				return _manager.SelectedAlgorithm;
 			}
 		}
+
+		public TimeSpan Time
+		{
+			get
+			{
+				return _timer.Elapsed;
+			}
+		}
 		#endregion
 
 		#region Handlers
@@ -55,6 +62,7 @@ namespace PlateDetector.Algorithms
 			Detected?.Invoke(this, e);
 		}
 		#endregion
+
 		#region Methods
 
 		/// <summary> Изменяет алгоритм локализации в детекторе. </summary>
@@ -80,7 +88,7 @@ namespace PlateDetector.Algorithms
 
 				if(boundBoxes.Count > 0)
 				{
-					OnDetected(new DetectionEventArgs(result, _timer.Elapsed));
+					OnDetected(new DetectionEventArgs(result, Time));
 				}
 
 				return result;

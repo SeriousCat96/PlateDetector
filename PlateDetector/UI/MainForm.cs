@@ -28,12 +28,6 @@ namespace PlateDetector.UI
 		{
 			InitializeComponent();
 			InitializeData();
-
-			//var net = OpenCvSharp.Dnn.Net.ReadNetFromTensorflow(@"E:\Study\Mallenom\vgg16_rpn\fasterrcnn_frozen.pb");
-			//var file = @"E:\YandexDisk\testsamples\frames\Россия(RU)\#15722-Фест(19-21.07.2017)\20170719_05115020_1_T459BB178_RU_N02_a000aa100.jpg";
-			//var convNet = new ConvNeuralNetFactory().CreateDetectionAlgorithm();
-			//convNet.Load(@"E:\Study\Mallenom\fasterrcnn.pb");
-			//var r = convNet.Predict(new Mat(@"E:\YandexDisk\testsamples\frames\Абхазия(AB)\ABH (avto-nomer.ru)\car10459868.jpg"));
 		}
 
 		#endregion
@@ -78,12 +72,13 @@ namespace PlateDetector.UI
 					.Image
 					.Rectangle(rect, Scalar.OrangeRed, thickness: 2);
 
-				Log.Detection($"Обнаружен номер: {rect.ToString()}");
+				Log.Detection($"Время: {e.Time.Milliseconds} мс", rect);
 			}
 
 			Log.Info($"Время: {e.Time.Milliseconds} мс");
 
 			pictureBox.ImageIpl = _detector.Image;
+			
 		}
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
@@ -98,7 +93,6 @@ namespace PlateDetector.UI
 			base.OnLoad(e);
 
 			MinimumSize	= Size;
-			Font		= SystemFonts.MessageBoxFont;
 			BackColor	= SystemColors.Window;
 			Location	= new System.Drawing.Point(200, 25);
 		}
@@ -118,8 +112,11 @@ namespace PlateDetector.UI
 				_logController
 					.LogListBox
 					.Items
-					.Add(e.Message);
-				_logController.LogListBox.SelectedIndex = _logController.LogListBox.Items.Count - 1;
+					.Add(new LogItem(e.Message));
+
+				_logController
+					.LogListBox
+					.TopIndex = _logController.LogListBox.Items.Count - 1;
 			});
 
 			if(lboxLog.InvokeRequired)
@@ -142,12 +139,6 @@ namespace PlateDetector.UI
 
 		}
 
-		protected override void OnPaint(PaintEventArgs e)
-		{
-			base.OnPaint(e);
-
-			//e.Graphics
-		}
 		#endregion
 
 		private void OnLoadImgToolStripMenuItemClick(object sender, EventArgs e)

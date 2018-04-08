@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using OpenCvSharp;
+using PlateDetector.Algorithms;
 
 namespace PlateDetector.Logging
 {
@@ -66,21 +68,21 @@ namespace PlateDetector.Logging
 		/// <param name="message"> Сообщение для лога. </param>
 		public void Info(string message)
 		{
-			Message(MessageType.Info, message);
+			Message(new InfoLogMessage(message));
 		}
 
 		/// <summary> Отправляет в лог сообщение о детектировании. </summary>
 		/// <param name="message"> Сообщение для лога. </param>
-		public void Detection(string message)
+		public void Detection(string message, Rect rect)
 		{
-			Message(MessageType.Detection, message);
+			Message(new DetectionLogMessage(message, rect));
 		}
 
 		/// <summary> Отправляет в лог сообщение об ошибке. </summary>
 		/// <param name="message"> Сообщение для лога. </param>
 		public void Error(string message)
 		{
-			Message(MessageType.Error, message);
+			Message(new ErrorLogMessage(message));
 		}
 
 		/// <summary> Инициализирует поля класса. </summary>
@@ -92,23 +94,16 @@ namespace PlateDetector.Logging
 		/// <summary> Реализует отправку сообщения в лог. </summary>
 		/// <param name="messageType"> Тип сообщения. </param>
 		/// <param name="message"> Сообщение для лога. </param>
-		private void Message(MessageType messageType, string message)
+		private void Message(ILogMessage message)
 		{
-			var formattedMsg = $"[{DateTime.Now}][{messageType.ToString().ToUpper()}]: {message}";
-			_streamWriter.WriteLine(formattedMsg);
+			_streamWriter.WriteLine(message.ToString());
 			_streamWriter.Flush();
 
-			OnLogFileUpdated(new LogEventArgs(formattedMsg));
+			OnLogFileUpdated(new LogEventArgs(message));
 		}
 
 		#endregion
 
-		/// <summary> Описывает типы сообщений лога. </summary>
-		public enum MessageType
-		{
-			Info,
-			Detection,
-			Error
-		}
+		
 	}
 }

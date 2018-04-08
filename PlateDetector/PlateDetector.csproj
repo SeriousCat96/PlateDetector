@@ -104,9 +104,15 @@
     <Compile Include="Algorithms\IDetectionAlg.cs" />
     <Compile Include="Algorithms\MatExtensions.cs" />
     <Compile Include="Algorithms\IDetectionAlgFactory.cs" />
+    <Compile Include="Logging\DetectionLogMessage.cs" />
+    <Compile Include="Logging\ErrorLogMessage.cs" />
+    <Compile Include="Logging\ILogMessage.cs" />
+    <Compile Include="Logging\InfoLogMessage.cs" />
     <Compile Include="Logging\Log.cs" />
+    <Compile Include="Logging\MessageType.cs" />
     <Compile Include="UI\LogController.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />
+    <Compile Include="UI\LogItem.cs" />
     <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,4 +1,5 @@
 ﻿using System;
+using static PlateDetector.Logging.Log;
 
 namespace PlateDetector.Logging
 {
@@ -7,12 +8,12 @@ namespace PlateDetector.Logging
 	{
 		/// <summary> Создаёт <see cref="LogEventArgs"/>. </summary>
 		/// <param name="message"> Сообщение лога. </param>
-		public LogEventArgs(string message)
+		public LogEventArgs(ILogMessage message)
 		{
 			Message = message;
 		}
 
 		/// <summary> Сообщение лога. </summary>
-		public string Message { get; }
+		public ILogMessage Message { get; }
 	}
 }
