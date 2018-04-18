@@ -1,4 +1,4 @@
-﻿namespace PlateDetector.Algorithms
+﻿namespace PlateDetector.Detection
 {
 	/// <summary> Класс, обеспечивающий создание <see cref="HaarCascadeFactory"/>.</summary>
 	public class HaarCascadeFactory : IDetectionAlgFactory
@@ -7,7 +7,7 @@
 		/// <returns> Возвращает созданный объект <see cref="IDetectionAlg"/> . </returns>
 		public IDetectionAlg CreateDetectionAlgorithm()
 		{
-			return new HaarCascade(
+			return new HaarCascadeModel(
 				scaleFactor: 1.25,
 				minNeighbours: 5,
 				minSize: new OpenCvSharp.Size(80, 20),

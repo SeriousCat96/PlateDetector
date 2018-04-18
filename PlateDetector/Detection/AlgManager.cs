@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace PlateDetector.Algorithms
+namespace PlateDetector.Detection
 {
 	/// <summary> Реализует менеджер алгоритмов, способный переключаться между алгоритмами локализации. </summary>
 	public class AlgManager

@@ -1,5 +1,4 @@
 ﻿using System;
-using static PlateDetector.Logging.Log;
 
 namespace PlateDetector.Logging
 {

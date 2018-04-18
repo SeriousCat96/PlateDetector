@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace PlateDetector.Algorithms
+namespace PlateDetector.Detection
 {
 	/// <summary> Интерфейс алгоритма локализации. </summary>
 	public interface IDetectionAlg
@@ -15,6 +15,6 @@ namespace PlateDetector.Algorithms
 		/// <summary> Предсказывает местоположения объектов на изображении. </summary>
 		/// <param name="image"> Анализируемое изображение. </param>
 		/// <returns> Список ограничивающих прямоугольников <see cref="OpenCvSharp.Rect"/>. </returns>
-		List<Rect> Predict(Mat image);
+		List<Detection> Predict(Mat image);
 	}
 }

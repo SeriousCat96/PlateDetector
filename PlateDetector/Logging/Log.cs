@@ -1,18 +1,18 @@
-﻿using System;
+﻿using OpenCvSharp;
+
+using System;
 using System.IO;
 using System.Text;
-using OpenCvSharp;
-using PlateDetector.Algorithms;
 
 namespace PlateDetector.Logging
 {
-	/// <summary> Реализует логгирование. </summary>
+	/// <summary> Реализует логирование информации. </summary>
 	public sealed class Log : IDisposable
 	{
 		#region Constants
 
 		/// <summary> Имя лог-файла. </summary>
-		private const string FileName = "LOG.txt";
+		private const string FileName = "logs.log";
 		#endregion
 
 		#region Data
@@ -38,7 +38,7 @@ namespace PlateDetector.Logging
 
 		#region Events
 
-		/// <summary> Происходит обновлении записей в лог-файле. </summary>
+		/// <summary> Происходит при добавлении записи в лог-файл. </summary>
 		public event EventHandler<LogEventArgs> LogFileUpdated;
 
 		/// <summary> Вызывает событие <see cref="LogFileUpdated"/>. </summary>
@@ -68,21 +68,21 @@ namespace PlateDetector.Logging
 		/// <param name="message"> Сообщение для лога. </param>
 		public void Info(string message)
 		{
-			Message(new InfoLogMessage(message));
+			Message(new LogInfoMessage(message));
 		}
 
 		/// <summary> Отправляет в лог сообщение о детектировании. </summary>
-		/// <param name="message"> Сообщение для лога. </param>
-		public void Detection(string message, Rect rect)
+		/// <param name="detection"> Найденный объект. </param>
+		public void Detection(Detection.Detection detection)
 		{
-			Message(new DetectionLogMessage(message, rect));
+			Message(new LogDetectionMessage(detection));
 		}
 
 		/// <summary> Отправляет в лог сообщение об ошибке. </summary>
 		/// <param name="message"> Сообщение для лога. </param>
 		public void Error(string message)
 		{
-			Message(new ErrorLogMessage(message));
+			Message(new LogErrorMessage(message));
 		}
 
 		/// <summary> Инициализирует поля класса. </summary>
@@ -92,7 +92,6 @@ namespace PlateDetector.Logging
 		}
 
 		/// <summary> Реализует отправку сообщения в лог. </summary>
-		/// <param name="messageType"> Тип сообщения. </param>
 		/// <param name="message"> Сообщение для лога. </param>
 		private void Message(ILogMessage message)
 		{
@@ -104,6 +103,5 @@ namespace PlateDetector.Logging
 
 		#endregion
 
-		
 	}
 }

@@ -94,22 +94,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms\AlgManager.cs" />
-    <Compile Include="Algorithms\ConvNeuralNetFactory.cs" />
-    <Compile Include="Algorithms\HaarCascadeFactory.cs" />
-    <Compile Include="Algorithms\ConvNeuralNet.cs" />
-    <Compile Include="Algorithms\DetectionResult.cs" />
-    <Compile Include="Algorithms\Detector.cs" />
-    <Compile Include="Algorithms\HaarCascade.cs" />
-    <Compile Include="Algorithms\IDetectionAlg.cs" />
-    <Compile Include="Algorithms\MatExtensions.cs" />
-    <Compile Include="Algorithms\IDetectionAlgFactory.cs" />
-    <Compile Include="Logging\DetectionLogMessage.cs" />
-    <Compile Include="Logging\ErrorLogMessage.cs" />
+    <Compile Include="Detection\AlgManager.cs" />
+    <Compile Include="Detection\Detection.cs" />
+    <Compile Include="Detection\FasterRCNNFactory.cs" />
+    <Compile Include="Detection\HaarCascadeFactory.cs" />
+    <Compile Include="Detection\FasterRCNNModel.cs" />
+    <Compile Include="Detection\DetectionResult.cs" />
+    <Compile Include="Detection\Detector.cs" />
+    <Compile Include="Detection\HaarCascadeModel.cs" />
+    <Compile Include="Detection\IDetectionAlg.cs" />
+    <Compile Include="Detection\MatExtensions.cs" />
+    <Compile Include="Detection\IDetectionAlgFactory.cs" />
+    <Compile Include="Logging\LogDetectionMessage.cs" />
+    <Compile Include="Logging\LogErrorMessage.cs" />
     <Compile Include="Logging\ILogMessage.cs" />
-    <Compile Include="Logging\InfoLogMessage.cs" />
+    <Compile Include="Logging\LogInfoMessage.cs" />
     <Compile Include="Logging\Log.cs" />
-    <Compile Include="Logging\MessageType.cs" />
+    <Compile Include="Logging\LogMessageType.cs" />
+    <Compile Include="UserClasses\NdArray.cs" />
     <Compile Include="UI\LogController.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />
     <Compile Include="UI\LogItem.cs" />
@@ -160,6 +162,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AppServices\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

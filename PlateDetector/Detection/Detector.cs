@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Drawing;
 using OpenCvSharp;
 
-namespace PlateDetector.Algorithms
+namespace PlateDetector.Detection
 {
 	/// <summary> Реализует детектор номеров. </summary>
 	public class Detector
@@ -13,6 +13,7 @@ namespace PlateDetector.Algorithms
 		/// <summary> Менеджер алгоритмов локализации. </summary>
 		private AlgManager _manager;
 
+		/// <summary> Таймер для измерения времени работы алгоритма. </summary>
 		private Stopwatch _timer;
 		#endregion
 
@@ -38,6 +39,7 @@ namespace PlateDetector.Algorithms
 		/// <summary> Обрабатываемое изображение. </summary>
 		public Mat Image { get; set; }
 
+		/// <summary> Текущий алгоритм локализации </summary>
 		public IDetectionAlg SelectedAlgorithm
 		{
 			get
@@ -46,13 +48,6 @@ namespace PlateDetector.Algorithms
 			}
 		}
 
-		public TimeSpan Time
-		{
-			get
-			{
-				return _timer.Elapsed;
-			}
-		}
 		#endregion
 
 		#region Handlers
@@ -81,14 +76,16 @@ namespace PlateDetector.Algorithms
 			if(algorithm != null && Image != null)
 			{
 				_timer.Restart();
-				var boundBoxes = algorithm.Predict(Image);
+				var detections = algorithm.Predict(Image);
 				_timer.Stop();
 
-				var result = new DetectionResult(boundBoxes);
+				var elapsedTime = _timer.Elapsed;
 
-				if(boundBoxes.Count > 0)
+				var result = new DetectionResult(detections, elapsedTime);
+
+				if(detections.Count > 0)
 				{
-					OnDetected(new DetectionEventArgs(result, Time));
+					OnDetected(new DetectionEventArgs(result));
 				}
 
 				return result;
@@ -102,13 +99,11 @@ namespace PlateDetector.Algorithms
 
 	public sealed class DetectionEventArgs : EventArgs
 	{
-		public DetectionEventArgs(DetectionResult result, TimeSpan time)
+		public DetectionEventArgs(DetectionResult detections)
 		{
-			Result = result;
-			Time   = time;
+			Detections = detections;
 		}
 
-		public DetectionResult Result { get; }
-		public TimeSpan Time { get; }
+		public DetectionResult Detections { get; }
 	}
 }

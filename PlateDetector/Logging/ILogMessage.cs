@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace PlateDetector.Logging
 {
-	/// <summary> Описывает типы сообщений лога. </summary>
+	/// <summary> Описывает типы сообщений лога.</summary>
 	public interface ILogMessage
 	{
+		/// <summary> Цвет, которым выделяется текст в окне лога.</summary>
 		Color Color { get; }
+		/// <summary> Сообщение в форматированном виде, в котором оно выводится в лог.</summary>
 		string FormattedMessage { get; }
-		string Text { get; }
-		MessageType Type { get; }
+		/// <summary> Тип сообщения лога.</summary>
+		LogMessageType Type { get; }
 	}
 }

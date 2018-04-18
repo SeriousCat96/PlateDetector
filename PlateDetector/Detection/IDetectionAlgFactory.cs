@@ -1,4 +1,4 @@
-﻿namespace PlateDetector.Algorithms
+﻿namespace PlateDetector.Detection
 {
 	/// <summary> Интерфейс, обеспечивающий создание <see cref="IDetectionAlg"/>.</summary>
 	public interface IDetectionAlgFactory

@@ -1,8 +1,7 @@
 ﻿using OpenCvSharp;
 
-using PlateDetector.Algorithms;
+using PlateDetector.Detection;
 using PlateDetector.Logging;
-using PlateDetector.UI;
 
 using System;
 using System.Drawing;
@@ -41,7 +40,7 @@ namespace PlateDetector.UI
 			_logController	= new LogController(lboxLog);
 			_detector		= new Detector(
 				new AlgManager(
-					new ConvNeuralNetFactory(),
+					new FasterRCNNFactory(),
 					new HaarCascadeFactory()
 					)
 				);
@@ -66,19 +65,20 @@ namespace PlateDetector.UI
 
 		private void OnDetected(object sender, DetectionEventArgs e)
 		{
-			foreach(var rect in e.Result.GetBoundBoxes())
+			foreach(var detection in e.Detections.GetDetectionsList())
 			{
+				var region = detection.Region;
 				_detector
 					.Image
-					.Rectangle(rect, Scalar.OrangeRed, thickness: 2);
+					.AddRectangle(region);
 
-				Log.Detection($"Время: {e.Time.Milliseconds} мс", rect);
+				Log.Detection(detection);
 			}
 
-			Log.Info($"Время: {e.Time.Milliseconds} мс");
+			var ms = e.Detections.ElapsedTime.Milliseconds + 1000 * e.Detections.ElapsedTime.Seconds;
+			Log.Info($"Время: {ms} мс");
 
 			pictureBox.ImageIpl = _detector.Image;
-			
 		}
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)

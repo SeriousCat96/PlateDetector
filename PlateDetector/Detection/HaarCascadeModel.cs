@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 
 using OpenCvSharp;
-using OpenCvSharp.Extensions;
 
-namespace PlateDetector.Algorithms
+namespace PlateDetector.Detection
 {
 	/// <summary> Реализует каскадный классификатор Хаара. </summary>
-	public class HaarCascade : IDetectionAlg, IDisposable
+	public class HaarCascadeModel : IDetectionAlg, IDisposable
 	{
 		#region Const
 		private const string ModelFile = "haarcascade_russian_plate_number.xml";
@@ -35,12 +33,12 @@ namespace PlateDetector.Algorithms
 		#endregion
 
 		#region .ctor
-		/// <summary> Создает <see cref="HaarCascade"/>. </summary>
+		/// <summary> Создает <see cref="HaarCascadeModel"/>. </summary>
 		/// <param name="scaleFactor"> Параметр, определяющий, насколько размер сканирующего окна увеличивается. </param>
 		/// <param name="minNeighbours"> Параметр, определяющий минимальное количество обнаружений в соседних областях, чтобы считать обнаружение достоверным. </param>
 		/// <param name="minSize"> Минимальный размер объекта на изображении. Объекты меньше будут проигнорированы. </param>
 		/// <param name="maxSize"> Максимальный размер объекта на изображении. Объекты больше будут проигнорированы. </param>
-		public HaarCascade(double scaleFactor, int minNeighbours, OpenCvSharp.Size minSize, OpenCvSharp.Size maxSize)
+		public HaarCascadeModel(double scaleFactor, int minNeighbours, OpenCvSharp.Size minSize, OpenCvSharp.Size maxSize)
 		{
 			_scaleFactor = scaleFactor;
 			_minNeighbours = minNeighbours;
@@ -73,7 +71,7 @@ namespace PlateDetector.Algorithms
 		/// <summary> Предсказывает местоположения объектов на изображении. </summary>
 		/// <param name="image"> Анализируемое изображение. </param>
 		/// <returns> Список ограничивающих прямоугольников <see cref="OpenCvSharp.Rect"/>. </returns>
-		public List<Rect> Predict(Mat image)
+		public List<Detection> Predict(Mat image)
 		{
 			var rects = _classifier.DetectMultiScale(
 				image: image,
@@ -83,7 +81,8 @@ namespace PlateDetector.Algorithms
 				minSize: _minSize,
 				maxSize: _maxSize);
 
-			return rects.ToList();
+			var detections = rects.Select(e => new Detection(e)).ToList();
+			return detections;
 		}
 
 		#endregion
