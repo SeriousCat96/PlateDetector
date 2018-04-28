@@ -85,6 +85,11 @@ namespace PlateDetector.Detection
 			return detections;
 		}
 
+		public override string ToString()
+		{
+			return "Метод Виолы-Джонса";
+		}
+
 		#endregion
 	}
 }

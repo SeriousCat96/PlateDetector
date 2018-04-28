@@ -31,10 +31,12 @@ namespace PlateDetector.UI
 
 		#endregion
 
+		/// <summary> Лог.</summary>
 		public Log Log { get; private set; }
 
 		#region Methods
 
+		/// <summary> Инициализирует поля.</summary>
 		private void InitializeData()
 		{
 			_logController	= new LogController(lboxLog);
@@ -47,11 +49,19 @@ namespace PlateDetector.UI
 
 			Log				= new Log();
 
-			_detector.Detected	+= OnDetected;
-			Log.LogFileUpdated	+= OnLogFileUpdated;
-			FormClosing			+= OnFormClosing;
+			_detector.Detected	  += OnDetected;
+			_detector
+				.Manager
+				.AlgorithmChanged += OnAlgorithmChanged;
+			Log.LogFileUpdated	  += OnLogFileUpdated;
+			FormClosing			  += OnFormClosing;
 
-			Log.Info($"Выбран алгоритм: {_detector.SelectedAlgorithm.GetType().Name}");
+			Log.Info($"Выбран алгоритм: {_detector.SelectedAlgorithm}");
+		}
+
+		private void OnAlgorithmChanged(object sender, AlgChangeEventArgs e)
+		{
+			Log.Info($"Выбран алгоритм: {e.SelectedAlgorithm}");
 		}
 
 		private void Detect()
@@ -76,16 +86,19 @@ namespace PlateDetector.UI
 			}
 
 			var ms = e.Detections.ElapsedTime.Milliseconds + 1000 * e.Detections.ElapsedTime.Seconds;
-			Log.Info($"Время: {ms} мс");
+			Log.Info($"Время: {ms / 1000f} сек");
 
 			pictureBox.ImageIpl = _detector.Image;
 		}
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
 		{
-			_detector.Detected	-= OnDetected;
-			Log.LogFileUpdated	-= OnLogFileUpdated;
-			FormClosing			-= OnFormClosing;
+			_detector.Detected	  -= OnDetected;
+			_detector
+				.Manager
+				.AlgorithmChanged -= OnAlgorithmChanged;
+			Log.LogFileUpdated	  -= OnLogFileUpdated;
+			FormClosing			  -= OnFormClosing;
 		}
 
 		protected override void OnLoad(EventArgs e)
@@ -140,8 +153,6 @@ namespace PlateDetector.UI
 
 		}
 
-		#endregion
-
 		private void OnLoadImgToolStripMenuItemClick(object sender, EventArgs e)
 		{
 			using(var openFileDlg = new OpenFileDialog())
@@ -179,6 +190,18 @@ namespace PlateDetector.UI
 			catch(Exception exc)
 			{
 				Log.Error(exc.Message);
+			}
+		}
+		#endregion
+
+		private void OnChooseAlgToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			using(var window = new AlgForm(_detector.Manager))
+			{
+				if(window.ShowDialog(this) == DialogResult.OK)
+				{
+					Console.WriteLine();
+				}
 			}
 		}
 	}

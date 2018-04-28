@@ -7,6 +7,18 @@ namespace PlateDetector.Detection
 	/// <summary> Реализует менеджер алгоритмов, способный переключаться между алгоритмами локализации. </summary>
 	public class AlgManager
 	{
+		#region Events
+
+		/// <summary> Возникает при изменении алгоритма. </summary>
+		public event EventHandler<AlgChangeEventArgs> AlgorithmChanged;
+
+		/// <summary> Вызов события <see cref="AlgChanged"/>.</summary>
+		/// <param name="e"> Аргументы события.</param>
+		private void OnAlgorithmChanged(AlgChangeEventArgs e)
+		{
+			AlgorithmChanged?.Invoke(this, e);
+		}
+		#endregion
 		#region .ctor
 
 		/// <summary> Создает <see cref="AlgManager"/>. </summary>
@@ -50,15 +62,25 @@ namespace PlateDetector.Detection
 			if(types.Contains(type))
 			{
 				SelectedAlgorithm = Algorithms[types.IndexOf(type)];
-
-				Console.WriteLine($"Selected alorithm {type.Name}");
+				OnAlgorithmChanged(new AlgChangeEventArgs(SelectedAlgorithm));				
 			}
 			else
 			{
-				Console.WriteLine($"Algorithm is absent.");
 				throw new ArgumentException("Данный тип алгоритма отсутствует.", nameof(type));
 			}
 		} 
 		#endregion
+	}
+
+	/// <summary> Аргументы события <see cref="AlgManager.AlgChanged"/></summary>
+	public class AlgChangeEventArgs : EventArgs
+	{
+		public AlgChangeEventArgs(IDetectionAlg selectedAlgorithm)
+		{
+			SelectedAlgorithm = selectedAlgorithm;
+		}
+
+		/// <summary> Выбранный алгоритм. </summary>
+		public IDetectionAlg SelectedAlgorithm { get; }
 	}
 }

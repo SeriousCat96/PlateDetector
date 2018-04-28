@@ -28,9 +28,9 @@ namespace PlateDetector.Detection
 					curpos = (byte*)img.Ptr(h);
 					for(int w = 0; w < width; w++)
 					{
-						*_b = *(curpos++) / 255f; _b += 3;
-						*_g = *(curpos++) / 255f; _g += 3;
-						*_r = *(curpos++) / 255f; _r += 3;
+						*_b = *(curpos++) / 128f - 1; _b += 3;
+						*_g = *(curpos++) / 128f - 1; _g += 3;
+						*_r = *(curpos++) / 128f - 1; _r += 3;
 					}
 				}
 			}
@@ -73,7 +73,7 @@ namespace PlateDetector.Detection
 			var scaleX = (int)Math.Round(Math.Round(size.Width / 735.0, 1));
 			var thickness = 2 * scaleX > 0 ? 2 * scaleX: 2;
 
-			mat.Rectangle(rect, Scalar.OrangeRed, thickness, LineTypes.Link4);
+			mat.Rectangle(rect, Scalar.Fuchsia, thickness, LineTypes.Link8);
 		}
 	}
 }

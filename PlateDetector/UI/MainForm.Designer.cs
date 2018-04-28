@@ -80,13 +80,14 @@ namespace PlateDetector.UI
 			// chooseAlgToolStripMenuItem
 			// 
 			this.chooseAlgToolStripMenuItem.Name = "chooseAlgToolStripMenuItem";
-			this.chooseAlgToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+			this.chooseAlgToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.chooseAlgToolStripMenuItem.Text = "Выбрать";
+			this.chooseAlgToolStripMenuItem.Click += new System.EventHandler(this.OnChooseAlgToolStripMenuItemClick);
 			// 
 			// evalAlgToolStripMenuItem
 			// 
 			this.evalAlgToolStripMenuItem.Name = "evalAlgToolStripMenuItem";
-			this.evalAlgToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
+			this.evalAlgToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.evalAlgToolStripMenuItem.Text = "Оценить";
 			// 
 			// pictureBox
@@ -127,6 +128,7 @@ namespace PlateDetector.UI
 			// 
 			// MainForm
 			// 
+			this.AcceptButton = this.btnDetect;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(760, 599);

@@ -10,9 +10,6 @@ namespace PlateDetector.Detection
 	{
 		#region Data
 
-		/// <summary> Менеджер алгоритмов локализации. </summary>
-		private AlgManager _manager;
-
 		/// <summary> Таймер для измерения времени работы алгоритма. </summary>
 		private Stopwatch _timer;
 		#endregion
@@ -28,13 +25,15 @@ namespace PlateDetector.Detection
 		/// <param name="manager">Менеджер алгоритмов локализации. </param>
 		public Detector(AlgManager manager)
 		{
-			_manager = manager;
+			Manager = manager;
 			_timer	 = new Stopwatch();
 
 		}
 		#endregion
 
 		#region Properties
+		/// <summary> Менеджер алгоритмов локализации. </summary>
+		public AlgManager Manager { get; }
 
 		/// <summary> Обрабатываемое изображение. </summary>
 		public Mat Image { get; set; }
@@ -44,7 +43,7 @@ namespace PlateDetector.Detection
 		{
 			get
 			{
-				return _manager.SelectedAlgorithm;
+				return Manager.SelectedAlgorithm;
 			}
 		}
 
@@ -64,14 +63,14 @@ namespace PlateDetector.Detection
 		/// <param name="type"></param>
 		public void ChangeAlgorithm(Type type)
 		{
-			_manager.Select(type);
+			Manager.Select(type);
 		}
 	
 		/// <summary> Выполняет локализацию на текущем изображении. </summary>
 		/// <returns> Возвращает результат локализации <seealso cref="DetectionResult"/>. </returns>
 		public DetectionResult Detect()
 		{
-			var algorithm = _manager.SelectedAlgorithm;
+			var algorithm = Manager.SelectedAlgorithm;
 
 			if(algorithm != null && Image != null)
 			{

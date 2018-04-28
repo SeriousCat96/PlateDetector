@@ -70,7 +70,7 @@ namespace PlateDetector.Detection
 		public List<Detection> Predict(Mat image)
 		{
 			var runner = _session.GetRunner();
-
+			
 			var imgArr = Preprocess(image);
 			var tensor = new TFTensor(imgArr.Value);
 			var is_train = new TFTensor(false);
@@ -102,7 +102,6 @@ namespace PlateDetector.Detection
 		/// <param name="output"> Результаты в виде тензоров. </param>
 		/// <param name="originalSize"> Размер оригинала изображения. </param>
 		/// <returns> Результаты локализации. </returns>
-
 		private List<Detection> PostProcess(TFTensor[] output, Size originalSize)
 		{
 			TFTensor boundBoxesTensor = output[0];
@@ -134,6 +133,11 @@ namespace PlateDetector.Detection
 			}
 
 			return detections;
+		}
+
+		public override string ToString()
+		{
+			return "Faster R-CNN";
 		}
 		#endregion
 	}

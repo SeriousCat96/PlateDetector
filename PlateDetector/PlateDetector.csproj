@@ -89,7 +89,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="TensorFlowSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TensorFlowSharp.1.6.0-pre1\lib\net461\TensorFlowSharp.dll</HintPath>
+      <HintPath>..\packages\TensorFlowSharp.1.7.0\lib\net461\TensorFlowSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -111,6 +111,12 @@
     <Compile Include="Logging\LogInfoMessage.cs" />
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Logging\LogMessageType.cs" />
+    <Compile Include="UI\AlgForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AlgForm.Designer.cs">
+      <DependentUpon>AlgForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserClasses\NdArray.cs" />
     <Compile Include="UI\LogController.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />
@@ -124,6 +130,9 @@
     <Compile Include="Native.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="UI\AlgForm.resx">
+      <DependentUpon>AlgForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,9 +181,9 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180319\build\OpenCvSharp3-AnyCPU.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180319\build\OpenCvSharp3-AnyCPU.props'))" />
-    <Error Condition="!Exists('..\packages\TensorFlowSharp.1.6.0-pre1\build\net45\TensorFlowSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TensorFlowSharp.1.6.0-pre1\build\net45\TensorFlowSharp.targets'))" />
+    <Error Condition="!Exists('..\packages\TensorFlowSharp.1.7.0\build\net45\TensorFlowSharp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\TensorFlowSharp.1.7.0\build\net45\TensorFlowSharp.targets'))" />
   </Target>
-  <Import Project="..\packages\TensorFlowSharp.1.6.0-pre1\build\net45\TensorFlowSharp.targets" Condition="Exists('..\packages\TensorFlowSharp.1.6.0-pre1\build\net45\TensorFlowSharp.targets')" />
+  <Import Project="..\packages\TensorFlowSharp.1.7.0\build\net45\TensorFlowSharp.targets" Condition="Exists('..\packages\TensorFlowSharp.1.7.0\build\net45\TensorFlowSharp.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
