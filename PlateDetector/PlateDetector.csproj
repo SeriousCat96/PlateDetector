@@ -111,12 +111,17 @@
     <Compile Include="Logging\LogInfoMessage.cs" />
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Logging\LogMessageType.cs" />
+    <Compile Include="Markup\RegionSelectionController.cs" />
+    <Compile Include="Markup\MarkupImporter.cs" />
+    <Compile Include="Markup\XmlMarkup.cs" />
     <Compile Include="UI\AlgForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\AlgForm.Designer.cs">
       <DependentUpon>AlgForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\DetectionController.cs" />
+    <Compile Include="UI\MarkupController.cs" />
     <Compile Include="UserClasses\NdArray.cs" />
     <Compile Include="UI\LogController.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />

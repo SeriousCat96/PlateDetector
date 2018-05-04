@@ -2,11 +2,11 @@
 
 using PlateDetector.Detection;
 using PlateDetector.Logging;
+using PlateDetector.Markup;
 
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-
 
 namespace PlateDetector.UI
 {
@@ -15,6 +15,10 @@ namespace PlateDetector.UI
 		#region Data
 		/// <summary> Контроллер лога. </summary>
 		private LogController _logController;
+
+		private DetectionController _detectionController;
+
+		private MarkupController _markupController;
 
 		/// <summary> Реализует детектор номеров. </summary>
 		private Detector _detector;
@@ -34,6 +38,8 @@ namespace PlateDetector.UI
 		/// <summary> Лог.</summary>
 		public Log Log { get; private set; }
 
+		public Mat OriginalImage { get; private set; }
+
 		#region Methods
 
 		/// <summary> Инициализирует поля.</summary>
@@ -48,6 +54,9 @@ namespace PlateDetector.UI
 				);
 
 			Log				= new Log();
+
+			_detectionController  = new DetectionController(pictureBox, Log);
+			_markupController	  = new MarkupController(pictureBox, Log);
 
 			_detector.Detected	  += OnDetected;
 			_detector
@@ -66,7 +75,7 @@ namespace PlateDetector.UI
 
 		private void Detect()
 		{
-			_detector.Image = pictureBox.ImageIpl;
+			_detector.Image = OriginalImage;
 			_detector.Detect();
 		}
 		#endregion
@@ -75,20 +84,7 @@ namespace PlateDetector.UI
 
 		private void OnDetected(object sender, DetectionEventArgs e)
 		{
-			foreach(var detection in e.Detections.GetDetectionsList())
-			{
-				var region = detection.Region;
-				_detector
-					.Image
-					.AddRectangle(region);
-
-				Log.Detection(detection);
-			}
-
-			var ms = e.Detections.ElapsedTime.Milliseconds + 1000 * e.Detections.ElapsedTime.Seconds;
-			Log.Info($"Время: {ms / 1000f} сек");
-
-			pictureBox.ImageIpl = _detector.Image;
+			_detectionController.Draw(e.Detections);
 		}
 
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
@@ -150,7 +146,6 @@ namespace PlateDetector.UI
 			{
 				mi();
 			}
-
 		}
 
 		private void OnLoadImgToolStripMenuItemClick(object sender, EventArgs e)
@@ -159,20 +154,21 @@ namespace PlateDetector.UI
 			{
 				openFileDlg.Title  = "Выберите картинку";
 				openFileDlg.Filter = "Изображения|*.jpg;*.jpeg;*.png;*.bmp|All files|*.*";
-				//openFileDlg.InitialDirectory = Path.Combine(
-				//	Directory.GetCurrentDirectory(),
-				//	"Photo");
 
 				if(openFileDlg.ShowDialog(this) == DialogResult.OK)
 				{
 					try
 					{
-						pictureBox.ImageIpl = new Mat(openFileDlg.FileName);
+						string uri = openFileDlg.FileName;
 
-						Log.Info($"Загружено изображение: {openFileDlg.FileName}");
+						OriginalImage = new Mat(uri);
+						pictureBox.ImageIpl = OriginalImage;
 
+						Log.Info($"Загружено изображение: {uri}");
+
+						_markupController.Reload(uri);
 					}
-					catch (Exception exc)
+					catch(Exception exc)
 					{
 						Log.Error(exc.Message);
 					}
@@ -185,7 +181,6 @@ namespace PlateDetector.UI
 			try
 			{
 				Detect();
-
 			}
 			catch(Exception exc)
 			{
