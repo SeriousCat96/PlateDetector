@@ -50,7 +50,7 @@ namespace PlateDetector.UI
             this.algToolStripMenuItem});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
-			this.menuStrip.Size = new System.Drawing.Size(760, 24);
+			this.menuStrip.Size = new System.Drawing.Size(887, 24);
 			this.menuStrip.TabIndex = 0;
 			// 
 			// fileToolStripMenuItem
@@ -80,14 +80,14 @@ namespace PlateDetector.UI
 			// chooseAlgToolStripMenuItem
 			// 
 			this.chooseAlgToolStripMenuItem.Name = "chooseAlgToolStripMenuItem";
-			this.chooseAlgToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.chooseAlgToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
 			this.chooseAlgToolStripMenuItem.Text = "Выбрать";
 			this.chooseAlgToolStripMenuItem.Click += new System.EventHandler(this.OnChooseAlgToolStripMenuItemClick);
 			// 
 			// evalAlgToolStripMenuItem
 			// 
 			this.evalAlgToolStripMenuItem.Name = "evalAlgToolStripMenuItem";
-			this.evalAlgToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.evalAlgToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
 			this.evalAlgToolStripMenuItem.Text = "Оценить";
 			// 
 			// pictureBox
@@ -112,13 +112,13 @@ namespace PlateDetector.UI
 			this.lboxLog.ItemHeight = 16;
 			this.lboxLog.Location = new System.Drawing.Point(12, 474);
 			this.lboxLog.Name = "lboxLog";
-			this.lboxLog.Size = new System.Drawing.Size(610, 116);
+			this.lboxLog.Size = new System.Drawing.Size(737, 116);
 			this.lboxLog.TabIndex = 2;
 			// 
 			// btnDetect
 			// 
 			this.btnDetect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnDetect.Location = new System.Drawing.Point(628, 474);
+			this.btnDetect.Location = new System.Drawing.Point(755, 474);
 			this.btnDetect.Name = "btnDetect";
 			this.btnDetect.Size = new System.Drawing.Size(120, 116);
 			this.btnDetect.TabIndex = 3;
@@ -131,7 +131,7 @@ namespace PlateDetector.UI
 			this.AcceptButton = this.btnDetect;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(760, 599);
+			this.ClientSize = new System.Drawing.Size(887, 599);
 			this.Controls.Add(this.btnDetect);
 			this.Controls.Add(this.lboxLog);
 			this.Controls.Add(this.pictureBox);
