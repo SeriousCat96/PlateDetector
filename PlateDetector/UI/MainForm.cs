@@ -241,7 +241,12 @@ namespace PlateDetector.UI
 				.DataProvider
 				.File;
 
-			_markupController.Draw(uri);
+			try
+			{
+				_markupController.Draw(uri);
+			}
+			catch { }
+
 			_detectionController.Draw(e.Detections);
 		}
 
