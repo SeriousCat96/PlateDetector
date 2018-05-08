@@ -7,6 +7,7 @@ using PlateDetector.Markup;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using PlateDetector.Imaging;
 
 namespace PlateDetector.UI
 {
@@ -20,6 +21,7 @@ namespace PlateDetector.UI
 
 		private MarkupController _markupController;
 
+		private ImageSwitchController _imageController;
 		/// <summary> Реализует детектор номеров. </summary>
 		private Detector _detector;
 
@@ -57,6 +59,7 @@ namespace PlateDetector.UI
 
 			_detectionController  = new DetectionController(pictureBox, Log);
 			_markupController	  = new MarkupController(pictureBox, Log);
+			_imageController	  = new ImageSwitchController(pictureBox);
 
 			_detector.Detected	  += OnDetected;
 			_detector
@@ -68,19 +71,112 @@ namespace PlateDetector.UI
 			Log.Info($"Выбран алгоритм: {_detector.SelectedAlgorithm}");
 		}
 
-		private void OnAlgorithmChanged(object sender, AlgChangeEventArgs e)
-		{
-			Log.Info($"Выбран алгоритм: {e.SelectedAlgorithm}");
-		}
-
 		private void Detect()
 		{
 			_detector.Image = OriginalImage;
 			_detector.Detect();
 		}
+
+		private void MoveNext()
+		{
+			try
+			{
+				_imageController.MoveNext();
+
+				ShowMarkup();
+			}
+			catch(Exception exc)
+			{
+				Log.Error(exc.Message);
+			}
+		}
+
+		private void MoveBack()
+		{
+			try
+			{
+				_imageController.MoveBack();
+
+				ShowMarkup();
+			}
+			catch(Exception exc)
+			{
+				Log.Error(exc.Message);
+			}
+		}
+
+		protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+		{
+			if(keyData == Keys.Left)
+			{
+				MoveBack();
+				return true;
+			}
+
+			if(keyData == Keys.Right)
+			{
+				MoveNext();
+				return true;
+			}
+
+			return base.ProcessCmdKey(ref msg, keyData);
+		}
+
+		private void ShowMarkup()
+		{
+			var uri = _imageController
+				.DataProvider
+				.File;
+
+			Log.Info($"Загружено изображение: {uri}");
+
+			OriginalImage = pictureBox.ImageIpl;
+
+			_markupController.OriginalImage = OriginalImage;
+			_markupController.Draw(uri);
+		}
+
 		#endregion
 
 		#region EventHandlers
+
+		private void OnAlgorithmChanged(object sender, AlgChangeEventArgs e)
+		{
+			Log.Info($"Выбран алгоритм: {e.SelectedAlgorithm}");
+		}
+
+		private void OnButtonDetectClick(object sender, EventArgs e)
+		{
+			try
+			{
+				Detect();
+			}
+			catch(Exception exc)
+			{
+				Log.Error(exc.Message);
+			}
+		}
+
+		private void OnButtonMoveNextClick(object sender, EventArgs e)
+		{
+			MoveNext();
+		}
+
+		private void OnButtonMoveBackClick(object sender, EventArgs e)
+		{
+			MoveBack();
+		}
+
+		private void OnChooseAlgToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			using(var window = new AlgForm(_detector.Manager))
+			{
+				if(window.ShowDialog(this) == DialogResult.OK)
+				{
+					Console.WriteLine();
+				}
+			}
+		}
 
 		private void OnDetected(object sender, DetectionEventArgs e)
 		{
@@ -105,6 +201,33 @@ namespace PlateDetector.UI
 			BackColor	= SystemColors.Window;
 			Location	= new System.Drawing.Point(200, 0);
 			Font		= SystemFonts.MessageBoxFont;
+		}
+
+		private void OnLoadImgToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			using(var openFileDlg = new OpenFileDialog())
+			{
+				openFileDlg.Title = "Выберите картинку";
+				openFileDlg.Filter = "Изображения|*.jpg;*.jpeg;*.png;*.bmp|All files|*.*";
+
+				if(openFileDlg.ShowDialog(this) == DialogResult.OK)
+				{
+					try
+					{
+						string uri = openFileDlg.FileName;
+
+						_imageController
+							.DataProvider
+							.File = uri;
+
+						ShowMarkup();
+					}
+					catch(Exception exc)
+					{
+						Log.Error(exc.Message);
+					}
+				}
+			}
 		}
 
 		private void OnLogFileUpdated(object sender, LogEventArgs e)
@@ -148,56 +271,7 @@ namespace PlateDetector.UI
 			}
 		}
 
-		private void OnLoadImgToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			using(var openFileDlg = new OpenFileDialog())
-			{
-				openFileDlg.Title  = "Выберите картинку";
-				openFileDlg.Filter = "Изображения|*.jpg;*.jpeg;*.png;*.bmp|All files|*.*";
-
-				if(openFileDlg.ShowDialog(this) == DialogResult.OK)
-				{
-					try
-					{
-						string uri = openFileDlg.FileName;
-
-						OriginalImage = new Mat(uri);
-						pictureBox.ImageIpl = OriginalImage;
-
-						Log.Info($"Загружено изображение: {uri}");
-
-						_markupController.Reload(uri);
-					}
-					catch(Exception exc)
-					{
-						Log.Error(exc.Message);
-					}
-				}			
-			}
-		}
-
-		private void OnButtonDetectClick(object sender, EventArgs e)
-		{
-			try
-			{
-				Detect();
-			}
-			catch(Exception exc)
-			{
-				Log.Error(exc.Message);
-			}
-		}
 		#endregion
 
-		private void OnChooseAlgToolStripMenuItemClick(object sender, EventArgs e)
-		{
-			using(var window = new AlgForm(_detector.Manager))
-			{
-				if(window.ShowDialog(this) == DialogResult.OK)
-				{
-					Console.WriteLine();
-				}
-			}
-		}
 	}
 }

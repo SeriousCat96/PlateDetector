@@ -39,6 +39,8 @@ namespace PlateDetector.UI
 			this.pictureBox = new OpenCvSharp.UserInterface.PictureBoxIpl();
 			this.lboxLog = new System.Windows.Forms.ListBox();
 			this.btnDetect = new System.Windows.Forms.Button();
+			this.btnMoveBack = new System.Windows.Forms.Button();
+			this.btnMoveNext = new System.Windows.Forms.Button();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
 			this.SuspendLayout();
@@ -92,9 +94,6 @@ namespace PlateDetector.UI
 			// 
 			// pictureBox
 			// 
-			this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
 			this.pictureBox.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
 			this.pictureBox.Location = new System.Drawing.Point(12, 27);
 			this.pictureBox.Name = "pictureBox";
@@ -126,12 +125,34 @@ namespace PlateDetector.UI
 			this.btnDetect.UseVisualStyleBackColor = true;
 			this.btnDetect.Click += new System.EventHandler(this.OnButtonDetectClick);
 			// 
+			// btnMoveBack
+			// 
+			this.btnMoveBack.Location = new System.Drawing.Point(755, 418);
+			this.btnMoveBack.Name = "btnMoveBack";
+			this.btnMoveBack.Size = new System.Drawing.Size(58, 50);
+			this.btnMoveBack.TabIndex = 4;
+			this.btnMoveBack.Text = "<";
+			this.btnMoveBack.UseVisualStyleBackColor = true;
+			this.btnMoveBack.Click += new System.EventHandler(this.OnButtonMoveBackClick);
+			// 
+			// btnMoveNext
+			// 
+			this.btnMoveNext.Location = new System.Drawing.Point(817, 418);
+			this.btnMoveNext.Name = "btnMoveNext";
+			this.btnMoveNext.Size = new System.Drawing.Size(58, 50);
+			this.btnMoveNext.TabIndex = 5;
+			this.btnMoveNext.Text = ">";
+			this.btnMoveNext.UseVisualStyleBackColor = true;
+			this.btnMoveNext.Click += new System.EventHandler(this.OnButtonMoveNextClick);
+			// 
 			// MainForm
 			// 
 			this.AcceptButton = this.btnDetect;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(887, 599);
+			this.Controls.Add(this.btnMoveNext);
+			this.Controls.Add(this.btnMoveBack);
 			this.Controls.Add(this.btnDetect);
 			this.Controls.Add(this.lboxLog);
 			this.Controls.Add(this.pictureBox);
@@ -158,6 +179,8 @@ namespace PlateDetector.UI
 		private System.Windows.Forms.ToolStripMenuItem evalAlgToolStripMenuItem;
 		private System.Windows.Forms.ListBox lboxLog;
 		private System.Windows.Forms.Button btnDetect;
+		private System.Windows.Forms.Button btnMoveBack;
+		private System.Windows.Forms.Button btnMoveNext;
 	}
 }
 

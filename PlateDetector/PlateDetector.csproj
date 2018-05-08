@@ -56,6 +56,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="OpenCvSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6adad1e807fea099, processorArchitecture=MSIL">
       <HintPath>..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180319\lib\net46\OpenCvSharp.dll</HintPath>
       <Private>True</Private>
@@ -105,6 +106,7 @@
     <Compile Include="Detection\IDetectionAlg.cs" />
     <Compile Include="Detection\MatExtensions.cs" />
     <Compile Include="Detection\IDetectionAlgFactory.cs" />
+    <Compile Include="Imaging\ImageFilesDataProvider.cs" />
     <Compile Include="Logging\LogDetectionMessage.cs" />
     <Compile Include="Logging\LogErrorMessage.cs" />
     <Compile Include="Logging\ILogMessage.cs" />
@@ -121,6 +123,7 @@
       <DependentUpon>AlgForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\DetectionController.cs" />
+    <Compile Include="UI\ImageSwitchController.cs" />
     <Compile Include="UI\MarkupController.cs" />
     <Compile Include="UserClasses\NdArray.cs" />
     <Compile Include="UI\LogController.cs" />
