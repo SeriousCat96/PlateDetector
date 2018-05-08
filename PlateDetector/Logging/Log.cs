@@ -85,6 +85,13 @@ namespace PlateDetector.Logging
 			Message(new LogErrorMessage(message));
 		}
 
+		/// <summary> Отправляет в лог предупреждающее сообщение. </summary>
+		/// <param name="message"> Сообщение для лога. </param>
+		public void Warning(string message)
+		{
+			Message(new LogWarningMessage(message));
+		}
+
 		/// <summary> Инициализирует поля класса. </summary>
 		private void Initialize()
 		{

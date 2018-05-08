@@ -113,6 +113,7 @@
     <Compile Include="Logging\LogInfoMessage.cs" />
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Logging\LogMessageType.cs" />
+    <Compile Include="Logging\LogWarningMessage.cs" />
     <Compile Include="Markup\RegionSelectionController.cs" />
     <Compile Include="Markup\MarkupImporter.cs" />
     <Compile Include="Markup\XmlMarkup.cs" />
@@ -182,6 +183,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppServices\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="if_arrow-right_173148.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="if_arrow-left_173147.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

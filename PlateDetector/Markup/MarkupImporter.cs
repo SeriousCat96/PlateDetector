@@ -34,7 +34,7 @@ namespace PlateDetector.Markup
 				return regions;
 			}
 
-			return null;
+			else throw new InvalidOperationException("Изображение не размечено вручную.");
 		}
 
 		/// <summary> Существует ли файл с разметкой. </summary>

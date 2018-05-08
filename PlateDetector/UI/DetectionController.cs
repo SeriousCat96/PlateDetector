@@ -1,14 +1,15 @@
 ﻿using OpenCvSharp;
 using OpenCvSharp.UserInterface;
 
+using PlateDetector.Detection;
+using PlateDetector.Markup;
+using PlateDetector.Logging;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PlateDetector.Detection;
-using PlateDetector.Markup;
-using PlateDetector.Logging;
 
 namespace PlateDetector.UI
 {
@@ -19,13 +20,15 @@ namespace PlateDetector.UI
 		{
 			PicBox				= picBox;
 			Image				= picBox.ImageIpl;
-
+			Detections			= new DetectionResult(new List<Detection.Detection>(), new TimeSpan());
 			Log					= log;
 		}
 
 		#endregion
 		
 		#region Properties
+
+		public DetectionResult Detections { get; private set; }
 
 		public PictureBoxIpl PicBox { get; }
 
@@ -57,21 +60,32 @@ namespace PlateDetector.UI
 
 		#region Methods
 
-		public void Draw(DetectionResult detections)
+		public void Draw(DetectionResult detections = null)
 		{
-			if(detections.GetDetectionsList().Count > 0)
+			if(detections != null)
 			{
-				foreach(var detection in detections.GetDetectionsList())
+				Detections = detections;
+			}
+
+			if(Detections.GetDetectionsList().Count > 0)
+			{
+				foreach(var detection in Detections.GetDetectionsList())
 				{
 					var region = detection.Region;
 
 					Image.AddRectangle(region, RegionColor);
 					
-					Log.Detection(detection);
+					if(detections != null)
+					{
+						Log.Detection(detection);
+					}
 				}
 
-				var ms = detections.ElapsedTime.Milliseconds + 1000 * detections.ElapsedTime.Seconds;
-				Log.Info($"Время: {ms / 1000f} сек");
+				if(detections != null)
+				{
+					var ms = Detections.ElapsedTime.Milliseconds + 1000 * Detections.ElapsedTime.Seconds;
+					Log.Info($"Время: {ms / 1000f} сек");
+				}
 			}
 
 			PicBox.RefreshIplImage(Image);

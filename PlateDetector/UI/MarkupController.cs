@@ -13,6 +13,21 @@ namespace PlateDetector.UI
 {
 	public sealed class MarkupController
 	{
+		#region Data
+
+		private bool _isMarkupOn;
+		#endregion
+		#region Events
+
+		/// <summary> Возникает при изменении режима разметки. </summary>
+		public event EventHandler MarkupModeChanged;
+
+		private void OnMarkupModeChanged(EventArgs e)
+		{
+			MarkupModeChanged?.Invoke(this, e);
+		}
+
+		#endregion
 		#region .ctor
 		public MarkupController(PictureBoxIpl picBox, Log log)
 		{
@@ -56,7 +71,18 @@ namespace PlateDetector.UI
 
 		public RegionSelectionController SelectionController { get; }
 
-		public bool IsMarkupOn { get; set; } = true;
+		public bool IsMarkupOn
+		{
+			get
+			{
+				return _isMarkupOn;
+			}
+			set
+			{
+				_isMarkupOn = value;
+				OnMarkupModeChanged(new EventArgs());
+			}
+		}
 
 		public Log Log { get; private set; }
 		#endregion
@@ -71,17 +97,18 @@ namespace PlateDetector.UI
 
 		public void Draw(string uri)
 		{
+			SelectionController.Image = OriginalImage.Clone();
+
 			if(IsMarkupOn)
 			{
-				SelectionController.Image = OriginalImage.Clone();
-
 				var gtBoxes = MarkupImporter.ImportRegions(uri, SelectionController);
 				if(gtBoxes != null)
 				{
 					SelectionController.SelectRegions(gtBoxes);
-					PicBox.RefreshIplImage(SelectionController.Image);
 				}
 			}
+
+			PicBox.RefreshIplImage(SelectionController.Image);
 		}
 
 		#endregion

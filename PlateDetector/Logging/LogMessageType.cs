@@ -7,6 +7,8 @@
 		Info,
 		/// <summary> Сообщение об ошибке.</summary>
 		Error,
+		/// <summary> Предупреждающее сообщение.</summary>
+		Warning,
 		/// <summary> Сообщение о детектировании.</summary>
 		Detection,
 	}

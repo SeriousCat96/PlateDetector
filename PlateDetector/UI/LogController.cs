@@ -7,10 +7,13 @@ namespace PlateDetector.UI
 	/// <summary> Предоставляет методы, обрабатывающие элемент управления <see cref="ListBox"/> для лога. </summary>
 	public class LogController : IDisposable
 	{
+		#region Data
 		private SolidBrush _reportsForegroundBrushSelected;
 		private SolidBrush _reportsBackgroundBrushSelected;
 		private SolidBrush _reportsBackgroundBrush1;
-		private SolidBrush _reportsBackgroundBrush2;
+		private SolidBrush _reportsBackgroundBrush2; 
+
+		#endregion
 
 		#region .ctor
 		/// <summary> Создаёт <see cref="LogDispatcher"/>. </summary>

@@ -70,11 +70,7 @@ namespace PlateDetector.Detection
 
 		public static void AddRectangle(this Mat mat, Rect rect, Scalar color)
 		{
-			var size = mat.Size();
-			var scaleX = (int)Math.Round(Math.Round(size.Width / 735.0, 1));
-			var thickness = 2 * scaleX > 0 ? 2 * scaleX: 2;
-
-			mat.Rectangle(rect, color, thickness, LineTypes.Link8);
+			mat.Rectangle(rect, color, 2, LineTypes.Link8);
 		}
 	}
 }
