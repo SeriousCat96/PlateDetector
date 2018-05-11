@@ -1,15 +1,15 @@
-﻿using System;
+﻿using OpenCvSharp;
+
+using System;
 using System.Collections.Generic;
 using System.IO;
-
-using OpenCvSharp;
 
 using TensorFlow;
 
 namespace PlateDetector.Detection
 {
 	/// <summary> Реализует сверточную нейронную сеть. </summary>
-	public class FasterRCNNModel : IDetectionAlg, IDisposable
+	public class FasterRcnnModel : IDetectionAlg, IDisposable
 	{
 		#region Const
 		public const string ModelFile = @"fasterrcnn.pb";
@@ -29,10 +29,10 @@ namespace PlateDetector.Detection
 
 		#region .ctor
 
-		/// <summary> Создает <see cref="FasterRCNNModel"/>. </summary>
+		/// <summary> Создает <see cref="FasterRcnnModel"/>. </summary>
 		/// <param name="model"> Граф вычислений модели сверточной нейронной сети. </param>
 		/// <param name="imageSize"> Размер входного изображения. </param>
-		public FasterRCNNModel(TFGraph model, Size imageSize)
+		public FasterRcnnModel(TFGraph model, Size imageSize)
 		{
 			_imageSize = imageSize;
 			_graph = model;
@@ -65,7 +65,7 @@ namespace PlateDetector.Detection
 		/// <summary> Предсказывает местоположения объектов на изображении. </summary>
 		/// <param name="image"> Анализируемое изображение. </param>
 		/// <returns> Список ограничивающих прямоугольников <see cref="Rectangle"/>. </returns>
-		public List<Detection> Predict(Mat image)
+		public IReadOnlyList<Detection> Predict(Mat image)
 		{
 			var runner = _session.GetRunner();
 			
@@ -100,7 +100,7 @@ namespace PlateDetector.Detection
 		/// <param name="output"> Результаты в виде тензоров. </param>
 		/// <param name="originalSize"> Размер оригинала изображения. </param>
 		/// <returns> Результаты локализации. </returns>
-		private List<Detection> PostProcess(TFTensor[] output, Size originalSize)
+		private IReadOnlyList<Detection> PostProcess(TFTensor[] output, Size originalSize)
 		{
 			TFTensor boundBoxesTensor = output[0];
 			TFTensor probsTensor = output[1];

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using OpenCvSharp;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-
-using OpenCvSharp;
 
 namespace PlateDetector.Detection
 {
@@ -71,7 +71,7 @@ namespace PlateDetector.Detection
 		/// <summary> Предсказывает местоположения объектов на изображении. </summary>
 		/// <param name="image"> Анализируемое изображение. </param>
 		/// <returns> Список ограничивающих прямоугольников <see cref="OpenCvSharp.Rect"/>. </returns>
-		public List<Detection> Predict(Mat image)
+		public IReadOnlyList<Detection> Predict(Mat image)
 		{
 			var rects = _classifier.DetectMultiScale(
 				image: image,

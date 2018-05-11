@@ -7,7 +7,7 @@ namespace PlateDetector.Detection
 	public class DetectionResult
 	{
 		#region Data
-		private List<Detection> _detections;
+		private IReadOnlyList<Detection> _detections;
 
 		#endregion
 
@@ -15,7 +15,7 @@ namespace PlateDetector.Detection
 		/// <summary> Создает <see cref="DetectionResult"/>. </summary>
 		/// <param name="detections"> Список обнаруженных объектов <see cref="Detection"/>.</param>
 		/// /// <param name="elapsedTime"> Время работы алгоритма.</param>
-		public DetectionResult(List<Detection> detections, TimeSpan elapsedTime)
+		public DetectionResult(IReadOnlyList<Detection> detections, TimeSpan elapsedTime)
 		{
 			_detections	= detections;
 			ElapsedTime	= elapsedTime;
@@ -30,7 +30,7 @@ namespace PlateDetector.Detection
 		#region Methods
 		/// <summary> Возвращает список обнаруженных объектов <see cref="Detection"/>.</summary>
 		/// <returns> Возвращает список обнаруженных объектов <see cref="Detection"/>.</returns>
-		public List<Detection> GetDetectionsList() => _detections;
+		public IReadOnlyList<Detection> GetDetectionsList() => _detections;
 		#endregion
 	}
 }

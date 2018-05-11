@@ -1,9 +1,9 @@
 ﻿namespace PlateDetector.Detection
 {
 	/// <summary> Класс, обеспечивающий создание <see cref="HaarCascadeFactory"/>.</summary>
-	public class HaarCascadeFactory : IDetectionAlgFactory
+	public class HaarCascadeProvider : IDetectionAlgProvider
 	{
-		/// <summary> Производит объект <see cref="HaarCascadeFactory"/> с установленными параметрами. </summary>
+		/// <summary> Производит объект <see cref="HaarCascadeModel"/> с установленными параметрами. </summary>
 		/// <returns> Возвращает созданный объект <see cref="IDetectionAlg"/> . </returns>
 		public IDetectionAlg CreateDetectionAlgorithm()
 		{

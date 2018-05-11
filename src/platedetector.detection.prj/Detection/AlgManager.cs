@@ -23,14 +23,14 @@ namespace PlateDetector.Detection
 		#region .ctor
 
 		/// <summary> Создает <see cref="AlgManager"/>. </summary>
-		/// <param name="factories"> Абстрактные фабрики алгоритмов локализации. </param>
-		public AlgManager(params IDetectionAlgFactory[] factories)
+		/// <param name="providers"> Фабрики алгоритмов локализации. </param>
+		public AlgManager(params IDetectionAlgProvider[] providers)
 		{
 			Algorithms = new List<IDetectionAlg>();
 
-			if(factories != null)
+			if(providers != null)
 			{
-				foreach(var factory in factories)
+				foreach(var factory in providers)
 				{
 					var algorithm = factory.CreateDetectionAlgorithm();
 					Algorithms.Add(algorithm);
@@ -44,7 +44,7 @@ namespace PlateDetector.Detection
 		#region Properties
 
 		/// <summary> Список алгоритмов локализации. </summary>
-		public List<IDetectionAlg> Algorithms { get; }
+		public IList<IDetectionAlg> Algorithms { get; }
 
 		/// <summary> Выбранный алгоритм локализации. </summary>
 		public IDetectionAlg SelectedAlgorithm { get; protected set; }

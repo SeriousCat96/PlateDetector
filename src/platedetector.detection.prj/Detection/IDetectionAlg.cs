@@ -1,7 +1,6 @@
 ﻿using OpenCvSharp;
 
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace PlateDetector.Detection
 {
@@ -15,6 +14,6 @@ namespace PlateDetector.Detection
 		/// <summary> Предсказывает местоположения объектов на изображении. </summary>
 		/// <param name="image"> Анализируемое изображение. </param>
 		/// <returns> Список ограничивающих прямоугольников <see cref="OpenCvSharp.Rect"/>. </returns>
-		List<Detection> Predict(Mat image);
+		IReadOnlyList<Detection> Predict(Mat image);
 	}
 }

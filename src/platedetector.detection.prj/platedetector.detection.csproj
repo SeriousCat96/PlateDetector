@@ -75,15 +75,15 @@
     <Compile Include="Detection\Detection.cs" />
     <Compile Include="Detection\DetectionResult.cs" />
     <Compile Include="Detection\Detector.cs" />
-    <Compile Include="Detection\FasterRCNNFactory.cs" />
-    <Compile Include="Detection\FasterRCNNModel.cs" />
-    <Compile Include="Detection\HaarCascadeFactory.cs" />
+    <Compile Include="Detection\FasterRcnnProvider.cs" />
+    <Compile Include="Detection\FasterRcnnModel.cs" />
+    <Compile Include="Detection\HaarCascadeProvider.cs" />
     <Compile Include="Detection\HaarCascadeModel.cs" />
     <Compile Include="Detection\IDetectionAlg.cs" />
-    <Compile Include="Detection\IDetectionAlgFactory.cs" />
-    <Compile Include="Detection\MatExtensions.cs" />
+    <Compile Include="Detection\IDetectionAlgProvider.cs" />
+    <Compile Include="Utils\MatExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserClasses\NdArray.cs" />
+    <Compile Include="Utils\NdArray.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

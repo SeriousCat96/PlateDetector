@@ -3,7 +3,6 @@
 using PlateDetector.Detection;
 using PlateDetector.Imaging;
 using PlateDetector.Logging;
-using PlateDetector.Markup;
 
 using System;
 using System.Drawing;
@@ -61,8 +60,8 @@ namespace PlateDetector.UI
 			_logController	= new LogController(lboxLog);
 			_detector		= new Detector(
 				new AlgManager(
-					new FasterRCNNFactory(),
-					new HaarCascadeFactory()
+					new FasterRcnnProvider(),
+					new HaarCascadeProvider()
 					)
 				);
 

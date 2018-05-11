@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
+
 using PlateDetector.Detection;
 
 namespace PlateDetector.UI

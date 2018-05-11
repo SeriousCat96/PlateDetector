@@ -1,5 +1,6 @@
-﻿using System.Text;
-using OpenCvSharp;
+﻿using OpenCvSharp;
+
+using System.Text;
 
 namespace PlateDetector.Detection
 {

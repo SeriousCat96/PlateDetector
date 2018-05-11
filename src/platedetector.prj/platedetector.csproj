@@ -112,17 +112,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UI\AlgForm.cs">
+    <Compile Include="Forms\AlgForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\AlgForm.Designer.cs">
+    <Compile Include="Forms\AlgForm.Designer.cs">
       <DependentUpon>AlgForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\DetectionController.cs" />
-    <Compile Include="UI\EvalForm.cs">
+    <Compile Include="Forms\EvalForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\EvalForm.Designer.cs">
+    <Compile Include="Forms\EvalForm.Designer.cs">
       <DependentUpon>EvalForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ImageSwitchController.cs" />
@@ -130,22 +130,22 @@
     <Compile Include="UI\LogController.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />
     <Compile Include="UI\LogItem.cs" />
-    <Compile Include="UI\MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Native.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="UI\AlgForm.resx">
+    <EmbeddedResource Include="Forms\AlgForm.resx">
       <DependentUpon>AlgForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\EvalForm.resx">
+    <EmbeddedResource Include="Forms\EvalForm.resx">
       <DependentUpon>EvalForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -184,7 +184,7 @@
     <Folder Include="AppServices\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\platedetector.detection\platedetector.detection.csproj">
+    <ProjectReference Include="..\platedetector.detection.prj\platedetector.detection.csproj">
       <Project>{413b61e1-46eb-486f-9d5c-1419c3aaedd1}</Project>
       <Name>platedetector.detection</Name>
     </ProjectReference>
