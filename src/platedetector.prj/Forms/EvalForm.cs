@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace PlateDetector.UI
+namespace PlateDetector.Controllers
 {
 	public partial class EvalForm : Form
 	{

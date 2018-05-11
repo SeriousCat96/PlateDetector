@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 using PlateDetector.Detection;
 
-namespace PlateDetector.UI
+namespace PlateDetector.Controllers
 {
 	public partial class AlgForm : Form
 	{

@@ -1,4 +1,4 @@
-﻿namespace PlateDetector.UI
+﻿namespace PlateDetector.Controllers
 {
 	partial class AlgForm
 	{

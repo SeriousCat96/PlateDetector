@@ -104,9 +104,6 @@
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Logging\LogMessageType.cs" />
     <Compile Include="Logging\LogWarningMessage.cs" />
-    <Compile Include="Markup\RegionSelectionController.cs" />
-    <Compile Include="Markup\MarkupImporter.cs" />
-    <Compile Include="Markup\XmlMarkup.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -118,18 +115,17 @@
     <Compile Include="Forms\AlgForm.Designer.cs">
       <DependentUpon>AlgForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\DetectionController.cs" />
+    <Compile Include="Controllers\DetectionController.cs" />
     <Compile Include="Forms\EvalForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\EvalForm.Designer.cs">
       <DependentUpon>EvalForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ImageSwitchController.cs" />
-    <Compile Include="UI\MarkupController.cs" />
-    <Compile Include="UI\LogController.cs" />
+    <Compile Include="Controllers\ImageSwitchController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />
-    <Compile Include="UI\LogItem.cs" />
+    <Compile Include="Logging\LogItem.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +135,7 @@
     <Compile Include="Native.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Controllers\MarkupController.cs" />
     <EmbeddedResource Include="Forms\AlgForm.resx">
       <DependentUpon>AlgForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,6 +184,10 @@
     <ProjectReference Include="..\platedetector.detection.prj\platedetector.detection.csproj">
       <Project>{413b61e1-46eb-486f-9d5c-1419c3aaedd1}</Project>
       <Name>platedetector.detection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\platedetector.markup.prj\platedetector.markup.csproj">
+      <Project>{044f99fc-e2f9-4d7b-9123-f1fd922ab9e1}</Project>
+      <Name>platedetector.markup</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlateDetector.Imaging
 {
-	/// <summary> Предоставляет данные о файлах и каталоге изображений. </summary>
-	public class ImageFilesDataProvider
+    /// <summary> Предоставляет данные о файлах и каталоге изображений. </summary>
+    public class ImageFilesDataProvider
 	{
 		#region Data
 
@@ -62,7 +59,6 @@ namespace PlateDetector.Imaging
 		}
 
 		#endregion
-
 
 		#region Methods
 

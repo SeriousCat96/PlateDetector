@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 
-namespace PlateDetector.UI
+namespace PlateDetector.Controllers
 {
 	public partial class MainForm : Form
 	{

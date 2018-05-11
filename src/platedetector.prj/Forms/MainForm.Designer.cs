@@ -1,6 +1,6 @@
 ﻿using OpenCvSharp.UserInterface;
 
-namespace PlateDetector.UI
+namespace PlateDetector.Controllers
 {
 	partial class MainForm
 	{

@@ -1,4 +1,4 @@
-﻿using PlateDetector.UI;
+﻿using PlateDetector.Controllers;
 
 using System;
 using System.Windows.Forms;

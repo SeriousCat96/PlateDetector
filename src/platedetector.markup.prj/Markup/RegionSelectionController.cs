@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using OpenCvSharp;
 using PlateDetector.Detection;
 
 namespace PlateDetector.Markup
 {
-	public class RegionSelectionController
+    public class RegionSelectionController
 	{
 		#region .ctor
 		/// <summary> Создает <see cref="RegionSelectionController"/>.</summary>

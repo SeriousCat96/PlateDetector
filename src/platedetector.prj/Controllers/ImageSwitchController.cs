@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlateDetector.UI
+namespace PlateDetector.Controllers
 {
 	public sealed class ImageSwitchController
 	{

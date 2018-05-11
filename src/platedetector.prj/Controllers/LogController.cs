@@ -1,8 +1,10 @@
-﻿using System;
+﻿using PlateDetector.Logging;
+
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace PlateDetector.UI
+namespace PlateDetector.Controllers
 {
 	/// <summary> Предоставляет методы, обрабатывающие элемент управления <see cref="ListBox"/> для лога. </summary>
 	public class LogController : IDisposable
