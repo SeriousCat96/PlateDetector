@@ -1,13 +1,15 @@
-﻿using System;
+﻿using OpenCvSharp;
+using OpenCvSharp.UserInterface;
+
+using PlateDetector.Imaging;
+
+using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenCvSharp;
-using OpenCvSharp.UserInterface;
-using PlateDetector.Imaging;
 
 namespace PlateDetector.UI
 {
@@ -34,7 +36,7 @@ namespace PlateDetector.UI
 		{
 			if(DataProvider != null)
 			{
-				DataProvider.FileChanged   -= OnFileChanged;
+				DataProvider.FileChanged -= OnFileChanged;
 			}
 		}
 		#endregion
@@ -86,6 +88,8 @@ namespace PlateDetector.UI
 			_curPosition = _items.IndexOf(e.File);
 
 			PicBox.RefreshIplImage(new Mat(e.File));
+
+			GC.Collect();
 		}
 
 		#endregion

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlateDetector", "PlateDetector\PlateDetector.csproj", "{7B434D65-75CD-4906-8B99-98C4A6281102}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "platedetector", "PlateDetector\platedetector.csproj", "{7B434D65-75CD-4906-8B99-98C4A6281102}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "platedetector.detection", "platedetector.detection\platedetector.detection.csproj", "{413B61E1-46EB-486F-9D5C-1419C3AAEDD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{7B434D65-75CD-4906-8B99-98C4A6281102}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B434D65-75CD-4906-8B99-98C4A6281102}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B434D65-75CD-4906-8B99-98C4A6281102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{413B61E1-46EB-486F-9D5C-1419C3AAEDD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{413B61E1-46EB-486F-9D5C-1419C3AAEDD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{413B61E1-46EB-486F-9D5C-1419C3AAEDD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{413B61E1-46EB-486F-9D5C-1419C3AAEDD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

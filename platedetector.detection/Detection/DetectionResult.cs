@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PlateDetector.Detection
 {
@@ -10,6 +10,7 @@ namespace PlateDetector.Detection
 		private List<Detection> _detections;
 
 		#endregion
+
 		#region .ctor
 		/// <summary> Создает <see cref="DetectionResult"/>. </summary>
 		/// <param name="detections"> Список обнаруженных объектов <see cref="Detection"/>.</param>

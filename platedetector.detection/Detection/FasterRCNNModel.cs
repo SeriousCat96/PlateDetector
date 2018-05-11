@@ -4,8 +4,6 @@ using System.IO;
 
 using OpenCvSharp;
 
-using PlateDetector.Structures;
-
 using TensorFlow;
 
 namespace PlateDetector.Detection

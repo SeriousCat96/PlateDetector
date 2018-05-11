@@ -16,6 +16,12 @@ namespace PlateDetector.UI
 
 		public AlgManager AlgManager { get; }
 
+		private void SelectAlg()
+		{
+			var selectedAlg = algListBox.SelectedItem as IDetectionAlg;
+			AlgManager.Select(selectedAlg.GetType());
+		}
+
 		protected override void OnLoad(EventArgs e)
 		{
 			base.OnLoad(e);
@@ -27,12 +33,22 @@ namespace PlateDetector.UI
 			algListBox
 				.Items
 				.AddRange(AlgManager.Algorithms.ToArray());
+
+			algListBox.SelectedIndex = AlgManager
+				.Algorithms
+				.IndexOf(AlgManager.SelectedAlgorithm);
 		}
 
 		private void OnButtonOKClick(object sender, EventArgs e)
 		{
-			var selectedAlg = algListBox.SelectedItem as IDetectionAlg;
-			AlgManager.Select(selectedAlg.GetType());
+			SelectAlg();
+		}
+
+		private void OnListboxMouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			SelectAlg();
+
+			DialogResult = DialogResult.OK;
 		}
 	}
 }

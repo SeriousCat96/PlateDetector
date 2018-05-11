@@ -9,13 +9,14 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>PlateDetector</RootNamespace>
-    <AssemblyName>PlateDetector</AssemblyName>
+    <AssemblyName>platedetector</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,7 +29,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -95,17 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Detection\AlgManager.cs" />
-    <Compile Include="Detection\Detection.cs" />
-    <Compile Include="Detection\FasterRCNNFactory.cs" />
-    <Compile Include="Detection\HaarCascadeFactory.cs" />
-    <Compile Include="Detection\FasterRCNNModel.cs" />
-    <Compile Include="Detection\DetectionResult.cs" />
-    <Compile Include="Detection\Detector.cs" />
-    <Compile Include="Detection\HaarCascadeModel.cs" />
-    <Compile Include="Detection\IDetectionAlg.cs" />
-    <Compile Include="Detection\MatExtensions.cs" />
-    <Compile Include="Detection\IDetectionAlgFactory.cs" />
+    <Compile Include="Evaluation\IMetric.cs" />
     <Compile Include="Imaging\ImageFilesDataProvider.cs" />
     <Compile Include="Logging\LogDetectionMessage.cs" />
     <Compile Include="Logging\LogErrorMessage.cs" />
@@ -117,6 +107,11 @@
     <Compile Include="Markup\RegionSelectionController.cs" />
     <Compile Include="Markup\MarkupImporter.cs" />
     <Compile Include="Markup\XmlMarkup.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="UI\AlgForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,9 +119,14 @@
       <DependentUpon>AlgForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\DetectionController.cs" />
+    <Compile Include="UI\EvalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\EvalForm.Designer.cs">
+      <DependentUpon>EvalForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\ImageSwitchController.cs" />
     <Compile Include="UI\MarkupController.cs" />
-    <Compile Include="UserClasses\NdArray.cs" />
     <Compile Include="UI\LogController.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />
     <Compile Include="UI\LogItem.cs" />
@@ -142,19 +142,17 @@
     <EmbeddedResource Include="UI\AlgForm.resx">
       <DependentUpon>AlgForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\EvalForm.resx">
+      <DependentUpon>EvalForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -165,6 +163,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\if_arrow-left_173147.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -185,13 +184,16 @@
     <Folder Include="AppServices\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="doc.png" />
+    <ProjectReference Include="..\platedetector.detection\platedetector.detection.csproj">
+      <Project>{413b61e1-46eb-486f-9d5c-1419c3aaedd1}</Project>
+      <Name>platedetector.detection</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="if_arrow-right_173148.png" />
+    <None Include="Resources\if_arrow-right_173148.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="if_arrow-left_173147.png" />
+    <None Include="Resources\doc.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

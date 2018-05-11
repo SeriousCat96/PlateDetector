@@ -10,15 +10,16 @@ namespace PlateDetector.Detection
 		#region Events
 
 		/// <summary> Возникает при изменении алгоритма. </summary>
-		public event EventHandler<AlgChangeEventArgs> AlgorithmChanged;
+		public event EventHandler<AlgChangedEventArgs> AlgorithmChanged;
 
 		/// <summary> Вызов события <see cref="AlgChanged"/>.</summary>
 		/// <param name="e"> Аргументы события.</param>
-		private void OnAlgorithmChanged(AlgChangeEventArgs e)
+		private void OnAlgorithmChanged(AlgChangedEventArgs e)
 		{
 			AlgorithmChanged?.Invoke(this, e);
 		}
 		#endregion
+
 		#region .ctor
 
 		/// <summary> Создает <see cref="AlgManager"/>. </summary>
@@ -62,7 +63,7 @@ namespace PlateDetector.Detection
 			if(types.Contains(type))
 			{
 				SelectedAlgorithm = Algorithms[types.IndexOf(type)];
-				OnAlgorithmChanged(new AlgChangeEventArgs(SelectedAlgorithm));				
+				OnAlgorithmChanged(new AlgChangedEventArgs(SelectedAlgorithm));				
 			}
 			else
 			{
@@ -73,9 +74,9 @@ namespace PlateDetector.Detection
 	}
 
 	/// <summary> Аргументы события <see cref="AlgManager.AlgChanged"/></summary>
-	public class AlgChangeEventArgs : EventArgs
+	public class AlgChangedEventArgs : EventArgs
 	{
-		public AlgChangeEventArgs(IDetectionAlg selectedAlgorithm)
+		public AlgChangedEventArgs(IDetectionAlg selectedAlgorithm)
 		{
 			SelectedAlgorithm = selectedAlgorithm;
 		}

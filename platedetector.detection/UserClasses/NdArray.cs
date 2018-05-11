@@ -1,4 +1,4 @@
-﻿namespace PlateDetector.Structures
+﻿namespace PlateDetector.Detection
 {
 	public sealed class NdArray<T> where T: struct
 	{

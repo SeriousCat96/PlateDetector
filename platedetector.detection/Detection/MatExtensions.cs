@@ -1,8 +1,4 @@
-﻿using System;
-using System.Drawing;
-using OpenCvSharp;
-
-using PlateDetector.Structures;
+﻿using OpenCvSharp;
 
 namespace PlateDetector.Detection
 {

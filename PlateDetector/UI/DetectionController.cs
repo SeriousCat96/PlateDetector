@@ -18,10 +18,11 @@ namespace PlateDetector.UI
 		#region .ctor
 		public DetectionController(PictureBoxIpl picBox, Log log)
 		{
-			PicBox				= picBox;
-			Image				= picBox.ImageIpl;
-			Detections			= new DetectionResult(new List<Detection.Detection>(), new TimeSpan());
-			Log					= log;
+			PicBox		= picBox;
+			Image		= picBox.ImageIpl;
+			Log			= log;
+
+			RefreshDetections();
 		}
 
 		#endregion
@@ -89,8 +90,14 @@ namespace PlateDetector.UI
 			}
 
 			PicBox.RefreshIplImage(Image);
+
+			GC.Collect();
 		}
 
+		public void RefreshDetections()
+		{
+			Detections = new DetectionResult(new List<Detection.Detection>(), new TimeSpan());
+		}
 		#endregion
 	}
 }

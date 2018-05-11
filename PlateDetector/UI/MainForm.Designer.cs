@@ -43,11 +43,11 @@ namespace PlateDetector.UI
 			this.lblFolder = new System.Windows.Forms.Label();
 			this.tboxFolder = new System.Windows.Forms.TextBox();
 			this.btnOpenFolder = new System.Windows.Forms.Button();
+			this.chkBoxMarkup = new System.Windows.Forms.CheckBox();
 			this.btnMoveNext = new System.Windows.Forms.Button();
 			this.btnMoveBack = new System.Windows.Forms.Button();
 			this.pictureBox = new OpenCvSharp.UserInterface.PictureBoxIpl();
 			this.loadImgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.chkBoxMarkup = new System.Windows.Forms.CheckBox();
 			this.menuStrip.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
 			this.SuspendLayout();
@@ -91,6 +91,7 @@ namespace PlateDetector.UI
 			this.evalAlgToolStripMenuItem.Name = "evalAlgToolStripMenuItem";
 			this.evalAlgToolStripMenuItem.Size = new System.Drawing.Size(121, 22);
 			this.evalAlgToolStripMenuItem.Text = "Оценить";
+			this.evalAlgToolStripMenuItem.Click += new System.EventHandler(this.OnEvalAlgToolStripMenuItemClick);
 			// 
 			// lboxLog
 			// 
@@ -165,14 +166,25 @@ namespace PlateDetector.UI
 			this.btnOpenFolder.UseVisualStyleBackColor = true;
 			this.btnOpenFolder.Click += new System.EventHandler(this.OnButtonOpenFolderClick);
 			// 
+			// chkBoxMarkup
+			// 
+			this.chkBoxMarkup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.chkBoxMarkup.Location = new System.Drawing.Point(733, 119);
+			this.chkBoxMarkup.Name = "chkBoxMarkup";
+			this.chkBoxMarkup.Size = new System.Drawing.Size(171, 17);
+			this.chkBoxMarkup.TabIndex = 11;
+			this.chkBoxMarkup.Text = "Синхронизация с разметкой";
+			this.chkBoxMarkup.UseVisualStyleBackColor = true;
+			this.chkBoxMarkup.CheckedChanged += new System.EventHandler(this.OnCheckboxMarkupCheckedChanged);
+			// 
 			// btnMoveNext
 			// 
 			this.btnMoveNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btnMoveNext.BackgroundImage = global::PlateDetector.Properties.Resources.arrow_right;
 			this.btnMoveNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.btnMoveNext.Location = new System.Drawing.Point(844, 418);
+			this.btnMoveNext.Location = new System.Drawing.Point(842, 418);
 			this.btnMoveNext.Name = "btnMoveNext";
-			this.btnMoveNext.Size = new System.Drawing.Size(107, 50);
+			this.btnMoveNext.Size = new System.Drawing.Size(109, 50);
 			this.btnMoveNext.TabIndex = 5;
 			this.btnMoveNext.UseVisualStyleBackColor = true;
 			this.btnMoveNext.Click += new System.EventHandler(this.OnButtonMoveNextClick);
@@ -184,7 +196,7 @@ namespace PlateDetector.UI
 			this.btnMoveBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
 			this.btnMoveBack.Location = new System.Drawing.Point(733, 418);
 			this.btnMoveBack.Name = "btnMoveBack";
-			this.btnMoveBack.Size = new System.Drawing.Size(107, 50);
+			this.btnMoveBack.Size = new System.Drawing.Size(109, 50);
 			this.btnMoveBack.TabIndex = 4;
 			this.btnMoveBack.UseVisualStyleBackColor = true;
 			this.btnMoveBack.Click += new System.EventHandler(this.OnButtonMoveBackClick);
@@ -210,17 +222,6 @@ namespace PlateDetector.UI
 			this.loadImgToolStripMenuItem.Text = "Загрузить изображение";
 			this.loadImgToolStripMenuItem.Click += new System.EventHandler(this.OnLoadImgToolStripMenuItemClick);
 			// 
-			// chkBoxMarkup
-			// 
-			this.chkBoxMarkup.AutoSize = true;
-			this.chkBoxMarkup.Location = new System.Drawing.Point(733, 119);
-			this.chkBoxMarkup.Name = "chkBoxMarkup";
-			this.chkBoxMarkup.Size = new System.Drawing.Size(171, 17);
-			this.chkBoxMarkup.TabIndex = 11;
-			this.chkBoxMarkup.Text = "Синхронизация с разметкой";
-			this.chkBoxMarkup.UseVisualStyleBackColor = true;
-			this.chkBoxMarkup.CheckedChanged += new System.EventHandler(this.OnCheckboxMarkupCheckedChanged);
-			// 
 			// MainForm
 			// 
 			this.AcceptButton = this.btnDetect;
@@ -239,6 +240,7 @@ namespace PlateDetector.UI
 			this.Controls.Add(this.lboxLog);
 			this.Controls.Add(this.pictureBox);
 			this.Controls.Add(this.menuStrip);
+			this.DoubleBuffered = true;
 			this.MainMenuStrip = this.menuStrip;
 			this.Name = "MainForm";
 			this.Text = "Детектор номеров";

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("platedetector")]
+[assembly: AssemblyTitle("platedetector.detection")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Mallenom Systems")]
-[assembly: AssemblyProduct("platedetector")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("platedetector.detection")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7b434d65-75cd-4906-8b99-98c4a6281102")]
+[assembly: Guid("413b61e1-46eb-486f-9d5c-1419c3aaedd1")]
 
 // Version information for an assembly consists of the following four values:
 //

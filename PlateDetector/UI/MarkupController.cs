@@ -17,6 +17,7 @@ namespace PlateDetector.UI
 
 		private bool _isMarkupOn;
 		#endregion
+
 		#region Events
 
 		/// <summary> Возникает при изменении режима разметки. </summary>
@@ -28,6 +29,7 @@ namespace PlateDetector.UI
 		}
 
 		#endregion
+
 		#region .ctor
 		public MarkupController(PictureBoxIpl picBox, Log log)
 		{

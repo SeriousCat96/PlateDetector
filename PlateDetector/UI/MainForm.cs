@@ -1,13 +1,13 @@
 ﻿using OpenCvSharp;
 
 using PlateDetector.Detection;
+using PlateDetector.Imaging;
 using PlateDetector.Logging;
 using PlateDetector.Markup;
 
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using PlateDetector.Imaging;
 using System.Diagnostics;
 using System.IO;
 
@@ -82,13 +82,17 @@ namespace PlateDetector.UI
 			_markupController
 				.MarkupModeChanged += OnMarkupModeChanged;
 
+			_imageController
+				.DataProvider
+				.FileChanged	   += OnFileChanged;
+
 			FormClosing			   += OnFormClosing;
 
 			Log.Info($"Выбран алгоритм: {_detector.SelectedAlgorithm}");
 			tboxAlg.Text = _detector
 				.SelectedAlgorithm
 				.ToString();
-		}
+		}	
 
 		private void Detect()
 		{
@@ -183,7 +187,7 @@ namespace PlateDetector.UI
 
 		#region EventHandlers
 
-		private void OnAlgorithmChanged(object sender, AlgChangeEventArgs e)
+		private void OnAlgorithmChanged(object sender, AlgChangedEventArgs e)
 		{
 			Log.Info($"Выбран алгоритм: {e.SelectedAlgorithm}");
 
@@ -228,10 +232,7 @@ namespace PlateDetector.UI
 		{
 			using(var window = new AlgForm(_detector.Manager))
 			{
-				if(window.ShowDialog(this) == DialogResult.OK)
-				{
-					Console.WriteLine();
-				}
+				window.ShowDialog(this);
 			}
 		}
 
@@ -250,6 +251,19 @@ namespace PlateDetector.UI
 			_detectionController.Draw(e.Detections);
 		}
 
+		private void OnEvalAlgToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			using(var window = new EvalForm())
+			{
+				window.ShowDialog(this);
+			}
+		}
+
+		private void OnFileChanged(object sender, FileChangedEventArgs e)
+		{
+			_detectionController.RefreshDetections();
+		}
+
 		private void OnFormClosing(object sender, FormClosingEventArgs e)
 		{
 			_detector.Detected	   -= OnDetected;
@@ -261,6 +275,10 @@ namespace PlateDetector.UI
 
 			_markupController
 				.MarkupModeChanged -= OnMarkupModeChanged;
+
+			_imageController
+				.DataProvider
+				.FileChanged	   -= OnFileChanged;
 
 			FormClosing			   -= OnFormClosing;
 		}

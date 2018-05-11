@@ -66,6 +66,7 @@
 			this.algListBox.Name = "algListBox";
 			this.algListBox.Size = new System.Drawing.Size(258, 134);
 			this.algListBox.TabIndex = 2;
+			this.algListBox.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OnListboxMouseDoubleClick);
 			// 
 			// AlgForm
 			// 
@@ -78,7 +79,11 @@
 			this.Controls.Add(this.btn_Cancel);
 			this.Controls.Add(this.btn_OK);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+			this.MaximizeBox = false;
+			this.MinimizeBox = false;
 			this.Name = "AlgForm";
+			this.ShowIcon = false;
+			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Выбор алгоритма";
 			this.ResumeLayout(false);
