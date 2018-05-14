@@ -5,24 +5,12 @@ using PlateDetector.Imaging;
 
 using System;
 using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PlateDetector.Controllers
 {
-	public sealed class ImageSwitchController
+    public sealed class ImageSwitchController
 	{
-		#region Data
-		/// <summary> Список путей к файлам с изображениями. </summary>
-		private IList<string> _items;
-
-		private int _curPosition;
-
-		#endregion
-
 		#region .ctor
 
 		public ImageSwitchController(PictureBoxIpl picBox)
@@ -48,44 +36,49 @@ namespace PlateDetector.Controllers
 
 		public ImageFilesDataProvider DataProvider { get; set; }
 
-		#endregion
+        /// <summary> Список путей к файлам с изображениями. </summary>
+		public IList<string> Items { get; set; }
 
-		#region Methods
+        public int CurPosition { get; private set; }
 
-		public void MoveNext()
+        #endregion
+
+        #region Methods
+
+        public void MoveNext()
 		{
-			MoveTo(_curPosition + 1);
+			MoveTo(CurPosition + 1);
 		}
 
 		public void MoveBack()
 		{
-			MoveTo(_curPosition - 1);
+			MoveTo(CurPosition - 1);
 		}
 
 		private void MoveTo(int position)
 		{
-			if(position < 0)
-			{
-				position = position + _items.Count;
-			}
+            if (position < 0)
+            {
+                position = position + Items.Count;
+            }
 
-			_curPosition = position % _items.Count;
-		
-			DataProvider.File = _items[_curPosition];
-		}
+            CurPosition = position % Items.Count;
 
-		#endregion
+            DataProvider.File = Items[CurPosition];
+        }
 
-		#region EventHandlers
+        #endregion
 
-		private void OnFileChanged(object sender, FileChangedEventArgs e)
+        #region EventHandlers
+
+        private void OnFileChanged(object sender, FileChangedEventArgs e)
 		{
 			if (e.Folder != null)
 			{
-				_items = DataProvider.GetFiles();
+				Items = DataProvider.GetFiles();
 			}
 
-			_curPosition = _items.IndexOf(e.File);
+			CurPosition = Items.IndexOf(e.File);
 
 			PicBox.RefreshIplImage(new Mat(e.File));
 

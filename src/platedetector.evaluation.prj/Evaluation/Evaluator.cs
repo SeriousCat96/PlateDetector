@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PlateDetector.Evaluation
 {
-	public interface IMetric
-	{
-
-	}
+    public class Evaluator
+    {
+        
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using OpenCvSharp;
 
+using PlateDetector.Controllers;
 using PlateDetector.Detection;
 using PlateDetector.Imaging;
 using PlateDetector.Logging;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 
-namespace PlateDetector.Controllers
+namespace PlateDetector.GUI.Forms
 {
 	public partial class MainForm : Form
 	{
@@ -95,8 +96,7 @@ namespace PlateDetector.Controllers
 
 		private void Detect()
 		{
-			_detector.Image = OriginalImage.Clone();
-			_detector.Detect();
+			_detector.Detect(OriginalImage);
 		}
 
 		private void MoveNext()
@@ -252,7 +252,11 @@ namespace PlateDetector.Controllers
 
 		private void OnEvalAlgToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			using(var window = new EvalForm())
+			using(var window = new EvalForm(
+                new Detector(_detector.Manager),
+                pictureBox,
+                Log,
+                _imageController.DataProvider.Folder))
 			{
 				window.ShowDialog(this);
 			}

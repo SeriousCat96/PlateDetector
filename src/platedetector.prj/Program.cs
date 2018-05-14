@@ -1,11 +1,11 @@
-﻿using PlateDetector.Controllers;
+﻿using PlateDetector.GUI.Forms;
 
 using System;
 using System.Windows.Forms;
 
 namespace PlateDetector
 {
-	static class Program
+    static class Program
 	{
 		/// <summary>
 		/// The main entry point for the application.

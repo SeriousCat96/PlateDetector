@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{044F99FC-E2F9-4D7B-9123-F1FD922AB9E1}</ProjectGuid>
+    <ProjectGuid>{AF18E165-AB10-4F4A-89CC-366F41026C29}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PlateDetector.Markup</RootNamespace>
-    <AssemblyName>platedetector.markup</AssemblyName>
+    <RootNamespace>PlateDetector</RootNamespace>
+    <AssemblyName>platedetector.evaluation</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -55,24 +55,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Markup\MarkupImporter.cs" />
-    <Compile Include="Markup\RegionSelectionController.cs" />
-    <Compile Include="Markup\XmlMarkup.cs" />
+    <Compile Include="Evaluation\Evaluator.cs" />
+    <Compile Include="Evaluation\IMetric.cs" />
+    <Compile Include="Evaluation\Overlap.cs" />
+    <Compile Include="Evaluation\PrecisionMetric.cs" />
+    <Compile Include="Evaluation\ProgressReport.cs" />
+    <Compile Include="Evaluation\RecallMetric.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\platedetector.detection.prj\platedetector.detection.csproj">
       <Project>{413b61e1-46eb-486f-9d5c-1419c3aaedd1}</Project>
       <Name>platedetector.detection</Name>
     </ProjectReference>
+    <ProjectReference Include="..\platedetector.markup.prj\platedetector.markup.csproj">
+      <Project>{044f99fc-e2f9-4d7b-9123-f1fd922ab9e1}</Project>
+      <Name>platedetector.markup</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
-      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180319\build\OpenCvSharp3-AnyCPU.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenCvSharp3-AnyCPU.3.4.1.20180319\build\OpenCvSharp3-AnyCPU.props'))" />
   </Target>

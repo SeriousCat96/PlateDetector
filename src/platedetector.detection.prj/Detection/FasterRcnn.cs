@@ -1,5 +1,7 @@
 ﻿using OpenCvSharp;
 
+using PlateDetector.Detection.Utils;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,10 +11,10 @@ using TensorFlow;
 namespace PlateDetector.Detection
 {
 	/// <summary> Реализует сверточную нейронную сеть. </summary>
-	public class FasterRcnnModel : IDetectionAlg, IDisposable
+	public sealed class FasterRcnn : IDetectionAlg, IDisposable
 	{
 		#region Const
-		public const string ModelFile = @"fasterrcnn.pb";
+		public readonly string ModelFile = Path.Combine(Directory.GetCurrentDirectory(), "fasterrcnn.pb");
 
 		#endregion
 
@@ -24,27 +26,35 @@ namespace PlateDetector.Detection
 		private TFSession _session;
 
 		/// <summary> Размер входного изображения. </summary>
-		private Size _imageSize;
-		#endregion
+		private Size _inputImageSize;
+        #endregion
 
-		#region .ctor
+        #region .ctor
 
-		/// <summary> Создает <see cref="FasterRcnnModel"/>. </summary>
-		/// <param name="model"> Граф вычислений модели сверточной нейронной сети. </param>
-		/// <param name="imageSize"> Размер входного изображения. </param>
-		public FasterRcnnModel(TFGraph model, Size imageSize)
-		{
-			_imageSize = imageSize;
-			_graph = model;
+        /// <summary> Создает <see cref="FasterRcnn"/>. </summary>
+        /// <param name="computationalGraph"> Граф вычислений модели сверточной нейронной сети. </param>
+        /// <param name="inputImageSize"> Размер входного изображения. </param>
+        public FasterRcnn(TFGraph computationalGraph, Size inputImageSize, DetectionResultPattern pattern = DetectionResultPattern.RegionWithProbability)
+        {
+			_inputImageSize = inputImageSize;
+			_graph     = computationalGraph;
+            Pattern    = pattern;
 
 			Load(ModelFile);
 		}
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Properties
+    
+        /// <summary> Шаблон результата локализации. </summary>
+        public DetectionResultPattern Pattern { get; }
 
-		/// <summary> Освобождает ресурсы объекта. </summary>
-		public void Dispose()
+        #endregion
+
+        #region Methods
+
+        /// <summary> Освобождает ресурсы объекта. </summary>
+        public void Dispose()
 		{
 			_graph?.Dispose();
 
@@ -91,7 +101,7 @@ namespace PlateDetector.Detection
 		/// <returns> Массив float пикселей изображения. </returns>
 		private NdArray<float> Preprocess(Mat image)
 		{
-			image = image.Resize(_imageSize, 1, 1, InterpolationFlags.Linear);
+			image = image.Resize(_inputImageSize, 1, 1, InterpolationFlags.Linear);
 
 			return image.ToFloatArray();
 		}
@@ -114,10 +124,10 @@ namespace PlateDetector.Detection
 			{
 				if(probs[i] >= 0.5)
 				{
-					int newXmin = (int)(boundBoxes[i][0] / _imageSize.Width * originalSize.Width);
-					int newYmin = (int)(boundBoxes[i][1] / _imageSize.Height * originalSize.Height);
-					int newXmax = (int)(boundBoxes[i][2] / _imageSize.Width * originalSize.Width);
-					int newYmax = (int)(boundBoxes[i][3] / _imageSize.Height * originalSize.Height);
+					int newXmin = (int)(boundBoxes[i][0] / _inputImageSize.Width * originalSize.Width);
+					int newYmin = (int)(boundBoxes[i][1] / _inputImageSize.Height * originalSize.Height);
+					int newXmax = (int)(boundBoxes[i][2] / _inputImageSize.Width * originalSize.Width);
+					int newYmax = (int)(boundBoxes[i][3] / _inputImageSize.Height * originalSize.Height);
 
 					var region = new Rect(
 						newXmin,

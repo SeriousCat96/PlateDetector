@@ -1,4 +1,4 @@
-﻿namespace PlateDetector.Controllers
+﻿namespace PlateDetector.GUI.Forms
 {
 	partial class AlgForm
 	{
@@ -33,12 +33,12 @@
 			this.algListBox = new System.Windows.Forms.ListBox();
 			this.SuspendLayout();
 			// 
-			// btn_OK
+			// btnOK
 			// 
 			this.btn_OK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.btn_OK.DialogResult = System.Windows.Forms.DialogResult.OK;
 			this.btn_OK.Location = new System.Drawing.Point(114, 156);
-			this.btn_OK.Name = "btn_OK";
+			this.btn_OK.Name = "btnOK";
 			this.btn_OK.Size = new System.Drawing.Size(75, 23);
 			this.btn_OK.TabIndex = 0;
 			this.btn_OK.Text = "OK";

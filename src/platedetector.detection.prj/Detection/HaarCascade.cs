@@ -2,15 +2,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace PlateDetector.Detection
 {
 	/// <summary> Реализует каскадный классификатор Хаара. </summary>
-	public class HaarCascadeModel : IDetectionAlg, IDisposable
+	public sealed class HaarCascade : IDetectionAlg, IDisposable
 	{
 		#region Const
-		private const string ModelFile = "haarcascade_russian_plate_number.xml";
+		private readonly string ModelFile = Path.Combine(Directory.GetCurrentDirectory(), "haarcascade_russian_plate_number.xml");
 
 		#endregion
 
@@ -33,27 +34,35 @@ namespace PlateDetector.Detection
 		#endregion
 
 		#region .ctor
-		/// <summary> Создает <see cref="HaarCascadeModel"/>. </summary>
+		/// <summary> Создает <see cref="HaarCascade"/>. </summary>
 		/// <param name="scaleFactor"> Параметр, определяющий, насколько размер сканирующего окна увеличивается. </param>
 		/// <param name="minNeighbours"> Параметр, определяющий минимальное количество обнаружений в соседних областях, чтобы считать обнаружение достоверным. </param>
 		/// <param name="minSize"> Минимальный размер объекта на изображении. Объекты меньше будут проигнорированы. </param>
 		/// <param name="maxSize"> Максимальный размер объекта на изображении. Объекты больше будут проигнорированы. </param>
-		public HaarCascadeModel(double scaleFactor, int minNeighbours, OpenCvSharp.Size minSize, OpenCvSharp.Size maxSize)
+		public HaarCascade(double scaleFactor, int minNeighbours, OpenCvSharp.Size minSize, OpenCvSharp.Size maxSize, DetectionResultPattern pattern = DetectionResultPattern.RegionOnly)
 		{
 			_scaleFactor = scaleFactor;
 			_minNeighbours = minNeighbours;
 			_minSize = minSize;
 			_maxSize = maxSize;
+            Pattern  = pattern;
 
 			_classifier = new CascadeClassifier(ModelFile);
 		}
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Properties
 
-		/// <summary> Освобождает ресурсы объекта. </summary>
-		public void Dispose()
+        /// <summary> Шаблон результата локализации. </summary>
+        public DetectionResultPattern Pattern { get; }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary> Освобождает ресурсы объекта. </summary>
+        public void Dispose()
 		{
 			if(_classifier != null)
 			{

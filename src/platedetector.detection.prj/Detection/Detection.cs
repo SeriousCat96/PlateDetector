@@ -1,14 +1,19 @@
-﻿using OpenCvSharp;
+﻿using Newtonsoft.Json;
 
+using OpenCvSharp;
+
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace PlateDetector.Detection
 {
 	/// <summary>  </summary>
+    [DataContract]
 	public sealed class Detection
 	{
-		#region .ctor
-		public Detection(Rect region)
+        #region .ctor
+
+        public Detection(Rect region)
 		{
 			Region		= region;
 			Probability = 0.0f;
@@ -20,17 +25,62 @@ namespace PlateDetector.Detection
 			Probability = probability;
 			Country		= country;
 		}
-		#endregion
+        
+        #endregion
 
-		#region Properties
-		/// <summary> Прямоугольная область обнаруженного объекта. </summary>
-		public Rect Region { get; }
+        #region Properties
+        /// <summary> Прямоугольная область обнаруженного объекта. </summary>
+        public Rect Region { get; }
 
-		/// <summary> Предсказанная страна номера. </summary>
-		public Country Country { get; }
+        [DataMember]
+        [JsonProperty(PropertyName = "x")]
+        public int X
+        {
+            get
+            {
+                return Region.X;
+            }
+        }
 
-		/// <summary> Уверенность модели в результате. </summary>
-		public float Probability { get; }
+        [DataMember]
+        [JsonProperty(PropertyName = "y")]
+        public int Y
+        {
+            get
+            {
+                return Region.Y;
+            }
+        }
+
+        [DataMember]
+        [JsonProperty(PropertyName = "width")]
+        public int Width
+        {
+            get
+            {
+                return Region.Width;
+            }
+        }
+
+        [DataMember]
+        [JsonProperty(PropertyName = "height")]
+        public int Height
+        {
+            get
+            {
+                return Region.Height;
+            }
+        }
+
+        /// <summary> Предсказанная страна номера. </summary>
+        [DataMember]
+        [JsonProperty(PropertyName = "country")]
+        public Country Country { get; }
+
+        /// <summary> Уверенность модели в результате. </summary>
+        [DataMember]
+        [JsonProperty(PropertyName = "probability")]
+        public float Probability { get; }
 		#endregion
 
 		#region Methods

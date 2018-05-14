@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 using PlateDetector.Detection;
 
-namespace PlateDetector.Controllers
+namespace PlateDetector.GUI.Forms
 {
 	public partial class AlgForm : Form
 	{
@@ -29,8 +29,8 @@ namespace PlateDetector.Controllers
 			base.OnLoad(e);
 
 			MinimumSize = Size;
-			BackColor = SystemColors.Window;
-			Font = SystemFonts.MessageBoxFont;
+			BackColor   = SystemColors.Window;
+			Font        = SystemFonts.MessageBoxFont;
 
 			algListBox
 				.Items

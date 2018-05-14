@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
-using OpenCvSharp;
-using PlateDetector.Detection;
+﻿using OpenCvSharp;
+
+using PlateDetector.Detection.Utils;
+
+using System.Collections.Generic;
 
 namespace PlateDetector.Markup
 {

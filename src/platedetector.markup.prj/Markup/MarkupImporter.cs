@@ -1,11 +1,12 @@
-﻿using System;
+﻿using OpenCvSharp;
+
+using System;
 using System.Collections.Generic;
 using System.IO;
-using OpenCvSharp;
 
 namespace PlateDetector.Markup
 {
-    public class MarkupImporter
+	public class MarkupImporter
 	{
 		#region Properties
 
@@ -19,14 +20,17 @@ namespace PlateDetector.Markup
 		/// <summary> </summary>
 		/// <param name="uri"></param>
 		/// <param name="controller"></param>
-		public IEnumerable<Rect> ImportRegions(string uri, RegionSelectionController controller)
+		public IEnumerable<Rect> ImportRegions(string uri, RegionSelectionController controller = null)
 		{
 			CreateIfMarkupFileExists(uri);
 
 			if(Markup.HumanChecked)
 			{
 				var regions = Markup.GetRegions();
-				controller.SelectRegions(regions);
+                if(controller != null)
+                { 
+                    controller.SelectRegions(regions);
+                }
 
 				return regions;
 			}

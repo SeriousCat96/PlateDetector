@@ -1,14 +1,19 @@
 ﻿using OpenCvSharp;
 
-namespace PlateDetector.Detection
+namespace PlateDetector.Detection.Utils
 {
 	/// <summary> Хранит методы-расширения класса <see cref="Mat"/>.</summary>
 	public static class MatExtensions
 	{
-		/// <summary> Преобразует Bitmap в ч/б цвет в массив float</summary>
-		/// <param name="bmp"> Исходное изображение </param>
-		/// <returns> Возвращает 4-мерный массив пикселей float со значениями в диапазоне [0, 1]. </returns>
-		public unsafe static NdArray<float> ToFloatArray(this Mat img)
+        public static void AddRectangle(this Mat mat, Rect rect, Scalar color)
+        {
+            mat.Rectangle(rect, color, 2, LineTypes.Link8);
+        }
+
+        /// <summary> Преобразует Bitmap в ч/б цвет в массив float</summary>
+        /// <param name="bmp"> Исходное изображение </param>
+        /// <returns> Возвращает 4-мерный массив пикселей float со значениями в диапазоне [0, 1]. </returns>
+        public unsafe static NdArray<float> ToFloatArray(this Mat img)
 		{
 			int width = img.Width,
 				height = img.Height;
@@ -33,40 +38,6 @@ namespace PlateDetector.Detection
 			}
 			
 			return res;
-		}
-
-		/// <summary> Преобразует Bitmap в RGB цвет в массив float</summary>
-		/// <param name="img"> Исходное изображение </param>
-		/// <returns> Возвращает 4-мерный массив пикселей float со значениями в диапазоне [0, 1]. </returns>
-		public unsafe static NdArray<float> ToFloatArrayGrayScale(this Mat img)
-		{
-			int width = img.Width,
-				height = img.Height;
-
-			NdArray<float> res = new NdArray<float>(new float[1, height, width, 1]);
-			int stride = img.Channels();
-			
-			byte* curpos;
-			fixed (float* _res = res.Value)
-			{
-				float* _r = _res;
-				for(int h = 0; h < height; h++)
-				{
-					curpos = (byte*)img.Ptr(h);
-					for(int w = 0; w < width; w++)
-					{
-
-						*_r = *(curpos++) / 255f; ++_r;
-					}
-				}
-			}
-
-			return res;
-		}
-
-		public static void AddRectangle(this Mat mat, Rect rect, Scalar color)
-		{
-			mat.Rectangle(rect, color, 2, LineTypes.Link8);
 		}
 	}
 }

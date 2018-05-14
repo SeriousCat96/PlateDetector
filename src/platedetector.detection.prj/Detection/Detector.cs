@@ -1,7 +1,8 @@
 ﻿using OpenCvSharp;
-
+using OpenCvSharp.Extensions;
 using System;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace PlateDetector.Detection
 {
@@ -35,9 +36,6 @@ namespace PlateDetector.Detection
 		/// <summary> Менеджер алгоритмов локализации. </summary>
 		public AlgManager Manager { get; }
 
-		/// <summary> Обрабатываемое изображение. </summary>
-		public Mat Image { get; set; }
-
 		/// <summary> Текущий алгоритм локализации </summary>
 		public IDetectionAlg SelectedAlgorithm
 		{
@@ -65,22 +63,31 @@ namespace PlateDetector.Detection
 		{
 			Manager.Select(type);
 		}
-	
-		/// <summary> Выполняет локализацию на текущем изображении. </summary>
+
+        /// <summary> Выполняет локализацию на текущем изображении. </summary>
+        /// <param name="image"> Обрабатываемое изображение. </param>
 		/// <returns> Возвращает результат локализации <seealso cref="DetectionResult"/>. </returns>
-		public DetectionResult Detect()
+		public DetectionResult Detect(Bitmap image)
+        {
+            return Detect(BitmapConverter.ToMat(image));
+        }
+
+        /// <summary> Выполняет локализацию на текущем изображении. </summary>
+        /// <param name="image"> Обрабатываемое изображение. </param>
+        /// <returns> Возвращает результат локализации <seealso cref="DetectionResult"/>. </returns>
+        public DetectionResult Detect(Mat image)
 		{
 			var algorithm = Manager.SelectedAlgorithm;
 
-			if(algorithm != null && Image != null)
+			if(algorithm != null && image != null)
 			{
 				_timer.Restart();
-				var detections = algorithm.Predict(Image);
+				var detections = algorithm.Predict(image);
 				_timer.Stop();
 
 				var elapsedTime = _timer.Elapsed;
 
-				var result = new DetectionResult(detections, elapsedTime);
+				var result = new DetectionResult(detections, elapsedTime, algorithm.Pattern);
 
 				if(detections.Count > 0)
 				{
@@ -95,6 +102,7 @@ namespace PlateDetector.Detection
 
 		#endregion
 	}
+
 
 	public sealed class DetectionEventArgs : EventArgs
 	{

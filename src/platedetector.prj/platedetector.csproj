@@ -95,7 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evaluation\IMetric.cs" />
+    <Compile Include="Controllers\EvaluationController.cs" />
     <Compile Include="Imaging\ImageFilesDataProvider.cs" />
     <Compile Include="Logging\LogDetectionMessage.cs" />
     <Compile Include="Logging\LogErrorMessage.cs" />
@@ -109,40 +109,40 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AlgForm.cs">
+    <Compile Include="GUI\Forms\AlgForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\AlgForm.Designer.cs">
+    <Compile Include="GUI\Forms\AlgForm.Designer.cs">
       <DependentUpon>AlgForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\DetectionController.cs" />
-    <Compile Include="Forms\EvalForm.cs">
+    <Compile Include="GUI\Forms\EvalForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\EvalForm.Designer.cs">
+    <Compile Include="GUI\Forms\EvalForm.Designer.cs">
       <DependentUpon>EvalForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ImageSwitchController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Logging\LogEventArgs.cs" />
     <Compile Include="Logging\LogItem.cs" />
-    <Compile Include="Forms\MainForm.cs">
+    <Compile Include="GUI\Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
+    <Compile Include="GUI\Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Native.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\MarkupController.cs" />
-    <EmbeddedResource Include="Forms\AlgForm.resx">
+    <EmbeddedResource Include="GUI\Forms\AlgForm.resx">
       <DependentUpon>AlgForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EvalForm.resx">
+    <EmbeddedResource Include="GUI\Forms\EvalForm.resx">
       <DependentUpon>EvalForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.resx">
+    <EmbeddedResource Include="GUI\Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -184,6 +184,10 @@
     <ProjectReference Include="..\platedetector.detection.prj\platedetector.detection.csproj">
       <Project>{413b61e1-46eb-486f-9d5c-1419c3aaedd1}</Project>
       <Name>platedetector.detection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\platedetector.evaluation.prj\platedetector.evaluation.csproj">
+      <Project>{AF18E165-AB10-4F4A-89CC-366F41026C29}</Project>
+      <Name>platedetector.evaluation</Name>
     </ProjectReference>
     <ProjectReference Include="..\platedetector.markup.prj\platedetector.markup.csproj">
       <Project>{044f99fc-e2f9-4d7b-9123-f1fd922ab9e1}</Project>

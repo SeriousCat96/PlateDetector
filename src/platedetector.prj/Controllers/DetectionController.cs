@@ -2,18 +2,15 @@
 using OpenCvSharp.UserInterface;
 
 using PlateDetector.Detection;
-using PlateDetector.Markup;
+using PlateDetector.Detection.Utils;
 using PlateDetector.Logging;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlateDetector.Controllers
 {
-	public sealed class DetectionController
+    public sealed class DetectionController
 	{
 		#region .ctor
 		public DetectionController(PictureBoxIpl picBox, Log log)
@@ -96,7 +93,7 @@ namespace PlateDetector.Controllers
 
 		public void RefreshDetections()
 		{
-			Detections = new DetectionResult(new List<Detection.Detection>(), new TimeSpan());
+			Detections = new DetectionResult(new List<Detection.Detection>(), new TimeSpan(), DetectionResultPattern.RegionOnly);
 		}
 		#endregion
 	}
