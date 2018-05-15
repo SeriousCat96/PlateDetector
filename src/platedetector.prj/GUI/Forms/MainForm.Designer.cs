@@ -40,8 +40,8 @@
             this.lblAlg = new System.Windows.Forms.Label();
             this.lblFolder = new System.Windows.Forms.Label();
             this.tboxFolder = new System.Windows.Forms.TextBox();
-            this.btnOpenFolder = new System.Windows.Forms.Button();
             this.chkBoxMarkup = new System.Windows.Forms.CheckBox();
+            this.btnOpenFolder = new System.Windows.Forms.Button();
             this.btnMoveNext = new System.Windows.Forms.Button();
             this.btnMoveBack = new System.Windows.Forms.Button();
             this.pictureBox = new OpenCvSharp.UserInterface.PictureBoxIpl();
@@ -93,7 +93,7 @@
             // 
             // lboxLog
             // 
-            this.lboxLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.lboxLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lboxLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lboxLog.FormattingEnabled = true;
@@ -152,18 +152,6 @@
             this.tboxFolder.Size = new System.Drawing.Size(196, 20);
             this.tboxFolder.TabIndex = 9;
             // 
-            // btnOpenFolder
-            // 
-            this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.BackgroundImage = global::PlateDetector.Properties.Resources.folder;
-            this.btnOpenFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnOpenFolder.Location = new System.Drawing.Point(929, 92);
-            this.btnOpenFolder.Name = "btnOpenFolder";
-            this.btnOpenFolder.Size = new System.Drawing.Size(22, 22);
-            this.btnOpenFolder.TabIndex = 10;
-            this.btnOpenFolder.UseVisualStyleBackColor = true;
-            this.btnOpenFolder.Click += new System.EventHandler(this.OnButtonOpenFolderClick);
-            // 
             // chkBoxMarkup
             // 
             this.chkBoxMarkup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -175,10 +163,22 @@
             this.chkBoxMarkup.UseVisualStyleBackColor = true;
             this.chkBoxMarkup.CheckedChanged += new System.EventHandler(this.OnCheckboxMarkupCheckedChanged);
             // 
+            // btnOpenFolder
+            // 
+            this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOpenFolder.BackgroundImage = global::PlateDetector.Properties.Resources.doc;
+            this.btnOpenFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnOpenFolder.Location = new System.Drawing.Point(929, 92);
+            this.btnOpenFolder.Name = "btnOpenFolder";
+            this.btnOpenFolder.Size = new System.Drawing.Size(22, 22);
+            this.btnOpenFolder.TabIndex = 10;
+            this.btnOpenFolder.UseVisualStyleBackColor = true;
+            this.btnOpenFolder.Click += new System.EventHandler(this.OnButtonOpenFolderClick);
+            // 
             // btnMoveNext
             // 
             this.btnMoveNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveNext.BackgroundImage = global::PlateDetector.Properties.Resources.arrow_right;
+            this.btnMoveNext.BackgroundImage = global::PlateDetector.Properties.Resources.right;
             this.btnMoveNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMoveNext.Location = new System.Drawing.Point(842, 418);
             this.btnMoveNext.Name = "btnMoveNext";
@@ -190,7 +190,7 @@
             // btnMoveBack
             // 
             this.btnMoveBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveBack.BackgroundImage = global::PlateDetector.Properties.Resources.arrow_left;
+            this.btnMoveBack.BackgroundImage = global::PlateDetector.Properties.Resources.left;
             this.btnMoveBack.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnMoveBack.Location = new System.Drawing.Point(733, 418);
             this.btnMoveBack.Name = "btnMoveBack";
@@ -201,8 +201,8 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pictureBox.Location = new System.Drawing.Point(12, 27);
@@ -239,6 +239,7 @@
             this.Controls.Add(this.pictureBox);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "Детектор номеров";

@@ -7,8 +7,8 @@ using OpenCvSharp;
 
 namespace PlateDetector.Markup
 {
-	/// <summary> </summary>
-	public class XmlMarkup
+    /// <summary> Реализует чтение XML-файлов с разметкой. </summary>
+    public class XmlMarkup
 	{
 		#region .ctor
 		/// <summary> Создает <see cref="XmlMarkup"/>.</summary>
@@ -48,6 +48,8 @@ namespace PlateDetector.Markup
 
 		#region Methods
 
+        /// <summary> Получить список размеченных областей. </summary>
+        /// <returns></returns>
 		public IEnumerable<Rect> GetRegions()
 		{
 			var plates = XmlFile
@@ -98,6 +100,8 @@ namespace PlateDetector.Markup
 			return regions;
 		}
 
+        /// <summary> Загрузить файл с разметкой. </summary>
+        /// <param name="uri"></param>
 		public void Load(string uri)
 		{
 			Uri	= uri;

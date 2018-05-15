@@ -13,14 +13,14 @@ namespace PlateDetector.Markup
 		/// <summary> Разметка. </summary>
 		public XmlMarkup Markup { get; private set; }
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		/// <summary> </summary>
-		/// <param name="uri"></param>
-		/// <param name="controller"></param>
-		public IEnumerable<Rect> ImportRegions(string uri, RegionSelectionController controller = null)
+        /// <summary> Выполнить импорт и выделение размеченных областей. </summary>
+        /// <param name="uri"> Путь к файлу с изображением. </param>
+        /// <param name="controller"> Контроллер выделения областей.</param>
+        public IEnumerable<Rect> ImportRegions(string uri, RegionSelectionController controller = null)
 		{
 			CreateIfMarkupFileExists(uri);
 
@@ -38,9 +38,10 @@ namespace PlateDetector.Markup
 			else throw new InvalidOperationException("Изображение не размечено вручную.");
 		}
 
-		/// <summary> Существует ли файл с разметкой. </summary>
-		/// <param name="uri"> Путь к файлу с изображением. </param>
-		private void CreateIfMarkupFileExists(string uri)
+        /// <summary> Загрузить разметку если существует ли файл с разметкой. </summary>
+        /// <param name="uri"> Путь к файлу с изображением. </param>
+        /// <exception cref="FileNotFoundException">.</exception>
+        private void CreateIfMarkupFileExists(string uri)
 		{
 			var fileInfo = new FileInfo(uri);
 

@@ -47,7 +47,7 @@
             // btnOpenFolder
             // 
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpenFolder.BackgroundImage = global::PlateDetector.Properties.Resources.folder;
+            this.btnOpenFolder.BackgroundImage = global::PlateDetector.Properties.Resources.doc;
             this.btnOpenFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnOpenFolder.Location = new System.Drawing.Point(363, 24);
             this.btnOpenFolder.Name = "btnOpenFolder";

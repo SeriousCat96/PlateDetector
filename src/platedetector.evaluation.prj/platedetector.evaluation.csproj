@@ -49,7 +49,6 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evaluation\Evaluator.cs" />
     <Compile Include="Evaluation\IMetric.cs" />
     <Compile Include="Evaluation\Overlap.cs" />
     <Compile Include="Evaluation\PrecisionMetric.cs" />
