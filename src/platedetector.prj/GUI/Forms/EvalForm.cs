@@ -29,16 +29,12 @@ namespace PlateDetector.GUI.Forms
         
         #region .ctor
 
-        public EvalForm(Detector detector, PictureBoxIpl picBox, Log log, string initFolder)
+        public EvalForm(Detector detector, Log log, string initFolder)
         {
             InitializeComponent();
-
-            progressBar.Visible = false;
-            progressBar.Style = ProgressBarStyle.Continuous;
             
             Detector = detector;
             Log = log;
-            PicBox = picBox;
 
             _evaluationController = new EvaluationController(
                 new List<IMetric>
@@ -47,28 +43,13 @@ namespace PlateDetector.GUI.Forms
                     new PrecisionMetric()
                 },
                 Detector,
-                PicBox,
                 Log)
             {
                 Folder = initFolder
             };
 
-            tboxFolder.Text = _evaluationController.Folder;
-
-            listViewMetrics
-                .Items
-                .AddRange(_evaluationController.Metrics.Select(e => new ListViewItem(e.ToString())).ToArray());
-
-            _progress = new Progress<ProgressReport>();
-            _progress.ProgressChanged += (s, args) =>
-            {
-                progressBar.Style   = ProgressBarStyle.Continuous;
-                progressBar.Maximum = args.ItemsCount;
-                progressBar.Value   = args.CurPosition;
-                lblFileName.Text    = args.File;
-            };
+            SetViewProperties();
         }
-
 
         #endregion
 
@@ -78,19 +59,38 @@ namespace PlateDetector.GUI.Forms
 
         public Log Log { get; }
 
-        public PictureBoxIpl PicBox { get; }
-
         #endregion
 
         #region Methods
 
-        public Task EvaluateAsync()
+        private void SetViewProperties()
+        {
+            listViewMetrics
+                .Items
+                .AddRange(_evaluationController.Metrics.Select(e => new ListViewItem(e.ToString())).ToArray());
+
+            _progress = new Progress<ProgressReport>();
+            _progress.ProgressChanged += (s, args) =>
+            {
+                progressBar.Maximum = args.ItemsCount;
+                progressBar.Value = args.CurPosition;
+                tboxFileName.Text = args.File;
+            };
+
+            progressBar.Style = ProgressBarStyle.Continuous;
+
+            tboxFolder.Text = _evaluationController.Folder;
+            tboxAlg.Text = Detector.SelectedAlgorithm.ToString();
+        }
+
+        private Task EvaluateAsync()
         {
             return Task.Run(() =>
             {
-                _cts = new CancellationTokenSource();
-
-                _evaluationController.Evaluate(_progress, _cts.Token);
+                using (_cts = new CancellationTokenSource())
+                {
+                    _evaluationController.Evaluate(_progress, _cts.Token);
+                }
             });
         }
 
@@ -98,16 +98,6 @@ namespace PlateDetector.GUI.Forms
 
         #region EventHandlers
 
-        private async void OnButtonOKClickAsync(object sender, EventArgs e)
-        {
-            progressBar.Visible = true;
-            btnOK.Enabled = false;
-
-            await EvaluateAsync();
-
-            progressBar.Visible = false;
-            btnOK.Enabled = true;
-        }
 
         private void OnButtonOpenFolderClick(object sender, EventArgs e)
         {
@@ -123,11 +113,6 @@ namespace PlateDetector.GUI.Forms
             }
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-        }
-
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -136,11 +121,22 @@ namespace PlateDetector.GUI.Forms
             Font = SystemFonts.MessageBoxFont;
         }
 
+        private async void OnButtonStartClickAsync(object sender, EventArgs e)
+        {
+            groupBox.Visible = true;
+            btnStop.Enabled  = true;
+            btnStart.Enabled = false;
+
+            await EvaluateAsync();
+
+            groupBox.Visible = false;
+            btnStop.Enabled  = false;
+            btnStart.Enabled = true;
+        }
+
+        private void OnStopButtonClick(object sender, EventArgs e) => _cts?.Cancel();
+
         #endregion
 
-        private void OnCancelButtonClick(object sender, EventArgs e)
-        {
-            _cts?.Cancel();
-        }
     }
 }

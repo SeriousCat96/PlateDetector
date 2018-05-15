@@ -7,7 +7,7 @@ using System.Drawing;
 namespace PlateDetector.Detection
 {
 	/// <summary> Реализует детектор номеров. </summary>
-	public class Detector
+	public class Detector : IDetector
 	{
 		#region Data
 

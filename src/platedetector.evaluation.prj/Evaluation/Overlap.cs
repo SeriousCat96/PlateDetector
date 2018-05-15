@@ -70,6 +70,11 @@ namespace PlateDetector.Evaluation
 
         public static int NumTruePositives(IReadOnlyList<Rect> predicted, IReadOnlyList<Rect> groundTruth)
         {
+            if(predicted.Count == 0)
+            {
+                return 0;
+            }
+
             var ious = Iou(groundTruth, predicted);
             int count = 0;
 

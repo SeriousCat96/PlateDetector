@@ -4,6 +4,7 @@ using OpenCvSharp.UserInterface;
 using PlateDetector.Detection;
 using PlateDetector.Evaluation;
 using PlateDetector.GUI;
+using PlateDetector.Imaging;
 using PlateDetector.Logging;
 using PlateDetector.Markup;
 
@@ -18,15 +19,14 @@ using System.Windows.Forms;
 namespace PlateDetector.Controllers
 {
     public class EvaluationController
-    {
+    {       
         #region .ctor
 
-        public EvaluationController(IEnumerable<IMetric> metrics, Detector detector, PictureBoxIpl picBox, Log log)
+        public EvaluationController(IEnumerable<IMetric> metrics, Detector detector, Log log)
         {
             Metrics          = metrics;
             MarkupImporter   = new MarkupImporter();
-            PicBox           = picBox;
-            SwitchController = new ImageSwitchController(PicBox);
+            DataProvider     = new ImageFilesDataProvider();
             Detector         = detector;
             Log              = log;
         }
@@ -35,45 +35,21 @@ namespace PlateDetector.Controllers
 
         #region Properties
 
+        public ImageFilesDataProvider DataProvider { get; }
+
+        public Detector Detector { get; }
+
         public string Folder
         {
             get
             {
-                return SwitchController
-                    .DataProvider
-                    .Folder;
+                return DataProvider.Folder;
             }
             set
             {
-                SwitchController
-                    .DataProvider
-                    .Folder = value;
-
-                try
-                { 
-                    var files = SwitchController
-                        .DataProvider
-                        .GetFiles();
-
-                    SwitchController
-                        .Items = files;
-
-                    SwitchController
-                        .DataProvider
-                        .File = files[0];
-                }
-                catch(IndexOutOfRangeException)
-                {
-                    Log.Error("Отсутствуют изображения в папке");
-                }
-                catch(Exception exc)
-                {
-                    Log.Error(exc.Message);
-                }
+                DataProvider.Folder = value;
             }
         }
-
-        public Detector Detector { get; }
 
         public Log Log { get; }
 
@@ -83,7 +59,6 @@ namespace PlateDetector.Controllers
 
         public PictureBoxIpl PicBox { get; }
 
-        public ImageSwitchController SwitchController { get; }
 
         #endregion
 
@@ -97,7 +72,9 @@ namespace PlateDetector.Controllers
                 return;
             }
 
-            foreach (var file in SwitchController.Items)
+            var files = DataProvider.GetFiles();
+
+            foreach (var file in files)
             { 
                 try
                 {
@@ -107,7 +84,7 @@ namespace PlateDetector.Controllers
                         .ImportRegions(file)
                         .ToList();
                     var predicted = Detector
-                        .Detect(PicBox.ImageIpl)
+                        .Detect(new Mat(file))
                         .GetDetectionsList()
                         .Select(e => e.Region)
                         .ToList();
@@ -117,7 +94,13 @@ namespace PlateDetector.Controllers
                         metric.Stash(groundTruth, predicted);
                     }
 
-                    ReportProgress(progress);
+                    ReportProgress(progress, new ProgressReport()
+                    {
+                        CurPosition = files.IndexOf(file),
+                        ItemsCount  = files.Count,
+                        File        = file,
+                    });
+
                     token.ThrowIfCancellationRequested();
                 }
                 catch(OperationCanceledException exc)
@@ -148,18 +131,9 @@ namespace PlateDetector.Controllers
             }
         }
 
-        private void ReportProgress(IProgress<ProgressReport> progress)
-        {
-            var curPosition = SwitchController.CurPosition;
-            var itemsCount  = SwitchController.Items.Count;
-            var percent     = (int)((float)curPosition / itemsCount * 100);
-
-            progress?.Report(new ProgressReport()
-            {
-                CurPosition = SwitchController.CurPosition,
-                ItemsCount  = SwitchController.Items.Count,
-                File        = SwitchController.DataProvider.File,
-            });
+        private void ReportProgress(IProgress<ProgressReport> progress, ProgressReport report)
+        { 
+            progress?.Report(report);
         }
 
         #endregion

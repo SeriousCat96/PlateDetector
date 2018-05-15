@@ -8,7 +8,7 @@
     <ProjectGuid>{413B61E1-46EB-486F-9D5C-1419C3AAEDD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Platedetector.Detection</RootNamespace>
+    <RootNamespace>PlateDetector</RootNamespace>
     <AssemblyName>platedetector.detection</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -83,6 +83,7 @@
     <Compile Include="Detection\HaarCascade.cs" />
     <Compile Include="Detection\IDetectionAlg.cs" />
     <Compile Include="Detection\IDetectionAlgProvider.cs" />
+    <Compile Include="Detection\IDetector.cs" />
     <Compile Include="Utils\MatExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\NdArray.cs" />

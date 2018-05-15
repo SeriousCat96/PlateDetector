@@ -254,7 +254,6 @@ namespace PlateDetector.GUI.Forms
 		{
 			using(var window = new EvalForm(
                 new Detector(_detector.Manager),
-                pictureBox,
                 Log,
                 _imageController.DataProvider.Folder))
 			{
