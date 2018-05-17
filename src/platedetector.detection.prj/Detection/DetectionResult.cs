@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-
+using OpenCvSharp;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -15,13 +15,13 @@ namespace PlateDetector.Detection
         [JsonProperty(PropertyName = "detections")]
         private readonly IReadOnlyList<Detection> _detections;
 
-		#endregion
+        #endregion
 
-		#region .ctor
-		/// <summary> Создает <see cref="DetectionResult"/>. </summary>
-		/// <param name="detections"> Список обнаруженных объектов <see cref="Detection"/>.</param>
-		/// /// <param name="elapsedTime"> Время работы алгоритма.</param>
-		public DetectionResult(IReadOnlyList<Detection> detections, TimeSpan elapsedTime, DetectionResultPattern pattern)
+        #region .ctor
+        /// <summary> Создает <see cref="DetectionResult"/>. </summary>
+        /// <param name="detections"> Список обнаруженных объектов <see cref="Detection"/>.</param>
+        /// /// <param name="elapsedTime"> Время работы алгоритма.</param>
+        public DetectionResult(IReadOnlyList<Detection> detections, TimeSpan elapsedTime, DetectionResultPattern pattern)
 		{
 			_detections	= detections;
 			ElapsedTime	= elapsedTime;

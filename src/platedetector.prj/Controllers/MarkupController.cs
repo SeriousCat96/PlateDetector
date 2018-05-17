@@ -5,6 +5,8 @@ using PlateDetector.Logging;
 using PlateDetector.Markup;
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace PlateDetector.Controllers
 {
@@ -34,13 +36,15 @@ namespace PlateDetector.Controllers
             Image = picBox.ImageIpl;
 
             MarkupImporter = new MarkupImporter();
-            SelectionController = new RegionSelectionController(picBox.ImageIpl);
+            SelectionController = new RegionSelectionController(picBox);
             Log = log;
         }
 
         #endregion
 
         #region Properties
+
+        public IEnumerable<Rect> GtBoxes { get; private set; }
 
         public PictureBoxIpl PicBox { get; }
 
@@ -98,12 +102,21 @@ namespace PlateDetector.Controllers
         {
             SelectionController.Image = OriginalImage.Clone();
 
-            if (IsMarkupOn)
+            if(IsMarkupOn)
             {
-                var gtBoxes = MarkupImporter.ImportRegions(uri, SelectionController);
-                if (gtBoxes != null)
+                try
+                { 
+                    GtBoxes = MarkupImporter.ImportRegions(uri, SelectionController);
+                    if (GtBoxes != null)
+                    {
+                        SelectionController.SelectRegions(GtBoxes);
+                    }
+                }
+                catch(InvalidOperationException)
                 {
-                    SelectionController.SelectRegions(gtBoxes);
+                    GtBoxes = null;
+                    PicBox.RefreshIplImage(SelectionController.Image);
+                    throw;
                 }
             }
 

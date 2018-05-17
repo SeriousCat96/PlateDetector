@@ -15,6 +15,7 @@ namespace PlateDetector.Imaging
 
 		#region Properties
 
+        /// <summary> Текущий файл. </summary>
 		public string File
 		{
 			get
@@ -45,6 +46,7 @@ namespace PlateDetector.Imaging
 			}
 		}
 
+        /// <summary> Текущий каталог. </summary>
 		public string Folder { get; set; }
 
 		#endregion

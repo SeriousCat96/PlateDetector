@@ -10,6 +10,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using PlateDetector.Evaluation;
 
 namespace PlateDetector.GUI.Forms
 {
@@ -248,6 +249,12 @@ namespace PlateDetector.GUI.Forms
 			catch { }
 
 			_detectionController.Draw(e.Detections);
+
+            if(_markupController.IsMarkupOn)
+            {
+                new ImageTextRenderer(pictureBox)
+                    .PutIou(e.Detections, _markupController.GtBoxes);
+            }
 		}
 
 		private void OnEvalAlgToolStripMenuItemClick(object sender, EventArgs e)
@@ -388,7 +395,13 @@ namespace PlateDetector.GUI.Forms
 
 				_markupController.Draw(uri);
 				_detectionController.Draw();
-			}
+
+                if (_markupController.IsMarkupOn)
+                {
+                    new ImageTextRenderer(pictureBox)
+                        .PutIou(_detectionController.Detections, _markupController.GtBoxes);
+                }
+            }
 			catch(FileNotFoundException exc)
 			{
 				Log.Warning(exc.Message);

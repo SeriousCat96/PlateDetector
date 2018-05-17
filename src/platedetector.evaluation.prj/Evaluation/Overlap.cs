@@ -1,17 +1,21 @@
 ﻿using OpenCvSharp;
-using PlateDetector.Detection;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PlateDetector.Evaluation
 {
+    /// <summary> Содержит операции вычисления перекрытия областей. </summary>
     public static class Overlap
     {
+        /// <summary> Порог, при котором область считается правильно обнаруженной. </summary>
         public static double Threshold => 0.5;
 
+        /// <summary> Вычисление меры перекрытия областей IoU. </summary>
+        /// <param name="box1"> Область. </param>
+        /// <param name="box2"> Область. </param>
+        /// <returns></returns>
         public static double Iou(Rect box1, Rect box2)
         {
             var xmin1 = box1.X;
@@ -47,6 +51,10 @@ namespace PlateDetector.Evaluation
             return intersection / union;
         }
 
+        /// <summary> Вычисление меры перекрытия областей IoU. </summary>
+        /// <param name="groundTruth"> Истинные области. </param>
+        /// <param name="predicted"> Предсказанные области. </param>
+        /// <returns> Список перекрытий для каждого groundTruth с каждым predicted. </returns>
         public static IList<double[]> Iou(IReadOnlyList<Rect> groundTruth, IReadOnlyList<Rect> predicted)
         {
             var numGt = groundTruth.Count();
@@ -68,6 +76,10 @@ namespace PlateDetector.Evaluation
             return result;
         }
 
+        /// <summary> Рассчитывает количество правильно обнаруженных областей. </summary>
+        /// <param name="groundTruth"> Истинные области. </param>
+        /// <param name="predicted"> Предсказанные области. </param>
+        /// <returns> Возвращает количество правильно обнаруженных областей. </returns>
         public static int NumTruePositives(IReadOnlyList<Rect> predicted, IReadOnlyList<Rect> groundTruth)
         {
             if(predicted.Count == 0)

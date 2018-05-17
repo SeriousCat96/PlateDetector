@@ -83,15 +83,15 @@ namespace PlateDetector.GUI.Forms
             tboxAlg.Text = Detector.SelectedAlgorithm.ToString();
         }
 
-        private Task EvaluateAsync()
+        private async Task EvaluateAsync()
         {
-            return Task.Run(() =>
-            {
-                using (_cts = new CancellationTokenSource())
-                {
-                    _evaluationController.Evaluate(_progress, _cts.Token);
-                }
-            });
+            await Task.Run(async () =>
+             {
+                 using (_cts = new CancellationTokenSource())
+                 {
+                     await _evaluationController.EvaluateAsync(_progress, _cts.Token);
+                 }
+             });
         }
 
         #endregion

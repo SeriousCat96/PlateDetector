@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\EvaluationController.cs" />
+    <Compile Include="GUI\ImageTextRenderer.cs" />
     <Compile Include="Imaging\ImageFilesDataProvider.cs" />
     <Compile Include="Logging\LogDetectionMessage.cs" />
     <Compile Include="Logging\LogErrorMessage.cs" />

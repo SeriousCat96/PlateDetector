@@ -1,4 +1,5 @@
 ﻿using OpenCvSharp;
+using OpenCvSharp.UserInterface;
 
 using PlateDetector.Detection.Utils;
 
@@ -11,9 +12,10 @@ namespace PlateDetector.Markup
 		#region .ctor
 		/// <summary> Создает <see cref="RegionSelectionController"/>.</summary>
 		/// <param name="image"> Обрабатываемое изображение. </param>
-		public RegionSelectionController(Mat image)
+		public RegionSelectionController(PictureBoxIpl picBox)
 		{
-			Image = image;
+            PicBox = picBox;
+			Image  = picBox.ImageIpl?.Clone();
 		}
 		#endregion
 
@@ -22,6 +24,8 @@ namespace PlateDetector.Markup
 		public Mat Image { get; set; }
 		/// <summary> Цвет выделяемых областей. </summary>
 		public Scalar Color => Scalar.Aqua;
+
+        public PictureBoxIpl PicBox { get; }
 		
 		#endregion
 
@@ -32,7 +36,7 @@ namespace PlateDetector.Markup
 		{
 			foreach(var region in regions)
 			{
-				Image.AddRectangle(region, Color);
+				Image.AddRectangle(region, Color, new Size(PicBox.Width, PicBox.Height));
 			}
 		}
 		#endregion

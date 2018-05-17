@@ -1,9 +1,7 @@
 ﻿using OpenCvSharp;
-using OpenCvSharp.UserInterface;
 
 using PlateDetector.Detection;
 using PlateDetector.Evaluation;
-using PlateDetector.GUI;
 using PlateDetector.Imaging;
 using PlateDetector.Logging;
 using PlateDetector.Markup;
@@ -14,10 +12,10 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PlateDetector.Controllers
 {
+    /// <summary> Выполняет оценивание алгоритма заданными метриками. </summary>
     public class EvaluationController
     {       
         #region .ctor
@@ -35,10 +33,13 @@ namespace PlateDetector.Controllers
 
         #region Properties
 
+        /// <summary> Предоставляет данные о файлах и каталоге изображений. </summary>
         public ImageFilesDataProvider DataProvider { get; }
 
+        /// <summary> Детектор номеров. </summary>
         public Detector Detector { get; }
 
+        /// <summary> Каталог с тестовой выборкой изображений. </summary>
         public string Folder
         {
             get
@@ -51,86 +52,100 @@ namespace PlateDetector.Controllers
             }
         }
 
+        /// <summary> Лог. </summary>
         public Log Log { get; }
 
+        /// <summary> Загрузчик размеченных областей. </summary>
         public MarkupImporter MarkupImporter { get; }
 
+        /// <summary> Список метрик. </summary>
         public IEnumerable<IMetric> Metrics { get; }
-
-        public PictureBoxIpl PicBox { get; }
-
 
         #endregion
 
         #region Methods
-
-        public void Evaluate(IProgress<ProgressReport> progress, CancellationToken token)
+        /// <summary> Выполняет оценку алгоритма на заданной выборке в отдельном потоке. </summary>
+        /// <param name="progress"> Прогресс. </param>
+        /// <param name="token"> Токен отмены. </param>
+        /// <returns></returns>
+        public Task EvaluateAsync(IProgress<ProgressReport> progress, CancellationToken token)
         {
-            if (Folder == null)
+            return Task.Run(() =>
             {
-                Log.Error("Не выбран каталог.");
-                return;
-            }
-
-            var files = DataProvider.GetFiles();
-
-            foreach (var file in files)
-            { 
-                try
+                if (Folder == null)
                 {
-                    token.ThrowIfCancellationRequested();
-
-                    var groundTruth = MarkupImporter
-                        .ImportRegions(file)
-                        .ToList();
-                    var predicted = Detector
-                        .Detect(new Mat(file))
-                        .GetDetectionsList()
-                        .Select(e => e.Region)
-                        .ToList();
-
-                    foreach (var metric in Metrics)
-                    {
-                        metric.Stash(groundTruth, predicted);
-                    }
-
-                    ReportProgress(progress, new ProgressReport()
-                    {
-                        CurPosition = files.IndexOf(file),
-                        ItemsCount  = files.Count,
-                        File        = file,
-                    });
-
-                    token.ThrowIfCancellationRequested();
-                }
-                catch(OperationCanceledException exc)
-                {
-                    Log.Info(exc.Message);
-
+                    Log.Error("Не выбран каталог.");
                     return;
                 }
-                catch(FileNotFoundException exc)
-                {
-                    Log.Warning(exc.Message);
-                }
-                catch(InvalidOperationException exc)
-                {
-                    Log.Warning(exc.Message);
-                }
-                catch(Exception exc)
-                {
-                    Log.Error(exc.Message);
-                }
-            }
 
-            foreach (var metric in Metrics)
-            {
-                var value = metric.Compute();
+                var files = DataProvider.GetFiles();
+                int filesProceed = 0;
 
-                Log.Info($"{metric}: {value}");
-            }
+                foreach (var file in files)
+                {
+                    try
+                    {
+                        token.ThrowIfCancellationRequested();
+
+                        var groundTruth = MarkupImporter
+                            .ImportRegions(file)
+                            .ToList();
+                        var predicted = Detector
+                            .Detect(new Mat(file))
+                            .GetDetectionsList()
+                            .Select(e => e.Region)
+                            .ToList();
+
+                        foreach (var metric in Metrics)
+                        {
+                            metric.Stash(groundTruth, predicted);
+                        }
+
+                        ReportProgress(progress, new ProgressReport()
+                        {
+                            CurPosition = files.IndexOf(file),
+                            ItemsCount = files.Count,
+                            File = file,
+                        });
+
+                        filesProceed++;
+
+                        token.ThrowIfCancellationRequested();
+                    }
+                    catch (OperationCanceledException exc)
+                    {
+                        Log.Info(exc.Message);
+
+                        return;
+                    }
+                    catch (FileNotFoundException exc)
+                    {
+                        Log.Warning(exc.Message);
+                    }
+                    catch (InvalidOperationException exc)
+                    {
+                        Log.Warning(exc.Message);
+                    }
+                    catch (Exception exc)
+                    {
+                        Log.Error(exc.Message);
+                    }
+                }
+
+                Log.Info($"Обработано изображений: {filesProceed}");
+
+                foreach (var metric in Metrics)
+                {
+                    var value = metric.Compute();
+
+                    Log.Info($"{metric}: {value}");
+                }
+            });
         }
 
+        /// <summary> Выполняет отчет о прогрессе выполнения оценки. </summary>
+        /// <param name="progress"> Прогресс. </param>
+        /// <param name="report"> Отчет. </param>
         private void ReportProgress(IProgress<ProgressReport> progress, ProgressReport report)
         { 
             progress?.Report(report);

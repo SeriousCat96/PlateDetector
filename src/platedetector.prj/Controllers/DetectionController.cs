@@ -71,7 +71,7 @@ namespace PlateDetector.Controllers
 				{
 					var region = detection.Region;
 
-					Image.AddRectangle(region, RegionColor);
+					Image.AddRectangle(region, RegionColor, new Size(PicBox.Width, PicBox.Height));
 					
 					if(detections != null)
 					{
