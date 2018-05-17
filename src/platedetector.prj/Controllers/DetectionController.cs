@@ -81,8 +81,7 @@ namespace PlateDetector.Controllers
 
 				if(detections != null)
 				{
-					var ms = Detections.ElapsedTime.Milliseconds + 1000 * Detections.ElapsedTime.Seconds;
-					Log.Info($"Время: {ms / 1000f} сек");
+					Log.Info($"Время: {Detections.ElapsedTime.TotalSeconds} сек");
 				}
 			}
 
