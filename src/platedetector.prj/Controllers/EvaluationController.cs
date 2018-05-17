@@ -79,6 +79,8 @@ namespace PlateDetector.Controllers
                 }
 
                 var files = DataProvider.GetFiles();
+                var detectionTimeList = new List<double>();
+
                 int filesProceed = 0;
 
                 foreach (var file in files)
@@ -90,8 +92,12 @@ namespace PlateDetector.Controllers
                         var groundTruth = MarkupImporter
                             .ImportRegions(file)
                             .ToList();
-                        var predicted = Detector
-                            .Detect(new Mat(file))
+                        var detections = Detector
+                            .Detect(new Mat(file));
+
+                        detectionTimeList.Add(detections.ElapsedTime.TotalSeconds);
+
+                        var predicted = detections
                             .GetDetectionsList()
                             .Select(e => e.Region)
                             .ToList();
@@ -132,7 +138,14 @@ namespace PlateDetector.Controllers
                     }
                 }
 
+                var minTimeInterval = detectionTimeList.Min();
+                var meanTimeInterval = detectionTimeList.Average();
+                var maxTimeInterval = detectionTimeList.Max();
+
                 Log.Info($"Обработано изображений: {filesProceed}");
+                Log.Info($"Минимальное время обработки: {minTimeInterval} сек");
+                Log.Info($"Среднее время обработки: {meanTimeInterval} сек");
+                Log.Info($"Максимальное время обработки: {maxTimeInterval} сек");
 
                 foreach (var metric in Metrics)
                 {
