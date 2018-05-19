@@ -8,7 +8,7 @@
     <ProjectGuid>{413B61E1-46EB-486F-9D5C-1419C3AAEDD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PlateDetector</RootNamespace>
+    <RootNamespace>Platedetector.Detection</RootNamespace>
     <AssemblyName>platedetector.detection</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -70,17 +70,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Detection\AlgManager.cs" />
-    <Compile Include="Detection\Detection.cs" />
-    <Compile Include="Detection\DetectionResult.cs" />
-    <Compile Include="Detection\Detector.cs" />
-    <Compile Include="Detection\FasterRcnnProvider.cs" />
-    <Compile Include="Detection\FasterRcnn.cs" />
-    <Compile Include="Detection\HaarCascadeProvider.cs" />
-    <Compile Include="Detection\HaarCascade.cs" />
-    <Compile Include="Detection\IDetectionAlg.cs" />
-    <Compile Include="Detection\IDetectionAlgProvider.cs" />
-    <Compile Include="Detection\IDetector.cs" />
+    <Compile Include="AlgManager.cs" />
+    <Compile Include="Detection.cs" />
+    <Compile Include="DetectionResult.cs" />
+    <Compile Include="Detector.cs" />
+    <Compile Include="DetectorPool.cs" />
+    <Compile Include="FasterRcnn.cs" />
+    <Compile Include="FasterRcnnProvider.cs" />
+    <Compile Include="FasterRcnnRpnProvider.cs" />
+    <Compile Include="FasterRcnnRpn.cs" />
+    <Compile Include="HaarCascadeProvider.cs" />
+    <Compile Include="HaarCascade.cs" />
+    <Compile Include="IDetectionAlg.cs" />
+    <Compile Include="IDetectionAlgProvider.cs" />
+    <Compile Include="IDetector.cs" />
     <Compile Include="Utils\MatExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\NdArray.cs" />

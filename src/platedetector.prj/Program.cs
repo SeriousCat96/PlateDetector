@@ -1,9 +1,9 @@
-﻿using PlateDetector.GUI.Forms;
+﻿using Platedetector.UI;
 
 using System;
 using System.Windows.Forms;
 
-namespace PlateDetector
+namespace Platedetector
 {
     static class Program
 	{

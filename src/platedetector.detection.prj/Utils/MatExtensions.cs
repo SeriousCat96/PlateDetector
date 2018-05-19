@@ -1,7 +1,8 @@
 ﻿using OpenCvSharp;
+
 using System;
 
-namespace PlateDetector.Detection.Utils
+namespace Platedetector.Detection.Utils
 {
 	/// <summary> Хранит методы-расширения класса <see cref="Mat"/>.</summary>
 	public static class MatExtensions

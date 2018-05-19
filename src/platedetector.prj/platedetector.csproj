@@ -8,7 +8,7 @@
     <ProjectGuid>{7B434D65-75CD-4906-8B99-98C4A6281102}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PlateDetector</RootNamespace>
+    <RootNamespace>Platedetector</RootNamespace>
     <AssemblyName>platedetector</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -81,55 +81,41 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\EvaluationController.cs" />
-    <Compile Include="GUI\ImageTextRenderer.cs" />
-    <Compile Include="Imaging\ImageFilesDataProvider.cs" />
-    <Compile Include="Logging\LogDetectionMessage.cs" />
-    <Compile Include="Logging\LogErrorMessage.cs" />
-    <Compile Include="Logging\ILogMessage.cs" />
-    <Compile Include="Logging\LogInfoMessage.cs" />
-    <Compile Include="Logging\Log.cs" />
-    <Compile Include="Logging\LogMessageType.cs" />
-    <Compile Include="Logging\LogWarningMessage.cs" />
+    <Compile Include="Controllers\DetectionController.cs" />
+    <Compile Include="Drawing\ImageTextRenderer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Forms\AlgForm.cs">
+    <Compile Include="UI\AlgForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\AlgForm.Designer.cs">
+    <Compile Include="UI\AlgForm.Designer.cs">
       <DependentUpon>AlgForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\DetectionController.cs" />
-    <Compile Include="GUI\Forms\EvalForm.cs">
+    <Compile Include="UI\EvalForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\EvalForm.Designer.cs">
+    <Compile Include="UI\EvalForm.Designer.cs">
       <DependentUpon>EvalForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\ImageSwitchController.cs" />
-    <Compile Include="Controllers\LogController.cs" />
-    <Compile Include="Logging\LogEventArgs.cs" />
-    <Compile Include="Logging\LogItem.cs" />
-    <Compile Include="GUI\Forms\MainForm.cs">
+    <Compile Include="UI\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Forms\MainForm.Designer.cs">
+    <Compile Include="UI\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Native.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\MarkupController.cs" />
-    <EmbeddedResource Include="GUI\Forms\AlgForm.resx">
+    <EmbeddedResource Include="UI\AlgForm.resx">
       <DependentUpon>AlgForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\EvalForm.resx">
+    <EmbeddedResource Include="UI\EvalForm.resx">
       <DependentUpon>EvalForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Forms\MainForm.resx">
+    <EmbeddedResource Include="UI\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -178,6 +164,10 @@
     <ProjectReference Include="..\platedetector.markup.prj\platedetector.markup.csproj">
       <Project>{044f99fc-e2f9-4d7b-9123-f1fd922ab9e1}</Project>
       <Name>platedetector.markup</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\platedetector.utils.prj\platedetector.utils.csproj">
+      <Project>{F504C797-13FC-4A94-8CA1-975E6DDD2F39}</Project>
+      <Name>platedetector.utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

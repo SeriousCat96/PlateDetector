@@ -1,99 +1,99 @@
 ﻿using OpenCvSharp;
 using OpenCvSharp.UserInterface;
 
-using PlateDetector.Detection;
-using PlateDetector.Detection.Utils;
-using PlateDetector.Logging;
+using Platedetector.Detection;
+using Platedetector.Detection.Utils;
+using Platedetector.Utils.Logging;
 
 using System;
 using System.Collections.Generic;
 
-namespace PlateDetector.Controllers
+namespace Platedetector.Controllers
 {
     public sealed class DetectionController
-	{
-		#region .ctor
-		public DetectionController(PictureBoxIpl picBox, Log log)
-		{
-			PicBox		= picBox;
-			Image		= picBox.ImageIpl;
-			Log			= log;
+    {
+        #region .ctor
+        public DetectionController(PictureBoxIpl picBox, Log log)
+        {
+            PicBox = picBox;
+            Image = picBox.ImageIpl;
+            Log = log;
 
-			RefreshDetections();
-		}
+            RefreshDetections();
+        }
 
-		#endregion
-		
-		#region Properties
+        #endregion
 
-		public DetectionResult Detections { get; private set; }
+        #region Properties
 
-		public PictureBoxIpl PicBox { get; }
+        public DetectionResult Detections { get; private set; }
 
-		public Mat Image
-		{
-			get
-			{
-				if(PicBox == null)
-				{
-					throw new InvalidOperationException("Picture box is not initialized");
-				}
-				return PicBox.ImageIpl;
-			}
-			set
-			{
-				if(PicBox == null)
-				{
-					throw new InvalidOperationException("Picture box is not initialized");
-				}
-				PicBox.ImageIpl = value;
-			}
-		}
+        public PictureBoxIpl PicBox { get; }
 
-		public Log Log { get; private set; }
+        public Mat Image
+        {
+            get
+            {
+                if (PicBox == null)
+                {
+                    throw new InvalidOperationException("Picture box is not initialized");
+                }
+                return PicBox.ImageIpl;
+            }
+            set
+            {
+                if (PicBox == null)
+                {
+                    throw new InvalidOperationException("Picture box is not initialized");
+                }
+                PicBox.ImageIpl = value;
+            }
+        }
 
-		public Scalar RegionColor => Scalar.Fuchsia;
+        public Log Log { get; private set; }
 
-		#endregion
+        public Scalar RegionColor => Scalar.Fuchsia;
 
-		#region Methods
+        #endregion
 
-		public void Draw(DetectionResult detections = null)
-		{
-			if(detections != null)
-			{
-				Detections = detections;
-			}
+        #region Methods
 
-			if(Detections.GetDetectionsList().Count > 0)
-			{
-				foreach(var detection in Detections.GetDetectionsList())
-				{
-					var region = detection.Region;
+        public void Draw(DetectionResult detections = null)
+        {
+            if (detections != null)
+            {
+                Detections = detections;
+            }
 
-					Image.AddRectangle(region, RegionColor, new Size(PicBox.Width, PicBox.Height));
-					
-					if(detections != null)
-					{
-						Log.Detection(detection);
-					}
-				}
+            if (Detections.GetDetectionsList().Count > 0)
+            {
+                foreach (var detection in Detections.GetDetectionsList())
+                {
+                    var region = detection.Region;
 
-				if(detections != null)
-				{
-					Log.Info($"Время: {Detections.ElapsedTime.TotalSeconds} сек");
-				}
-			}
+                    Image.AddRectangle(region, RegionColor, new Size(PicBox.Width, PicBox.Height));
 
-			PicBox.RefreshIplImage(Image);
+                    if (detections != null)
+                    {
+                        Log.Detection(detection);
+                    }
+                }
 
-			GC.Collect();
-		}
+                if (detections != null)
+                {
+                    Log.Info($"Время: {Detections.ElapsedTime.TotalSeconds} сек");
+                }
+            }
 
-		public void RefreshDetections()
-		{
-			Detections = new DetectionResult(new List<Detection.Detection>(), new TimeSpan(), DetectionResultPattern.RegionOnly);
-		}
-		#endregion
-	}
+            PicBox.RefreshIplImage(Image);
+
+            GC.Collect();
+        }
+
+        public void RefreshDetections()
+        {
+            Detections = new DetectionResult(new List<Detection.Detection>(), new TimeSpan(), DetectionResultPattern.RegionOnly);
+        }
+        #endregion
+    }
 }

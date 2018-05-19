@@ -1,13 +1,12 @@
 ﻿using OpenCvSharp;
 using OpenCvSharp.UserInterface;
 
-using PlateDetector.Imaging;
+using Platedetector.Markup;
 
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 
-namespace PlateDetector.Controllers
+namespace Platedetector.Controllers
 {
     public sealed class ImageSwitchController
 	{

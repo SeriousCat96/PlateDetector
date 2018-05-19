@@ -8,7 +8,7 @@
     <ProjectGuid>{AF18E165-AB10-4F4A-89CC-366F41026C29}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PlateDetector</RootNamespace>
+    <RootNamespace>Platedetector.Evaluation</RootNamespace>
     <AssemblyName>platedetector.evaluation</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -47,13 +47,15 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evaluation\IMetric.cs" />
-    <Compile Include="Evaluation\Overlap.cs" />
-    <Compile Include="Evaluation\PrecisionMetric.cs" />
-    <Compile Include="Evaluation\ProgressReport.cs" />
-    <Compile Include="Evaluation\RecallMetric.cs" />
+    <Compile Include="EvaluationController.cs" />
+    <Compile Include="IMetric.cs" />
+    <Compile Include="Overlap.cs" />
+    <Compile Include="PrecisionMetric.cs" />
+    <Compile Include="ProgressReport.cs" />
+    <Compile Include="RecallMetric.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +66,10 @@
     <ProjectReference Include="..\platedetector.markup.prj\platedetector.markup.csproj">
       <Project>{044f99fc-e2f9-4d7b-9123-f1fd922ab9e1}</Project>
       <Name>platedetector.markup</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\platedetector.utils.prj\platedetector.utils.csproj">
+      <Project>{F504C797-13FC-4A94-8CA1-975E6DDD2F39}</Project>
+      <Name>platedetector.utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@
     <ProjectGuid>{044F99FC-E2F9-4D7B-9123-F1FD922AB9E1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PlateDetector.Markup</RootNamespace>
+    <RootNamespace>Platedetector.Markup</RootNamespace>
     <AssemblyName>platedetector.markup</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -52,9 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Markup\MarkupImporter.cs" />
-    <Compile Include="Markup\RegionSelectionController.cs" />
-    <Compile Include="Markup\XmlMarkup.cs" />
+    <Compile Include="ImageFilesDataProvider.cs" />
+    <Compile Include="MarkupController.cs" />
+    <Compile Include="MarkupImporter.cs" />
+    <Compile Include="RegionSelectionController.cs" />
+    <Compile Include="XmlMarkup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +66,10 @@
     <ProjectReference Include="..\platedetector.detection.prj\platedetector.detection.csproj">
       <Project>{413b61e1-46eb-486f-9d5c-1419c3aaedd1}</Project>
       <Name>platedetector.detection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\platedetector.utils.prj\platedetector.utils.csproj">
+      <Project>{F504C797-13FC-4A94-8CA1-975E6DDD2F39}</Project>
+      <Name>platedetector.utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
