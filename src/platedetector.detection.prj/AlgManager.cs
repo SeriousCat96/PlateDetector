@@ -18,13 +18,13 @@ namespace Platedetector.Detection
 		{
 			AlgorithmChanged?.Invoke(this, e);
 		}
-		#endregion
+        #endregion
 
-		#region .ctor
+        #region .ctor
 
-		/// <summary> Создает <see cref="AlgManager"/>. </summary>
-		/// <param name="providers"> Фабрики алгоритмов локализации. </param>
-		public AlgManager(params IDetectionAlgProvider[] providers)
+        /// <summary> Создает <see cref="AlgManager"/>. </summary>
+        /// <param name="providers"> Фабрики алгоритмов локализации. </param>
+        public AlgManager(params IDetectionAlgProvider[] providers)
 		{
 			Algorithms = new List<IDetectionAlg>();
 

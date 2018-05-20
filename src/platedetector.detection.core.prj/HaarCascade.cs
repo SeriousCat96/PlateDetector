@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Platedetector.Detection
+namespace Platedetector.Detection.Core
 {
 	/// <summary> Реализует каскадный классификатор Хаара. </summary>
 	public sealed class HaarCascade : IDetectionAlg, IDisposable

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "platedetector.evaluation", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "platedetector.utils", "platedetector.utils.prj\platedetector.utils.csproj", "{F504C797-13FC-4A94-8CA1-975E6DDD2F39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "platedetector.detection.core", "platedetector.detection.core.prj\platedetector.detection.core.csproj", "{039DBBA6-6D49-41B8-A2C9-DFB8E8EC93FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F504C797-13FC-4A94-8CA1-975E6DDD2F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F504C797-13FC-4A94-8CA1-975E6DDD2F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F504C797-13FC-4A94-8CA1-975E6DDD2F39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{039DBBA6-6D49-41B8-A2C9-DFB8E8EC93FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{039DBBA6-6D49-41B8-A2C9-DFB8E8EC93FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{039DBBA6-6D49-41B8-A2C9-DFB8E8EC93FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{039DBBA6-6D49-41B8-A2C9-DFB8E8EC93FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

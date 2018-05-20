@@ -1,4 +1,4 @@
-﻿namespace Platedetector.Detection
+﻿namespace Platedetector.Detection.Core
 {
 	/// <summary> Класс, обеспечивающий создание <see cref="HaarCascadeFactory"/>.</summary>
 	public sealed class HaarCascadeProvider : IDetectionAlgProvider

@@ -2,6 +2,7 @@
 
 using Platedetector.Controllers;
 using Platedetector.Detection;
+using Platedetector.Detection.Core;
 using Platedetector.Drawing;
 using Platedetector.Markup;
 using Platedetector.Utils.Logging;
@@ -59,7 +60,7 @@ namespace Platedetector.UI
 		{
 			_detector		= new Detector(
 				new AlgManager(
-					new FasterRcnnProvider(),
+					new FasterRcnnRpnProvider(),
 					new HaarCascadeProvider()
 					)
 				);

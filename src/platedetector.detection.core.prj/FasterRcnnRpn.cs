@@ -8,7 +8,7 @@ using System.IO;
 
 using TensorFlow;
 
-namespace Platedetector.Detection
+namespace Platedetector.Detection.Core
 {
 	/// <summary> Реализует сверточную нейронную сеть. </summary>
 	public sealed class FasterRcnnRpn : IDetectionAlg, IDisposable

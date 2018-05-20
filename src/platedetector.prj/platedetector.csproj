@@ -153,6 +153,10 @@
     <Folder Include="AppServices\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\platedetector.detection.core.prj\platedetector.detection.core.csproj">
+      <Project>{039dbba6-6d49-41b8-a2c9-dfb8e8ec93fa}</Project>
+      <Name>platedetector.detection.core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\platedetector.detection.prj\platedetector.detection.csproj">
       <Project>{413b61e1-46eb-486f-9d5c-1419c3aaedd1}</Project>
       <Name>platedetector.detection</Name>
