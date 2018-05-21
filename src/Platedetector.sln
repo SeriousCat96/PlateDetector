@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "platedetector.tests", "plat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "platedetector.detection.tests", "platedetector.detection.tests\platedetector.detection.tests.csproj", "{660CBD88-60C2-41BC-97E3-6E10FD816015}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "platedetector.evaluation.tests", "platedetector.evaluation.tests\platedetector.evaluation.tests.csproj", "{4B7B5C6D-F02E-4F33-844C-F5D9EFAE43B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{660CBD88-60C2-41BC-97E3-6E10FD816015}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{660CBD88-60C2-41BC-97E3-6E10FD816015}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{660CBD88-60C2-41BC-97E3-6E10FD816015}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B7B5C6D-F02E-4F33-844C-F5D9EFAE43B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B7B5C6D-F02E-4F33-844C-F5D9EFAE43B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B7B5C6D-F02E-4F33-844C-F5D9EFAE43B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B7B5C6D-F02E-4F33-844C-F5D9EFAE43B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2C0B865F-4F8C-4BCA-A5C4-4AE6551632EA} = {E72ABCAB-5411-4B77-AD63-AB488D6BCC90}
 		{660CBD88-60C2-41BC-97E3-6E10FD816015} = {E72ABCAB-5411-4B77-AD63-AB488D6BCC90}
+		{4B7B5C6D-F02E-4F33-844C-F5D9EFAE43B0} = {E72ABCAB-5411-4B77-AD63-AB488D6BCC90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A5DCF84E-D99E-4447-BFA7-945848AB87D9}

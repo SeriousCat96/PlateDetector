@@ -18,15 +18,15 @@ namespace Platedetector.Evaluation
         /// <returns></returns>
         public static double Iou(Rect box1, Rect box2)
         {
-            var xmin1 = box1.X;
-            var ymin1 = box1.Y;
-            var xmax1 = box1.X + box1.Width;
-            var ymax1 = box1.Y + box1.Height;
+            var xmin1 = box1.Left;
+            var ymin1 = box1.Top;
+            var xmax1 = box1.Right;
+            var ymax1 = box1.Bottom;
 
-            var xmin2 = box2.X;
-            var ymin2 = box2.Y;
-            var xmax2 = box2.X + box1.Width;
-            var ymax2 = box2.Y + box1.Height;
+            var xmin2 = box2.Left;
+            var ymin2 = box2.Top;
+            var xmax2 = box2.Right;
+            var ymax2 = box2.Bottom;
 
             var xA = Math.Max(xmin1, xmin2);
             var yA = Math.Max(ymin1, ymin2);
@@ -34,7 +34,7 @@ namespace Platedetector.Evaluation
             var yB = Math.Min(ymax1, ymax2);
 
             // Если нет пересечения, то IoU = 0.
-            if (!(xmin1 < xmax2 && xmax1 > xmin2 && ymax1 > ymin2 && ymin1 < ymax2))
+            if (!(xmin1 <= xmax2 && xmax1 >= xmin2 && ymax1 >= ymin2 && ymin1 <= ymax2))
             {
                 return 0;
             }
