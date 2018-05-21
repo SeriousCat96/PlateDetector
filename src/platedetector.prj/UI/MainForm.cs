@@ -304,7 +304,7 @@ namespace Platedetector.UI
 		{
 			using(var openFileDlg = new OpenFileDialog())
 			{
-				openFileDlg.Title = "Выберите картинку";
+				openFileDlg.Title = "Выбор изображения";
 				openFileDlg.Filter = "Изображения|*.jpg;*.jpeg;*.png;*.bmp|All files|*.*";
 
 				if(openFileDlg.ShowDialog(this) == DialogResult.OK)

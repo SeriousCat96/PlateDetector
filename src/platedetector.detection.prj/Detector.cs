@@ -77,27 +77,22 @@ namespace Platedetector.Detection
         /// <returns> Возвращает результат локализации <seealso cref="DetectionResult"/>. </returns>
         public DetectionResult Detect(Mat image)
 		{
-			var algorithm = Manager.SelectedAlgorithm;
+			IDetectionAlg algorithm = Manager.SelectedAlgorithm ?? throw new ArgumentNullException(nameof(algorithm));
+            image = image ?? throw new ArgumentNullException(nameof(image));
 
-			if(algorithm != null && image != null)
-			{
-				_timer.Restart();
-				var detections = algorithm.Predict(image);
-				_timer.Stop();
+            _timer.Restart();
+            var detections = algorithm.Predict(image);
+            _timer.Stop();
 
-				var elapsedTime = _timer.Elapsed;
+            var elapsedTime = _timer.Elapsed;
+            var result = new DetectionResult(detections, elapsedTime, algorithm.Pattern);
 
-				var result = new DetectionResult(detections, elapsedTime, algorithm.Pattern);
+            if (detections.Count > 0)
+            {
+                OnDetected(new DetectionEventArgs(result));
+            }
 
-				if(detections.Count > 0)
-				{
-					OnDetected(new DetectionEventArgs(result));
-				}
-
-				return result;
-			}
-
-			else throw new NullReferenceException();
+            return result;
 		}
 
 		#endregion

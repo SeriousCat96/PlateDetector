@@ -45,9 +45,9 @@
             this.btnMoveNext = new System.Windows.Forms.Button();
             this.btnMoveBack = new System.Windows.Forms.Button();
             this.pictureBox = new OpenCvSharp.UserInterface.PictureBoxIpl();
-            this.logView = new Platedetector.Utils.Logging.LogView();
             this.groupBoxDir = new System.Windows.Forms.GroupBox();
             this.groupBoxMarkup = new System.Windows.Forms.GroupBox();
+            this.logView = new Platedetector.Utils.Logging.LogView();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.groupBoxDir.SuspendLayout();
@@ -212,17 +212,6 @@
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
             // 
-            // logView
-            // 
-            this.logView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.logView.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.logView.ItemHeight = 18;
-            this.logView.Location = new System.Drawing.Point(12, 474);
-            this.logView.Name = "logView";
-            this.logView.Size = new System.Drawing.Size(715, 116);
-            this.logView.TabIndex = 12;
-            // 
             // groupBoxDir
             // 
             this.groupBoxDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -248,6 +237,17 @@
             this.groupBoxMarkup.TabIndex = 14;
             this.groupBoxMarkup.TabStop = false;
             this.groupBoxMarkup.Text = "Разметка";
+            // 
+            // logView
+            // 
+            this.logView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.logView.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.logView.Location = new System.Drawing.Point(12, 474);
+            this.logView.Name = "logView";
+            this.logView.RecordLimit = 0;
+            this.logView.Size = new System.Drawing.Size(715, 116);
+            this.logView.TabIndex = 12;
             // 
             // MainForm
             // 

@@ -28,16 +28,16 @@ namespace Platedetector.Detection
 		{
 			Algorithms = new List<IDetectionAlg>();
 
-			if(providers != null)
-			{
-				foreach(var factory in providers)
-				{
-					var algorithm = factory.CreateDetectionAlgorithm();
-					Algorithms.Add(algorithm);
-				}
+            if(providers.Length > 0)
+            {
+                foreach (var factory in providers)
+                {
+                    var algorithm = factory.CreateDetectionAlgorithm();
+                    Algorithms.Add(algorithm);
+                }
 
-				SelectedAlgorithm = Algorithms[0];
-			}
+                SelectedAlgorithm = Algorithms[0];
+            }
 		}
 		#endregion
 

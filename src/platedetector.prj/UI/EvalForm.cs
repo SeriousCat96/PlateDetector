@@ -101,7 +101,9 @@ namespace Platedetector.UI
         {
             using (var folderDlg = new FolderBrowserDialog())
             {
-                folderDlg.Description = "Выберите каталог";
+                folderDlg.ShowNewFolderButton = false;
+                folderDlg.SelectedPath = _evaluationController.Folder;
+                folderDlg.Description = "Выбор каталога";
 
                 if(folderDlg.ShowDialog(this) == DialogResult.OK)
                 {
