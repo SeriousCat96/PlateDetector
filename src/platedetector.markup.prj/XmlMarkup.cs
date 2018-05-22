@@ -17,11 +17,16 @@ namespace Platedetector.Markup
 		{
 			Load(uri);
 		}
-		#endregion
-		
-		#region Properties
-		/// <summary> Путь к файлу с разметкой. </summary>
-		public string Uri { get; private set; }
+
+        public XmlMarkup()
+        {
+            
+        }
+        #endregion
+
+        #region Properties
+        /// <summary> Путь к файлу с разметкой. </summary>
+        public string Uri { get; private set; }
 
 		/// <summary> XML файл. </summary>
 		public XDocument XmlFile { get; private set; }
@@ -52,10 +57,11 @@ namespace Platedetector.Markup
         /// <returns></returns>
 		public IEnumerable<Rect> GetRegions()
 		{
-			var plates = XmlFile
-				.XPathSelectElement("/Image/Plates")
-				.Elements();
+            XmlFile = XmlFile ?? throw new InvalidOperationException($"Свойство {nameof(XmlFile)} неопределено.");
 
+            var plates = XmlFile
+                .XPathSelectElement("/Image/Plates")
+                .Elements();
 			var regions = new List<Rect>();
 
 			foreach(var plate in plates)
@@ -104,7 +110,7 @@ namespace Platedetector.Markup
         /// <param name="uri"></param>
 		public void Load(string uri)
 		{
-			Uri	= uri;
+			Uri	= uri ?? throw new ArgumentNullException(nameof(uri));
 			XmlFile = XDocument.Load(Uri);
 		}
 		#endregion

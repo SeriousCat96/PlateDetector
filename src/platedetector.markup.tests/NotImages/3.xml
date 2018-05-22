@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Image Version="1.0">
+  <DongleId Value="" />
+  <HumanChecked Value="True" />
+  <Important Value="False" />
+  <Brightness Value="Light" />
+  <Description Value="Болгария(BG)" />
+  <Plates>
+    <Plate>
+      <Number Value="CA8800MT" />
+      <Stencil Value="BG_N01_aa0000aa" />
+      <Quality Value="High" />
+      <Country Value="bg" />
+      <Probability Value="0" />
+      <Region>
+        <Point X="1159" Y="740" />
+        <Point X="1424" Y="732" />
+        <Point X="1431" Y="786" />
+        <Point X="1163" Y="797" />
+      </Region>
+      <Symbols>
+        <Symbol Value="C" Probability="0.999065866869363">
+          <Point X="1190" Y="746" />
+          <Point X="1220" Y="746" />
+          <Point X="1220" Y="792" />
+          <Point X="1190" Y="792" />
+        </Symbol>
+        <Symbol Value="A" Probability="0.995687693846472">
+          <Point X="1217" Y="746" />
+          <Point X="1248" Y="746" />
+          <Point X="1248" Y="789" />
+          <Point X="1217" Y="789" />
+        </Symbol>
+        <Symbol Value="8" Probability="0.999505764567564">
+          <Point X="1254" Y="743" />
+          <Point X="1284" Y="743" />
+          <Point X="1284" Y="789" />
+          <Point X="1254" Y="789" />
+        </Symbol>
+        <Symbol Value="8" Probability="0.999954247615206">
+          <Point X="1282" Y="743" />
+          <Point X="1307" Y="743" />
+          <Point X="1307" Y="787" />
+          <Point X="1282" Y="787" />
+        </Symbol>
+        <Symbol Value="0" Probability="0.99993704104685">
+          <Point X="1304" Y="740" />
+          <Point X="1335" Y="740" />
+          <Point X="1335" Y="787" />
+          <Point X="1304" Y="787" />
+        </Symbol>
+        <Symbol Value="0" Probability="0.999285373591686">
+          <Point X="1332" Y="740" />
+          <Point X="1360" Y="740" />
+          <Point X="1360" Y="787" />
+          <Point X="1332" Y="787" />
+        </Symbol>
+        <Symbol Value="M" Probability="0.942689977620329">
+          <Point X="1365" Y="740" />
+          <Point X="1393" Y="740" />
+          <Point X="1393" Y="784" />
+          <Point X="1365" Y="784" />
+        </Symbol>
+        <Symbol Value="T" Probability="0.999030801481817">
+          <Point X="1390" Y="737" />
+          <Point X="1427" Y="737" />
+          <Point X="1427" Y="784" />
+          <Point X="1390" Y="784" />
+        </Symbol>
+      </Symbols>
+    </Plate>
+  </Plates>
+</Image>

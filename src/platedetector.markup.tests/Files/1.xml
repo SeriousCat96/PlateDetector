@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Image Version="1.0">
+  <DongleId Value="" />
+  <HumanChecked Value="True" />
+  <Important Value="False" />
+  <Brightness Value="Light" />
+  <Description Value="Болгария(BG)" />
+  <Plates>
+    <Plate>
+      <Number Value="EH4949BC" />
+      <Stencil Value="BG_N01_aa0000aa" />
+      <Quality Value="High" />
+      <Country Value="bg" />
+      <Probability Value="0" />
+      <Region>
+        <Point X="372" Y="707" />
+        <Point X="612" Y="708" />
+        <Point X="608" Y="758" />
+        <Point X="369" Y="756" />
+      </Region>
+    </Plate>
+  </Plates>
+</Image>
