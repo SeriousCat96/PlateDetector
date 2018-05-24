@@ -66,28 +66,39 @@ namespace Platedetector.Utils.Logging
 		/// <param name="message"> Сообщение для лога. </param>
 		public void Info(string message)
 		{
-			Message(new LogInfoMessage(message));
+            message = message ?? throw new ArgumentNullException(nameof(message));
+            message = message == string.Empty ? throw new ArgumentException("", nameof(message)) : message;
+
+            Message(new LogInfoMessage(message));
 		}
 
 		/// <summary> Отправляет в лог сообщение о детектировании. </summary>
 		/// <param name="detection"> Найденный объект. </param>
 		public void Detection(Detection.Detection detection)
 		{
-			Message(new LogDetectionMessage(detection));
+            detection = detection ?? throw new ArgumentNullException(nameof(detection));
+
+            Message(new LogDetectionMessage(detection));
 		}
 
 		/// <summary> Отправляет в лог сообщение об ошибке. </summary>
 		/// <param name="message"> Сообщение для лога. </param>
 		public void Error(string message)
 		{
-			Message(new LogErrorMessage(message));
+            message = message ?? throw new ArgumentNullException(nameof(message));
+            message = message == string.Empty ? throw new ArgumentException("", nameof(message)) : message;
+
+            Message(new LogErrorMessage(message));
 		}
 
 		/// <summary> Отправляет в лог предупреждающее сообщение. </summary>
 		/// <param name="message"> Сообщение для лога. </param>
 		public void Warning(string message)
 		{
-			Message(new LogWarningMessage(message));
+            message = message ?? throw new ArgumentNullException(nameof(message));
+            message = message == string.Empty ? throw new ArgumentException("", nameof(message)) : message;
+
+            Message(new LogWarningMessage(message));
 		}
 
 		/// <summary> Инициализирует поля класса. </summary>

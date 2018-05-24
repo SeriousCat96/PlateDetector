@@ -20,9 +20,14 @@ namespace Platedetector.UI
 
 		private void SelectAlg()
 		{
-			var selectedAlg = algListBox.SelectedItem as IDetectionAlg;
-			AlgManager.Select(selectedAlg.GetType());
-		}
+            if(algListBox.SelectedItem is IDetectionAlg selectedAlg)
+            {
+                if(selectedAlg != null)
+                {
+                    AlgManager.Select(selectedAlg.GetType());
+                }
+            }
+        }
 
 		protected override void OnLoad(EventArgs e)
 		{

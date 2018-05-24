@@ -78,18 +78,23 @@ namespace Platedetector.UI
             progressBar.Style = ProgressBarStyle.Continuous;
 
             tboxFolder.Text = _evaluationController.Folder;
-            tboxAlg.Text = Detector.SelectedAlgorithm.ToString();
+            tboxAlg.Text = Detector.SelectedAlgorithm?.ToString();
         }
 
         private async Task EvaluateAsync()
         {
+            if (Detector.SelectedAlgorithm == null)
+            {
+                Log.Error("Алгоритм не определен.");
+                return;
+            }
             await Task.Run(async () =>
-             {
-                 using (_cts = new CancellationTokenSource())
-                 {
-                     await _evaluationController.EvaluateAsync(_progress, _cts.Token);
-                 }
-             });
+            {
+                using (_cts = new CancellationTokenSource())
+                {
+                    await _evaluationController.EvaluateAsync(_progress, _cts.Token);
+                }
+            });
         }
 
         #endregion

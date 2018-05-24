@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Platedetector.Detection
@@ -32,11 +33,15 @@ namespace Platedetector.Detection
             {
                 foreach (var factory in providers)
                 {
-                    var algorithm = factory.CreateDetectionAlgorithm();
-                    Algorithms.Add(algorithm);
+                    try
+                    {
+                        var algorithm = factory.CreateDetectionAlgorithm();
+                        Algorithms.Add(algorithm);
+                    }
+                    catch(FileNotFoundException exc){}
                 }
 
-                SelectedAlgorithm = Algorithms[0];
+                SelectedAlgorithm = Algorithms.Count > 0 ? Algorithms[0] : null;
             }
 		}
 		#endregion

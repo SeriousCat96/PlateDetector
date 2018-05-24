@@ -90,7 +90,7 @@ namespace Platedetector.UI
 			Log.Info($"Выбран алгоритм: {_detector.SelectedAlgorithm}");
 			tboxAlg.Text = _detector
 				.SelectedAlgorithm
-				.ToString();
+				?.ToString();
 		}	
 
 		private void Detect()
@@ -118,7 +118,11 @@ namespace Platedetector.UI
 			{
 				Log.Warning(exc.Message);
 			}
-			catch(Exception exc)
+            catch (NullReferenceException exc)
+            {
+                Log.Error("Изображение неопределено");
+            }
+            catch (Exception exc)
 			{
 				Log.Error(exc.Message);
 			}
@@ -144,7 +148,11 @@ namespace Platedetector.UI
 			{
 				Log.Warning(exc.Message);
 			}
-			catch(Exception exc)
+            catch (NullReferenceException exc)
+            {
+                Log.Error("Изображение неопределено");
+            }
+            catch (Exception exc)
 			{
 				Log.Error(exc.Message);
 			}
@@ -200,7 +208,19 @@ namespace Platedetector.UI
 			{
 				Detect();
 			}
-			catch(Exception exc)
+            catch(ArgumentNullException exc)
+            {
+                switch (exc.ParamName)
+                {
+                    case "algorithm":
+                        Log.Error("Алгоритм неопределен");
+                        break;
+                    case "image":
+                        Log.Error("Изображение неопределено");
+                        break;
+                }
+            }
+            catch (Exception exc)
 			{
 				Log.Error(exc.Message);
 			}
@@ -404,7 +424,11 @@ namespace Platedetector.UI
 			{
 				Log.Warning(exc.Message);
 			}
-			catch(Exception exc)
+            catch (NullReferenceException exc)
+            {
+                Log.Error("Изображение неопределено");
+            }
+            catch (Exception exc)
 			{
 				Log.Error(exc.Message);
 			}
