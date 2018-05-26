@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Platedetector.Markup
 {
-	public class MarkupImporter
+	public class MarkupImporter : IDisposable
 	{
 		#region Properties
 
@@ -16,6 +16,13 @@ namespace Platedetector.Markup
         #endregion
 
         #region Methods
+
+        public void Dispose()
+        {
+            Markup?.Dispose();
+
+            Markup = null;
+        }
 
         /// <summary> Выполнить импорт и выделение размеченных областей. </summary>
         /// <param name="uri"> Путь к файлу с изображением. </param>
@@ -51,7 +58,8 @@ namespace Platedetector.Markup
 
 			if(File.Exists(xmlPath))
 			{
-				Markup = new XmlMarkup(xmlPath);
+                Markup?.Dispose();
+                Markup = new XmlMarkup(xmlPath);
 			}
 			else
 			{

@@ -49,7 +49,7 @@
             this.btnOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnOpenFolder.BackgroundImage = global::Platedetector.Properties.Resources.doc;
             this.btnOpenFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnOpenFolder.Location = new System.Drawing.Point(363, 24);
+            this.btnOpenFolder.Location = new System.Drawing.Point(480, 24);
             this.btnOpenFolder.Name = "btnOpenFolder";
             this.btnOpenFolder.Size = new System.Drawing.Size(22, 22);
             this.btnOpenFolder.TabIndex = 13;
@@ -58,12 +58,12 @@
             // 
             // tboxFolder
             // 
-            this.tboxFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tboxFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tboxFolder.Location = new System.Drawing.Point(13, 25);
             this.tboxFolder.Name = "tboxFolder";
             this.tboxFolder.ReadOnly = true;
-            this.tboxFolder.Size = new System.Drawing.Size(350, 20);
+            this.tboxFolder.Size = new System.Drawing.Size(467, 20);
             this.tboxFolder.TabIndex = 12;
             // 
             // lblFolder
@@ -77,11 +77,11 @@
             // 
             // listViewMetrics
             // 
-            this.listViewMetrics.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.listViewMetrics.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewMetrics.Location = new System.Drawing.Point(13, 64);
             this.listViewMetrics.Name = "listViewMetrics";
-            this.listViewMetrics.Size = new System.Drawing.Size(372, 83);
+            this.listViewMetrics.Size = new System.Drawing.Size(489, 83);
             this.listViewMetrics.TabIndex = 14;
             this.listViewMetrics.UseCompatibleStateImageBehavior = false;
             this.listViewMetrics.View = System.Windows.Forms.View.List;
@@ -90,7 +90,7 @@
             // 
             this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(312, 295);
+            this.btnStop.Location = new System.Drawing.Point(429, 295);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 16;
@@ -101,7 +101,7 @@
             // btnStart
             // 
             this.btnStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStart.Location = new System.Drawing.Point(231, 295);
+            this.btnStart.Location = new System.Drawing.Point(348, 295);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 15;
@@ -120,14 +120,14 @@
             // 
             // groupBox
             // 
-            this.groupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.groupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox.Controls.Add(this.lblFileName);
             this.groupBox.Controls.Add(this.tboxFileName);
             this.groupBox.Controls.Add(this.progressBar);
             this.groupBox.Location = new System.Drawing.Point(15, 192);
             this.groupBox.Name = "groupBox";
-            this.groupBox.Size = new System.Drawing.Size(372, 97);
+            this.groupBox.Size = new System.Drawing.Size(489, 97);
             this.groupBox.TabIndex = 18;
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Прогресс";
@@ -145,26 +145,26 @@
             // 
             // tboxFileName
             // 
-            this.tboxFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.tboxFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tboxFileName.Location = new System.Drawing.Point(6, 66);
             this.tboxFileName.Name = "tboxFileName";
             this.tboxFileName.ReadOnly = true;
-            this.tboxFileName.Size = new System.Drawing.Size(360, 20);
+            this.tboxFileName.Size = new System.Drawing.Size(477, 20);
             this.tboxFileName.TabIndex = 1;
             // 
             // progressBar
             // 
-            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar.Location = new System.Drawing.Point(6, 24);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(360, 23);
+            this.progressBar.Size = new System.Drawing.Size(477, 23);
             this.progressBar.TabIndex = 0;
             // 
             // lblAlg
             // 
-            this.lblAlg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.lblAlg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblAlg.AutoSize = true;
             this.lblAlg.Location = new System.Drawing.Point(12, 150);
@@ -175,19 +175,19 @@
             // 
             // tboxAlg
             // 
-            this.tboxAlg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.tboxAlg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tboxAlg.Location = new System.Drawing.Point(15, 166);
             this.tboxAlg.Name = "tboxAlg";
             this.tboxAlg.ReadOnly = true;
-            this.tboxAlg.Size = new System.Drawing.Size(372, 20);
+            this.tboxAlg.Size = new System.Drawing.Size(489, 20);
             this.tboxAlg.TabIndex = 19;
             // 
             // EvalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(397, 327);
+            this.ClientSize = new System.Drawing.Size(514, 327);
             this.Controls.Add(this.lblAlg);
             this.Controls.Add(this.tboxAlg);
             this.Controls.Add(this.groupBox);

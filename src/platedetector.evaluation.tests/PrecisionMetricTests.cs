@@ -43,15 +43,15 @@ namespace Platedetector.Evaluation.Tests
         }
 
         [TestMethod]
-        public void Compute_NumDetections20AndNumTruePositives10_Returns0Point5()
+        public void Compute_NumDetections20AndNumTruePositives1_Returns0Point05()
         {
             //arrange
             var metric = new PrecisionMetric
             {
                 NumDetections = 20,
-                NumTruePositive = 10
+                NumTruePositive = 1
             };
-            var expectedResult = 0.5;
+            var expectedResult = 0.05;
 
             //act
             var result = metric.Compute();
@@ -61,15 +61,15 @@ namespace Platedetector.Evaluation.Tests
         }
 
         [TestMethod]
-        public void Compute_NumDetections5AndNumTruePositives4_Returns0Point8()
+        public void Compute_NumDetections20AndNumTruePositives19_Returns0Point95()
         {
             //arrange
             var metric = new PrecisionMetric
             {
-                NumDetections = 5,
-                NumTruePositive = 4
+                NumDetections = 20,
+                NumTruePositive = 19
             };
-            var expectedResult = 0.8;
+            var expectedResult = 0.95;
 
             //act
             var result = metric.Compute();

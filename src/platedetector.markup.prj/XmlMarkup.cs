@@ -8,7 +8,7 @@ using OpenCvSharp;
 namespace Platedetector.Markup
 {
     /// <summary> Реализует чтение XML-файлов с разметкой. </summary>
-    public class XmlMarkup
+    public class XmlMarkup : IDisposable
 	{
 		#region .ctor
 		/// <summary> Создает <see cref="XmlMarkup"/>.</summary>
@@ -113,6 +113,12 @@ namespace Platedetector.Markup
 			Uri	= uri ?? throw new ArgumentNullException(nameof(uri));
 			XmlFile = XDocument.Load(Uri);
 		}
-		#endregion
-	}
+
+        public void Dispose()
+        {
+            Uri = null;
+            XmlFile = null;
+        }
+        #endregion
+    }
 }

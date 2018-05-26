@@ -9,7 +9,7 @@ namespace Platedetector.Detection.Core
 {
 	/// <summary> Реализует каскадный классификатор Хаара. </summary>
 	public sealed class HaarCascade : IDetectionAlg, IDisposable
-	{
+    {
 		#region Const
 		private readonly string ModelFile = Path.Combine(Directory.GetCurrentDirectory(), "haarcascade_russian_plate_number.xml");
 
@@ -64,11 +64,11 @@ namespace Platedetector.Detection.Core
         /// <summary> Освобождает ресурсы объекта. </summary>
         public void Dispose()
 		{
-			if(_classifier != null)
-			{
-				_classifier.Dispose();
-			}
-		}
+			_classifier?.Dispose();
+
+            _classifier = null;
+
+        }
 
 		/// <summary> Загрузка параметров алгоритма из файла. </summary>
 		/// <param name="filename"> Путь к файлу. </param>

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Platedetector.Evaluation
 {
     /// <summary> Выполняет оценивание алгоритма заданными метриками. </summary>
-    public class EvaluationController
+    public class EvaluationController : IDisposable
     {       
         #region .ctor
 
@@ -35,7 +35,7 @@ namespace Platedetector.Evaluation
         public ImageFilesDataProvider DataProvider { get; }
 
         /// <summary> Детектор номеров. </summary>
-        public Detector Detector { get; }
+        public Detector Detector { get; private set; }
 
         /// <summary> Каталог с тестовой выборкой изображений. </summary>
         public string Folder
@@ -54,7 +54,7 @@ namespace Platedetector.Evaluation
         public Log Log { get; }
 
         /// <summary> Загрузчик размеченных областей. </summary>
-        public MarkupImporter MarkupImporter { get; }
+        public MarkupImporter MarkupImporter { get; private set; }
 
         /// <summary> Список метрик. </summary>
         public IEnumerable<IMetric> Metrics { get; }
@@ -62,6 +62,16 @@ namespace Platedetector.Evaluation
         #endregion
 
         #region Methods
+
+        public void Dispose()
+        {
+            Detector?.Dispose();
+            MarkupImporter?.Dispose();
+
+            Detector = null;
+            MarkupImporter = null;
+        }
+
         /// <summary> Выполняет оценку алгоритма на заданной выборке в отдельном потоке. </summary>
         /// <param name="progress"> Прогресс. </param>
         /// <param name="token"> Токен отмены. </param>
@@ -86,31 +96,38 @@ namespace Platedetector.Evaluation
                     try
                     {
                         token.ThrowIfCancellationRequested();
-
-                        var groundTruth = MarkupImporter
-                            .ImportRegions(file)
-                            .ToList();
-                        var detections = Detector
-                            .Detect(new Mat(file));
-
-                        detectionTimeList.Add(detections.ElapsedTime.TotalSeconds);
-
-                        var predicted = detections
-                            .GetDetectionsList()
-                            .Select(e => e.Region)
-                            .ToList();
-
-                        foreach (var metric in Metrics)
+                        using(var image = new Mat(file))
                         {
-                            metric.Stash(groundTruth, predicted);
+                            var groundTruth = MarkupImporter
+                                .ImportRegions(file)
+                                .ToList();
+                            var detections = Detector
+                                .Detect(image);
+
+                            image.Release();
+
+                            detectionTimeList.Add(detections.ElapsedTime.TotalSeconds);
+
+                            var predicted = detections
+                                .GetDetectionsList()
+                                .Select(e => e.Region)
+                                .ToList();
+
+                            foreach (var metric in Metrics)
+                            {
+                                metric.Stash(groundTruth, predicted);
+                            }
+
+                            predicted = null;
+                            groundTruth = null;
+
+                            ReportProgress(progress, new ProgressReport()
+                            {
+                                CurPosition = files.IndexOf(file),
+                                ItemsCount = files.Count,
+                                File = file,
+                            });
                         }
-
-                        ReportProgress(progress, new ProgressReport()
-                        {
-                            CurPosition = files.IndexOf(file),
-                            ItemsCount = files.Count,
-                            File = file,
-                        });
 
                         filesProceed++;
 
@@ -145,12 +162,16 @@ namespace Platedetector.Evaluation
                 Log.Info($"Среднее время обработки: {meanTimeInterval} сек");
                 Log.Info($"Максимальное время обработки: {maxTimeInterval} сек");
 
+                detectionTimeList = null;
+
                 foreach (var metric in Metrics)
                 {
                     var value = metric.Compute();
 
                     Log.Info($"{metric}: {value}");
                 }
+
+                GC.Collect();
             });
         }
 
@@ -160,6 +181,7 @@ namespace Platedetector.Evaluation
         private void ReportProgress(IProgress<ProgressReport> progress, ProgressReport report)
         { 
             progress?.Report(report);
+            report = null;
         }
 
         #endregion

@@ -64,6 +64,7 @@ namespace Platedetector.Markup
                 {
                     throw new InvalidOperationException("Picture box is not initialized");
                 }
+                PicBox.ImageIpl?.Release();
                 PicBox.ImageIpl = value;
             }
         }
@@ -98,6 +99,7 @@ namespace Platedetector.Markup
 
         public void Draw(string uri)
         {
+            SelectionController.Image?.Release();
             SelectionController.Image = OriginalImage.Clone();
 
             if(IsMarkupOn)

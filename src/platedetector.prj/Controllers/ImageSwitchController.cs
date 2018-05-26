@@ -3,7 +3,6 @@ using OpenCvSharp.UserInterface;
 
 using Platedetector.Markup;
 
-using System;
 using System.Collections.Generic;
 
 namespace Platedetector.Controllers
@@ -79,10 +78,9 @@ namespace Platedetector.Controllers
 
 			CurPosition = Items.IndexOf(e.File);
 
-			PicBox.RefreshIplImage(new Mat(e.File));
-
-			GC.Collect();
-		}
+            PicBox.ImageIpl?.Release();
+            PicBox.RefreshIplImage(new Mat(e.File));
+        }
 
 		#endregion
 	}

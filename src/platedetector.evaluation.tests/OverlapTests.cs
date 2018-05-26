@@ -182,7 +182,7 @@ namespace Platedetector.Evaluation.Tests
         }
 
         [TestMethod]
-        public void Iou_IouBetweenListsSize2And1_ReturnsListSizeOf1With2Elements()
+        public void Iou_IouBetweenListsSize1And2_ReturnsListSizeOf1With2Elements()
         {
             //arrange
             var rect1 = new Rect(6, 9, 6, 4);
@@ -208,7 +208,7 @@ namespace Platedetector.Evaluation.Tests
         }
 
         [TestMethod]
-        public void Iou_IouBetweenListsSize2And3_ReturnsListSizeOf3With2Elements()
+        public void Iou_IouBetweenListsSize3And2_ReturnsListSizeOf3With2Elements()
         {
             //arrange
             var rect1 = new Rect(6, 9, 6, 4);

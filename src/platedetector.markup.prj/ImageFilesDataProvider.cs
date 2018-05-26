@@ -26,7 +26,7 @@ namespace Platedetector.Markup
 			{
 				var fileInfo = new FileInfo(value);
 
-				if(!fileInfo.Exists)
+                if (!fileInfo.Exists)
 				{
 					throw new FileNotFoundException("Файл не найден", value);
 				}

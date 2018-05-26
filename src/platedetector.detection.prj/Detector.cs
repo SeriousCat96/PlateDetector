@@ -7,7 +7,7 @@ using System.Drawing;
 namespace Platedetector.Detection
 {
 	/// <summary> Реализует детектор номеров. </summary>
-	public class Detector : IDetector
+	public class Detector : IDetector, IDisposable
 	{
 		#region Data
 
@@ -28,13 +28,12 @@ namespace Platedetector.Detection
 		{
 			Manager = manager;
 			_timer	 = new Stopwatch();
-
 		}
 		#endregion
 
 		#region Properties
 		/// <summary> Менеджер алгоритмов локализации. </summary>
-		public AlgManager Manager { get; }
+		public AlgManager Manager { get; private set; }
 
 		/// <summary> Текущий алгоритм локализации </summary>
 		public IDetectionAlg SelectedAlgorithm
@@ -95,8 +94,16 @@ namespace Platedetector.Detection
             return result;
 		}
 
-		#endregion
-	}
+        public void Dispose()
+        {
+            Manager?.Dispose();
+
+            Manager = null;
+            _timer = null;
+        }
+
+        #endregion
+    }
 
 
 	public sealed class DetectionEventArgs : EventArgs

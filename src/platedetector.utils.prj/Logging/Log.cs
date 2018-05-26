@@ -24,8 +24,13 @@ namespace Platedetector.Utils.Logging
 		/// <summary> Создаёт <see cref="Log"/>. </summary>
 		public Log()
 		{
-			Initialize();
-		}
+
+            try
+            {
+                Initialize();
+            }
+            catch(IOException){}
+        }
 		#endregion
 
 		#region Properties
@@ -111,11 +116,23 @@ namespace Platedetector.Utils.Logging
 		/// <param name="message"> Сообщение для лога. </param>
 		private void Message(ILogMessage message)
 		{
-			_streamWriter.WriteLine(message.ToString());
-			_streamWriter.Flush();
+            try
+            {
+                if(_streamWriter == null)
+                {
+                    Initialize();
+                }
 
-			OnLogFileUpdated(new LogEventArgs(message));
-		}
+                _streamWriter.WriteLine(message.ToString());
+                _streamWriter.Flush();
+            }
+            catch(IOException exc)
+            {
+                message = new LogErrorMessage(exc.Message);
+            }
+
+            OnLogFileUpdated(new LogEventArgs(message));
+        }
 
 		#endregion
 

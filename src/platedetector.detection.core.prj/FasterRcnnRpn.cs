@@ -56,11 +56,13 @@ namespace Platedetector.Detection.Core
         /// <summary> Освобождает ресурсы объекта. </summary>
         public void Dispose()
 		{
-			_graph?.Dispose();
+            _graph?.Dispose();
+            _graph = null;
 
-			_session?.CloseSession();
-			_session?.Dispose();
-		}
+            _session?.CloseSession();
+            _session?.Dispose();
+            _session = null;
+        }
 
 		/// <summary> Загрузка параметров алгоритма из файла. </summary>
 		/// <param name="filename"> Путь к файлу. </param>

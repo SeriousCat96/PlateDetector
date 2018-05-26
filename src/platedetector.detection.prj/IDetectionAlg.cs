@@ -1,11 +1,11 @@
 ﻿using OpenCvSharp;
-
+using System;
 using System.Collections.Generic;
 
 namespace Platedetector.Detection
 {
 	/// <summary> Интерфейс алгоритма локализации. </summary>
-	public interface IDetectionAlg
+	public interface IDetectionAlg : IDisposable
 	{
         /// <summary> Шаблон результата локализации. </summary>
         DetectionResultPattern Pattern { get; }

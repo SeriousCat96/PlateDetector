@@ -46,6 +46,8 @@ namespace Platedetector.Controllers
                 {
                     throw new InvalidOperationException("Picture box is not initialized");
                 }
+
+                PicBox.ImageIpl?.Release();
                 PicBox.ImageIpl = value;
             }
         }
@@ -86,8 +88,6 @@ namespace Platedetector.Controllers
             }
 
             PicBox.RefreshIplImage(Image);
-
-            GC.Collect();
         }
 
         public void RefreshDetections()

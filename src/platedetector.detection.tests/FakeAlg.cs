@@ -16,6 +16,11 @@ namespace Platedetector.Detection.Tests
     {
         public DetectionResultPattern Pattern => DetectionResultPattern.RegionOnly;
 
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Load(string filename) { }
 
         public IReadOnlyList<Detection> Predict(Mat image) => new List<Detection>

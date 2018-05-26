@@ -57,9 +57,11 @@ namespace Platedetector.Detection.Core
         public void Dispose()
         {
             _graph?.Dispose();
+            _graph = null;
 
             _session?.CloseSession();
             _session?.Dispose();
+            _session = null;
         }
 
         /// <summary> Загрузка параметров алгоритма из файла. </summary>

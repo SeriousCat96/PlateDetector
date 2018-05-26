@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 
 namespace Platedetector.UI
 {
@@ -38,7 +39,7 @@ namespace Platedetector.UI
 		public MainForm()
 		{
 			InitializeComponent();
-			InitializeData();
+            InitializeData();
 		}
 
 		#endregion
@@ -118,11 +119,11 @@ namespace Platedetector.UI
 			{
 				Log.Warning(exc.Message);
 			}
-            catch (NullReferenceException exc)
+            catch(NullReferenceException)
             {
                 Log.Error("Изображение неопределено");
             }
-            catch (Exception exc)
+            catch(Exception exc)
 			{
 				Log.Error(exc.Message);
 			}
@@ -148,11 +149,11 @@ namespace Platedetector.UI
 			{
 				Log.Warning(exc.Message);
 			}
-            catch (NullReferenceException exc)
+            catch(NullReferenceException)
             {
                 Log.Error("Изображение неопределено");
             }
-            catch (Exception exc)
+            catch(Exception exc)
 			{
 				Log.Error(exc.Message);
 			}
@@ -181,13 +182,13 @@ namespace Platedetector.UI
 				.DataProvider
 				.File;
 
-			Log.Info($"Загружено изображение: {uri}");
+            Log.Info($"Загружено изображение: {uri}");
 
-			OriginalImage = pictureBox.ImageIpl;
-
-			_markupController.OriginalImage = OriginalImage;
+			_markupController.OriginalImage = pictureBox.ImageIpl;
 			_markupController.Draw(uri);
-		}
+
+            OriginalImage = _markupController.OriginalImage;
+        }
 
 		#endregion
 
@@ -277,8 +278,11 @@ namespace Platedetector.UI
 
 		private void OnEvalAlgToolStripMenuItemClick(object sender, EventArgs e)
 		{
-			using(var window = new EvalForm(
-                new Detector(_detector.Manager),
+            using (var window = new EvalForm(
+                new Detector(
+                    new AlgManager(
+                        new FasterRcnnRpnProvider(),
+                        new HaarCascadeProvider())),
                 Log,
                 _imageController.DataProvider.Folder))
 			{
@@ -424,11 +428,11 @@ namespace Platedetector.UI
 			{
 				Log.Warning(exc.Message);
 			}
-            catch (NullReferenceException exc)
+            catch(NullReferenceException)
             {
                 Log.Error("Изображение неопределено");
             }
-            catch (Exception exc)
+            catch(Exception exc)
 			{
 				Log.Error(exc.Message);
 			}

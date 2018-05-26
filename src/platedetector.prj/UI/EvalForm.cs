@@ -53,7 +53,7 @@ namespace Platedetector.UI
 
         #region Properties
 
-        public Detector Detector { get; }
+        public Detector Detector { get; private set; }
 
         public Log Log { get; }
 
@@ -96,11 +96,19 @@ namespace Platedetector.UI
                 }
             });
         }
-
         #endregion
 
         #region EventHandlers
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
 
+            _evaluationController?.Dispose();
+            _evaluationController = null;
+
+            Detector?.Dispose();
+            Detector = null;
+        }
 
         private void OnButtonOpenFolderClick(object sender, EventArgs e)
         {

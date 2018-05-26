@@ -6,7 +6,7 @@ using System.Linq;
 namespace Platedetector.Detection
 {
 	/// <summary> Реализует менеджер алгоритмов, способный переключаться между алгоритмами локализации. </summary>
-	public class AlgManager
+	public class AlgManager : IDisposable
 	{
 		#region Events
 
@@ -38,7 +38,7 @@ namespace Platedetector.Detection
                         var algorithm = factory.CreateDetectionAlgorithm();
                         Algorithms.Add(algorithm);
                     }
-                    catch(FileNotFoundException exc){}
+                    catch(FileNotFoundException){}
                 }
 
                 SelectedAlgorithm = Algorithms.Count > 0 ? Algorithms[0] : null;
@@ -49,7 +49,7 @@ namespace Platedetector.Detection
 		#region Properties
 
 		/// <summary> Список алгоритмов локализации. </summary>
-		public IList<IDetectionAlg> Algorithms { get; }
+		public IList<IDetectionAlg> Algorithms { get; protected set; }
 
 		/// <summary> Выбранный алгоритм локализации. </summary>
 		public IDetectionAlg SelectedAlgorithm { get; protected set; }
@@ -74,9 +74,22 @@ namespace Platedetector.Detection
 			{
 				throw new ArgumentException("Данный тип алгоритма отсутствует.", nameof(type));
 			}
-		} 
-		#endregion
-	}
+		}
+
+        public void Dispose()
+        {
+            if(!(Algorithms is null))
+            {
+                foreach(var algorithm in Algorithms)
+                {
+                    algorithm?.Dispose();
+                }
+
+                Algorithms = null;
+            }
+        }
+        #endregion
+    }
 
 	/// <summary> Аргументы события <see cref="AlgManager.AlgChanged"/></summary>
 	public class AlgChangedEventArgs : EventArgs
