@@ -18,7 +18,7 @@ namespace Platedetector.Detection.Utils
             mat.Rectangle(rect, color, thickness, LineTypes.Link8);
         }
 
-        /// <summary> Преобразует Bitmap в ч/б цвет в массив float</summary>
+        /// <summary> Преобразует Mat в цвет в массив float</summary>
         /// <param name="bmp"> Исходное изображение </param>
         /// <returns> Возвращает 4-мерный массив пикселей float со значениями в диапазоне [0, 1]. </returns>
         public unsafe static NdArray<float> ToFloatArray(this Mat img)

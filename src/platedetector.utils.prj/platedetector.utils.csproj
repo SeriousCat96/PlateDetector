@@ -32,7 +32,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -42,7 +41,6 @@
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Logging\LogDetectionMessage.cs" />
     <Compile Include="Logging\LogErrorMessage.cs" />
-    <Compile Include="Logging\LogEventArgs.cs" />
     <Compile Include="Logging\LogInfoMessage.cs" />
     <Compile Include="Logging\LogItem.cs" />
     <Compile Include="Logging\LogMessageType.cs" />

@@ -16,7 +16,7 @@ namespace Platedetector.Evaluation
         /// <param name="box1"> Область. </param>
         /// <param name="box2"> Область. </param>
         /// <returns></returns>
-        public static double Iou(Rect box1, Rect box2)
+        public static double IoU(Rect box1, Rect box2)
         {
             var xmin1 = box1.Left;
             var ymin1 = box1.Top;
@@ -55,7 +55,7 @@ namespace Platedetector.Evaluation
         /// <param name="groundTruth"> Истинные области. </param>
         /// <param name="predicted"> Предсказанные области. </param>
         /// <returns> Список перекрытий для каждого groundTruth с каждым predicted. </returns>
-        public static IList<double[]> Iou(IReadOnlyList<Rect> groundTruth, IReadOnlyList<Rect> predicted)
+        public static IList<double[]> IoU(IReadOnlyList<Rect> groundTruth, IReadOnlyList<Rect> predicted)
         {
             var numGt = groundTruth.Count();
             var numPred = predicted.Count();
@@ -67,7 +67,7 @@ namespace Platedetector.Evaluation
 
                 for (int predIdx = 0; predIdx < numPred; predIdx++)
                 {
-                    ious[predIdx] = Iou(groundTruth[gtIdx], predicted[predIdx]);
+                    ious[predIdx] = IoU(groundTruth[gtIdx], predicted[predIdx]);
                 }
 
                 result.Add(ious);
@@ -87,7 +87,7 @@ namespace Platedetector.Evaluation
                 return 0;
             }
 
-            var ious = Iou(groundTruth, predicted);
+            var ious = IoU(groundTruth, predicted);
             int count = 0;
 
             foreach (var iouArr in ious)

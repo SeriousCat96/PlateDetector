@@ -134,11 +134,11 @@ namespace Platedetector.Tests
         }
 
         [TestMethod]
-        public void MoveNext_MoveFromFileABH2ToABH3_FileIsABH3()
+        public void MoveNext_MoveFromFileABH1ToABH2_FileIsABH2()
         {
             //arrange
-            var startFile = Path.Combine(Directory.GetCurrentDirectory(), @"Images\ABH2.jpg");
-            var expectedFile = Path.Combine(Directory.GetCurrentDirectory(), @"Images\ABH3.jpg");
+            var startFile = Path.Combine(Directory.GetCurrentDirectory(), @"Images\ABH1.jpg");
+            var expectedFile = Path.Combine(Directory.GetCurrentDirectory(), @"Images\ABH2.jpg");
             var controller = new ImageSwitchController(new PictureBoxIpl())
             {
                 Items = Directory

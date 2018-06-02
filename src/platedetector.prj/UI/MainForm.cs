@@ -12,7 +12,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
+using System.Reflection;
+using Microsoft.VisualBasic.Devices;
+using Microsoft.Win32;
 
 namespace Platedetector.UI
 {
@@ -88,7 +90,6 @@ namespace Platedetector.UI
 
 			FormClosing			   += OnFormClosing;
 
-			Log.Info($"Выбран алгоритм: {_detector.SelectedAlgorithm}");
 			tboxAlg.Text = _detector
 				.SelectedAlgorithm
 				?.ToString();
@@ -190,6 +191,23 @@ namespace Platedetector.UI
             OriginalImage = _markupController.OriginalImage;
         }
 
+        private void WriteStartupMessages()
+        {
+            var assembly = Assembly.GetEntryAssembly();
+            var assemblyName = assembly.GetName();
+            var computerInfo = new ComputerInfo();
+            var cpu = Registry
+                .LocalMachine
+                .OpenSubKey(@"Hardware\Description\System\CentralProcessor\0", RegistryKeyPermissionCheck.ReadSubTree)
+                .GetValue("ProcessorNameString") ?? "Unknown";
+
+            Log.Info($"Application \"{assemblyName.Name} {assemblyName.Version}\" started");
+            Log.Info($"OS: {computerInfo.OSFullName}");
+            Log.Info($"RAM: {computerInfo.TotalPhysicalMemory / (1024 * 1024)} MB");
+            Log.Info($"CPU: {cpu}");
+            Log.Info($"Выбран алгоритм: {_detector.SelectedAlgorithm}");
+        }
+
 		#endregion
 
 		#region EventHandlers
@@ -286,6 +304,11 @@ namespace Platedetector.UI
                 Log,
                 _imageController.DataProvider.Folder))
 			{
+                var selectedAlg = _detector.SelectedAlgorithm;
+
+                window
+                    .Detector
+                    .ChangeAlgorithm(selectedAlg.GetType());
 				window.ShowDialog(this);
 			}
 		}
@@ -321,8 +344,9 @@ namespace Platedetector.UI
 			MinimumSize	= Size;
 			Location	= new System.Drawing.Point(200, 0);
 			Font		= SystemFonts.MessageBoxFont;
-			//BackColor	= SystemColors.Window;
-		}
+
+            WriteStartupMessages();
+        }
 
 		private void OnLoadImgToolStripMenuItemClick(object sender, EventArgs e)
 		{

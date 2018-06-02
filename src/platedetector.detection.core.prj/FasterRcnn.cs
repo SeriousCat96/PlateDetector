@@ -22,7 +22,7 @@ namespace Platedetector.Detection.Core
         /// <summary> Граф вычислений модели сверточной нейронной сети. </summary>
         private TFGraph _graph;
 
-        /// <summary> TF сессия, обеспечивающая запус графа вычислений нейронной сети. </summary>
+        /// <summary> TF сессия, обеспечивающая запуск графа вычислений нейронной сети. </summary>
         private TFSession _session;
 
         /// <summary> Размер входного изображения. </summary>

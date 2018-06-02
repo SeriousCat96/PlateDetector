@@ -38,7 +38,7 @@ namespace Platedetector.Drawing
             }
 
             var gt = groundTruth.ToList();
-            var ious = Overlap.Iou(gt, predicted);
+            var ious = Overlap.IoU(gt, predicted);
 
             for (int i = 0; i < ious.Count; i++)
             {

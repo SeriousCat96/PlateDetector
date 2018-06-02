@@ -18,7 +18,7 @@ namespace Platedetector.Evaluation.Tests
             var expectedIou = 1.0;
 
             //act
-            var resultIou = Overlap.Iou(rect1, rect2);
+            var resultIou = Overlap.IoU(rect1, rect2);
 
 
             Assert.AreEqual(expectedIou, resultIou, delta: float.Epsilon);
@@ -33,7 +33,7 @@ namespace Platedetector.Evaluation.Tests
             var expectedIou = 0.0;
 
             //act
-            var resultIou = Overlap.Iou(rect1, rect2);
+            var resultIou = Overlap.IoU(rect1, rect2);
 
 
             Assert.AreEqual(expectedIou, resultIou, delta: float.Epsilon);
@@ -48,7 +48,7 @@ namespace Platedetector.Evaluation.Tests
             var expectedIou = 0.1765;
 
             //act
-            var resultIou = Overlap.Iou(rect1, rect2);
+            var resultIou = Overlap.IoU(rect1, rect2);
 
 
             Assert.AreEqual(expectedIou, resultIou, delta: 0.00005);
@@ -63,7 +63,7 @@ namespace Platedetector.Evaluation.Tests
             var expectedIou = 0.1765;
 
             //act
-            var resultIou = Overlap.Iou(rect1, rect2);
+            var resultIou = Overlap.IoU(rect1, rect2);
 
 
             Assert.AreEqual(expectedIou, resultIou, delta: 0.00005);
@@ -78,7 +78,7 @@ namespace Platedetector.Evaluation.Tests
             var expectedIou = 0.5;
 
             //act
-            var resultIou = Overlap.Iou(rect1, rect2);
+            var resultIou = Overlap.IoU(rect1, rect2);
 
 
             Assert.AreEqual(expectedIou, resultIou, delta: float.Epsilon);
@@ -93,7 +93,7 @@ namespace Platedetector.Evaluation.Tests
             var expectedIou = 0.0588;
 
             //act
-            var resultIou = Overlap.Iou(rect1, rect2);
+            var resultIou = Overlap.IoU(rect1, rect2);
 
 
             Assert.AreEqual(expectedIou, resultIou, delta: 0.00005);
@@ -108,7 +108,7 @@ namespace Platedetector.Evaluation.Tests
             var expectedIou = 0.1053;
 
             //act
-            var resultIou = Overlap.Iou(rect1, rect2);
+            var resultIou = Overlap.IoU(rect1, rect2);
 
 
             Assert.AreEqual(expectedIou, resultIou, delta: 0.00005);
@@ -126,7 +126,7 @@ namespace Platedetector.Evaluation.Tests
             var expectedresult = new List<double[]>();
 
             //act
-            var resultIou = Overlap.Iou(grountTruth, predicted);
+            var resultIou = Overlap.IoU(grountTruth, predicted);
 
 
             Assert.AreEqual(expectedresult.Count, resultIou.Count);
@@ -147,7 +147,7 @@ namespace Platedetector.Evaluation.Tests
             };
 
             //act
-            var resultIou = Overlap.Iou(grountTruth, predicted);
+            var resultIou = Overlap.IoU(grountTruth, predicted);
 
 
             Assert.AreEqual(expectedresult.Count, resultIou.Count);
@@ -174,7 +174,7 @@ namespace Platedetector.Evaluation.Tests
             };
 
             //act
-            var resultIou = Overlap.Iou(grountTruth, predicted);
+            var resultIou = Overlap.IoU(grountTruth, predicted);
 
 
             Assert.AreEqual(expectedresult.Count, resultIou.Count);
@@ -196,7 +196,7 @@ namespace Platedetector.Evaluation.Tests
             };
 
             //act
-            var resultIou = Overlap.Iou(grountTruth, predicted);
+            var resultIou = Overlap.IoU(grountTruth, predicted);
 
 
             Assert.AreEqual(expectedresult.Count, resultIou.Count);
@@ -227,7 +227,7 @@ namespace Platedetector.Evaluation.Tests
             };
 
             //act
-            var resultIou = Overlap.Iou(grountTruth, predicted);
+            var resultIou = Overlap.IoU(grountTruth, predicted);
 
 
             Assert.AreEqual(expectedresult.Count, resultIou.Count);

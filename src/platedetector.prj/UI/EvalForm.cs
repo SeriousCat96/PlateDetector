@@ -78,7 +78,6 @@ namespace Platedetector.UI
             progressBar.Style = ProgressBarStyle.Continuous;
 
             tboxFolder.Text = _evaluationController.Folder;
-            tboxAlg.Text = Detector.SelectedAlgorithm?.ToString();
         }
 
         private async Task EvaluateAsync()
@@ -132,6 +131,10 @@ namespace Platedetector.UI
 
             MinimumSize = Size;
             Font = SystemFonts.MessageBoxFont;
+
+            tboxAlg.Text = Detector
+                .SelectedAlgorithm?
+                .ToString();
         }
 
         private async void OnButtonStartClickAsync(object sender, EventArgs e)

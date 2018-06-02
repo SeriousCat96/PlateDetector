@@ -29,7 +29,7 @@ namespace Platedetector.Utils.Logging
 		/// <returns> Форматированное сообщение в виде строки.</returns>
 		public override string ToString()
 		{
-			return $"[{DateTime.Now}][{Type.ToString().ToUpper()}]: {Text}";
+			return $"[{DateTime.Now}][{Type.ToString().ToUpper()}] {Text}";
 		}
 	}
 }

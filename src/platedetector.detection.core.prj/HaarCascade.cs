@@ -26,10 +26,10 @@ namespace Platedetector.Detection.Core
 		private int _minNeighbours;
 
 		/// <summary> Минимальный размер объекта на изображении. Объекты меньше будут проигнорированы. </summary>
-		private OpenCvSharp.Size _minSize;
+		private Size _minSize;
 
 		/// <summary> Максимальный размер объекта на изображении. Объекты больше будут проигнорированы. </summary>
-		private OpenCvSharp.Size _maxSize;
+		private Size _maxSize;
 
 		#endregion
 
@@ -39,7 +39,7 @@ namespace Platedetector.Detection.Core
 		/// <param name="minNeighbours"> Параметр, определяющий минимальное количество обнаружений в соседних областях, чтобы считать обнаружение достоверным. </param>
 		/// <param name="minSize"> Минимальный размер объекта на изображении. Объекты меньше будут проигнорированы. </param>
 		/// <param name="maxSize"> Максимальный размер объекта на изображении. Объекты больше будут проигнорированы. </param>
-		public HaarCascade(double scaleFactor, int minNeighbours, OpenCvSharp.Size minSize, OpenCvSharp.Size maxSize, DetectionResultPattern pattern = DetectionResultPattern.RegionOnly)
+		public HaarCascade(double scaleFactor, int minNeighbours, Size minSize, Size maxSize, DetectionResultPattern pattern = DetectionResultPattern.RegionOnly)
 		{
 			_scaleFactor = scaleFactor;
 			_minNeighbours = minNeighbours;
