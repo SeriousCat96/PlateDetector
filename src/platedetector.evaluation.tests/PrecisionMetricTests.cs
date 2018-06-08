@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Platedetector.Evaluation.Tests
 {
@@ -7,13 +6,13 @@ namespace Platedetector.Evaluation.Tests
     public class PrecisionMetricTests
     {
         [TestMethod]
-        public void Compute_NumDetections9AndNumTruePositives9_Returns1()
+        public void Compute_NumDetections20AndNumTruePositives20_Returns1()
         {
             //arrange
             var metric = new PrecisionMetric
             {
-                NumDetections = 9,
-                NumTruePositive = 9
+                NumDetections = 20,
+                NumTruePositive = 20
             };
             var expectedResult = 1.0;
 
@@ -25,12 +24,12 @@ namespace Platedetector.Evaluation.Tests
         }
 
         [TestMethod]
-        public void Compute_NumDetections5AndNumTruePositives0_Returns0()
+        public void Compute_NumDetections20AndNumTruePositives0_Returns0()
         {
             //arrange
             var metric = new PrecisionMetric
             {
-                NumDetections = 5,
+                NumDetections = 20,
                 NumTruePositive = 0
             };
             var expectedResult = 0.0;

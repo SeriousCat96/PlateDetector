@@ -79,6 +79,9 @@ namespace Platedetector.Detection
 			IDetectionAlg algorithm = Manager.SelectedAlgorithm ?? throw new ArgumentNullException(nameof(algorithm));
             image = image ?? throw new ArgumentNullException(nameof(image));
 
+            //Debug.Assert(algorithm != null);
+            //Debug.Assert(image != null);
+
             _timer.Restart();
             var detections = algorithm.Predict(image);
             _timer.Stop();

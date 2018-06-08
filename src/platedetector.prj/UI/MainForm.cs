@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+
 using Microsoft.VisualBasic.Devices;
 using Microsoft.Win32;
 
@@ -196,10 +197,12 @@ namespace Platedetector.UI
             var assembly = Assembly.GetEntryAssembly();
             var assemblyName = assembly.GetName();
             var computerInfo = new ComputerInfo();
-            var cpu = Registry
+            var cpu = ((Registry
                 .LocalMachine
                 .OpenSubKey(@"Hardware\Description\System\CentralProcessor\0", RegistryKeyPermissionCheck.ReadSubTree)
-                .GetValue("ProcessorNameString") ?? "Unknown";
+                .GetValue("ProcessorNameString") ?? "Unknown") as string)
+                .Replace("(R)", "®")
+                .Replace("(TM)", "™");
 
             Log.Info($"Application \"{assemblyName.Name} {assemblyName.Version}\" started");
             Log.Info($"OS: {computerInfo.OSFullName}");

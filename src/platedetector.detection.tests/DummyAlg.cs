@@ -28,5 +28,5 @@ namespace Platedetector.Detection.Tests
             new Detection(new Rect(15, 7, 34, 11), 0.99f, Country.Russia),
             new Detection(new Rect(1, 1, 30, 8), 0.99f, Country.Ukraine),
         };
-}
+    }
 }

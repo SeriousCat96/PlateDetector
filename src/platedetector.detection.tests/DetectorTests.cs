@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenCvSharp;
 
@@ -11,7 +10,7 @@ namespace Platedetector.Detection.Tests
     public class DetectorTests
     {
         [TestMethod]
-        public void Detect_DetectObjectsWithDummyAlg_ReturnsRussiaAndUkraineObjectsWithRegionProbCountryPattern()
+        public void Detect_DetectObjectsWithDummyAlg_ReturnsRussiaAndUkraineObjects()
         {
             //arrange
             var detector = new Detector(new AlgManager(new DummyAlgProvider()));
@@ -46,7 +45,7 @@ namespace Platedetector.Detection.Tests
         }
 
         [TestMethod]
-        public void Detect_DetectObjectsWithFakeAlg_Returns1ObjectWithRegionOnlyPattern()
+        public void Detect_DetectObjectsWithFakeAlg_Returns1Object()
         {
             //arrange
             var detector = new Detector(new AlgManager(new FakeAlgProvider()));

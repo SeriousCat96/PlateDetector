@@ -5,6 +5,7 @@ using Platedetector.Utils.Logging;
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
@@ -46,6 +47,8 @@ namespace Platedetector.UI
                 Folder = initFolder
             };
 
+            IsRunning = false;
+
             SetViewProperties();
         }
 
@@ -56,6 +59,8 @@ namespace Platedetector.UI
         public Detector Detector { get; private set; }
 
         public Log Log { get; }
+
+        public bool IsRunning { get; set; }
 
         #endregion
 
@@ -87,26 +92,48 @@ namespace Platedetector.UI
                 Log.Error("Алгоритм не определен.");
                 return;
             }
-            await Task.Run(async () =>
-            {
-                using (_cts = new CancellationTokenSource())
+
+            _cts = new CancellationTokenSource();
+            IsRunning = true;
+
+            await Task.Run(
+                async () =>
                 {
                     await _evaluationController.EvaluateAsync(_progress, _cts.Token);
-                }
-            });
+                },
+                _cts.Token);
         }
         #endregion
 
         #region EventHandlers
-        protected override void OnClosed(EventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
-            base.OnClosed(e);
+            base.OnClosing(e);
 
-            _evaluationController?.Dispose();
-            _evaluationController = null;
+            if(IsRunning)
+            {
+                var result = MessageBox.Show(
+                this,
+                "Вы уверены что хотите закрыть окно? Процесс оценки алгоритма будет остановлен",
+                "",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2);
 
-            Detector?.Dispose();
-            Detector = null;
+                switch (result)
+                {
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        break;
+                    case DialogResult.OK:
+                        _cts?.Cancel();
+                        break;
+                }
+            }
+            else
+            {
+                _cts?.Cancel();
+            }
         }
 
         private void OnButtonOpenFolderClick(object sender, EventArgs e)
@@ -145,6 +172,7 @@ namespace Platedetector.UI
 
             await EvaluateAsync();
 
+            IsRunning = false;
             groupBox.Visible = false;
             btnStop.Enabled  = false;
             btnStart.Enabled = true;
