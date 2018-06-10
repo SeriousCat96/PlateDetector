@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Platedetector.Detection
 {
-	/// <summary>  </summary>
+	/// <summary> Обнаруженный объект. </summary>
     [DataContract]
 	public sealed class Detection
 	{

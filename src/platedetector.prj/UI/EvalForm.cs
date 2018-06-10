@@ -1,5 +1,4 @@
-﻿using Platedetector.Controllers;
-using Platedetector.Detection;
+﻿using Platedetector.Detection;
 using Platedetector.Evaluation;
 using Platedetector.Utils.Logging;
 
@@ -94,7 +93,6 @@ namespace Platedetector.UI
             }
 
             _cts = new CancellationTokenSource();
-            IsRunning = true;
 
             await Task.Run(
                 async () =>
@@ -169,6 +167,7 @@ namespace Platedetector.UI
             groupBox.Visible = true;
             btnStop.Enabled  = true;
             btnStart.Enabled = false;
+            IsRunning = true;
 
             await EvaluateAsync();
 

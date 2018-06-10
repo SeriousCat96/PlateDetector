@@ -1,4 +1,6 @@
-﻿namespace Platedetector.Detection.Core
+﻿using OpenCvSharp;
+
+namespace Platedetector.Detection.Core
 {
 	/// <summary> Класс, обеспечивающий создание <see cref="HaarCascadeFactory"/>.</summary>
 	public sealed class HaarCascadeProvider : IDetectionAlgProvider
@@ -10,8 +12,8 @@
 			return new HaarCascade(
 				scaleFactor: 1.25,
 				minNeighbours: 5,
-				minSize: new OpenCvSharp.Size(80, 20),
-				maxSize: new OpenCvSharp.Size(1000, 300));
+				minSize: new Size(80, 20),
+				maxSize: new Size(1000, 300));
 		}
 	}
 }
